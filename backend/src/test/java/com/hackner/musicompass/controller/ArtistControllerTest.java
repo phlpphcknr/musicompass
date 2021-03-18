@@ -84,9 +84,6 @@ class ArtistControllerTest {
     public void tryToFindNonExistingArtist(){
         //GIVEN
         String artistName = "King";
-        String discogsArtistId = "6666";
-        String artistImageUrl = "https://img.discogs.com/wcD5QViPvggOaC3T_D5ql1rHY_E=/150x150/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(40)/discogs-images/A-12596-1565996731-5432.jpeg.jpg";
-        String discogsArtistUrl = "https://api.discogs.com/artists/6666";
         String baseUrl = "https://api.discogs.com";
         String discogsApiUrl = baseUrl + "/database/search?type=artist&q=" + artistName;
         String testAccessToken = "testtest";

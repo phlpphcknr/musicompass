@@ -15,16 +15,14 @@ import java.util.Optional;
 @Builder
 public class ArtistService {
     private final DiscogsArtistApiService discogsArtistApiService;
-    private final DiscogsSecret discogsSecret;
 
     @Autowired
-    public ArtistService(DiscogsArtistApiService discogsArtistApiService, DiscogsSecret discogsSecret) {
+    public ArtistService(DiscogsArtistApiService discogsArtistApiService) {
         this.discogsArtistApiService = discogsArtistApiService;
-        this.discogsSecret = discogsSecret;
     }
 
     public Optional<Artist> getArtistByArtistName (String artistName) {
-        DiscogsArtistSearchResults DiscogsArtistSearchResults = discogsArtistApiService.getDiscogsArtistByArtistName(artistName, discogsSecret.getDiscogsToken());
+        DiscogsArtistSearchResults DiscogsArtistSearchResults = discogsArtistApiService.getDiscogsArtistByArtistName(artistName);
         if (DiscogsArtistSearchResults.getResults().length == 0){
             return Optional.empty();
         }

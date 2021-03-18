@@ -3,16 +3,12 @@ package com.hackner.musicompass.discogsapi.service;
 import com.hackner.musicompass.discogsapi.model.DiscogsArtist;
 import com.hackner.musicompass.discogsapi.model.DiscogsArtistSearchResults;
 
+import com.hackner.musicompass.secret.DiscogsSecret;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.Collection;
-import java.util.Optional;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.emptyArray;
 import static org.hamcrest.Matchers.equalTo;
@@ -21,7 +17,9 @@ import static org.mockito.Mockito.*;
 class DiscogsArtistApiServiceTest {
 
     private final RestTemplate restTemplate = mock(RestTemplate.class);
-    private final DiscogsArtistApiService discogsArtistApiService = new DiscogsArtistApiService(restTemplate);
+    private final DiscogsSecret discogsSecret = mock(DiscogsSecret.class);
+    private DiscogsApiEntityService discogsApiEntityService = new DiscogsApiEntityService(discogsSecret);
+    private final DiscogsArtistApiService discogsArtistApiService = new DiscogsArtistApiService(restTemplate, discogsApiEntityService);
 
     @Test
     @DisplayName("Get artist from API")
@@ -33,29 +31,22 @@ class DiscogsArtistApiServiceTest {
         String discogsArtistUrl = "https://api.discogs.com/artists/6666";
         String baseUrl = "https://api.discogs.com";
         String discogsApiUrl = baseUrl + "/database/search?type=artist&q=" + artistName;
-        String accessToken = "testtest";
 
         DiscogsArtist testDiscogsArtist = DiscogsArtist.builder()
                 .discogsArtistId(discogsArtistId)
                 .artistName(artistName)
                 .artistImageUrl(artistImageUrl)
                 .discogsArtistUrl(discogsArtistUrl).build();
-
         DiscogsArtistSearchResults testDiscogsArtistSearchResults = DiscogsArtistSearchResults.builder()
                 .results(new DiscogsArtist[]{testDiscogsArtist}).build();
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("User-Agent", "MusiCompass/0.1");
-        headers.add("Authorization", "Discogs token=" + accessToken);
-        HttpEntity<Void> entity = new HttpEntity<>(headers);
-
         ResponseEntity<DiscogsArtistSearchResults> mockResponseEntity = ResponseEntity.ok(testDiscogsArtistSearchResults);
 
-        when(restTemplate.exchange(discogsApiUrl, HttpMethod.GET, entity, DiscogsArtistSearchResults.class))
+        when(discogsSecret.getDiscogsToken()).thenReturn("testtest");
+        when(restTemplate.exchange(discogsApiUrl, HttpMethod.GET, discogsApiEntityService.getEntity(), DiscogsArtistSearchResults.class))
                 .thenReturn(mockResponseEntity);
 
         //WHEN
-        DiscogsArtistSearchResults actual = discogsArtistApiService.getDiscogsArtistByArtistName(artistName, accessToken);
+        DiscogsArtistSearchResults actual = discogsArtistApiService.getDiscogsArtistByArtistName(artistName);
 
         //THEN
         assertThat(actual, equalTo(testDiscogsArtistSearchResults));
@@ -68,23 +59,17 @@ class DiscogsArtistApiServiceTest {
         String artistName = "bliblablubb";
         String baseUrl = "https://api.discogs.com";
         String discogsApiUrl = baseUrl + "/database/search?type=artist&q=" + artistName;
-        String accessToken = "testtest";
 
         DiscogsArtistSearchResults testDiscogsArtistSearchResults = DiscogsArtistSearchResults.builder()
                 .results(new DiscogsArtist[]{}).build();
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("User-Agent", "MusiCompass/0.1");
-        headers.add("Authorization", "Discogs token=" + accessToken);
-        HttpEntity<Void> entity = new HttpEntity<>(headers);
-
         ResponseEntity<DiscogsArtistSearchResults> mockResponseEntity = ResponseEntity.ok(testDiscogsArtistSearchResults);
 
-        when(restTemplate.exchange(discogsApiUrl, HttpMethod.GET, entity, DiscogsArtistSearchResults.class))
+        when(discogsSecret.getDiscogsToken()).thenReturn("testtest");
+        when(restTemplate.exchange(discogsApiUrl, HttpMethod.GET, discogsApiEntityService.getEntity(), DiscogsArtistSearchResults.class))
                 .thenReturn(mockResponseEntity);
 
         //WHEN
-        DiscogsArtistSearchResults actual = discogsArtistApiService.getDiscogsArtistByArtistName(artistName, accessToken);
+        DiscogsArtistSearchResults actual = discogsArtistApiService.getDiscogsArtistByArtistName(artistName);
 
         //THEN
         assertThat(actual.getResults(), emptyArray());
