@@ -9,7 +9,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.util.Optional;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -19,6 +20,7 @@ class ArtistServiceTest {
     private final ArtistService testArtistService = ArtistService.builder()
             .discogsArtistApiService(testDiscogsArtistApiService)
             .build();
+
 
     @Test
     @DisplayName("TestArtistServiceForExistingArtist")
@@ -34,7 +36,6 @@ class ArtistServiceTest {
                 .artistName(artistName)
                 .artistImageUrl(artistImageUrl)
                 .discogsArtistUrl(discogsArtistUrl).build();
-
         DiscogsArtistSearchResults testDiscogsArtistSearchResults = DiscogsArtistSearchResults.builder()
                 .results(new DiscogsArtist[]{testDiscogsArtist}).build();
 

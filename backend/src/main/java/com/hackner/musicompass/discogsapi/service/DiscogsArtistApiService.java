@@ -19,6 +19,7 @@ public class DiscogsArtistApiService {
     private final DiscogsApiEntityService discogsApiEntityService;
     private final String baseUrl = "https://api.discogs.com";
 
+
     @Autowired
     public DiscogsArtistApiService(RestTemplate restTemplate, DiscogsApiEntityService discogsApiEntityService) {
         this.restTemplate = restTemplate;
