@@ -24,7 +24,7 @@ class ArtistControllerTest {
     private int port;
 
     private String getUrl() {
-        return "http://localhost:" + port + "/artist";
+        return "http://localhost:" + port + "/api/artist";
     }
 
     @MockBean
