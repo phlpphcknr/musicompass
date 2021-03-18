@@ -17,15 +17,15 @@ import static org.mockito.Mockito.*;
 class DiscogsArtistApiServiceTest {
 
     private final RestTemplate restTemplate = mock(RestTemplate.class);
-    private final DiscogsSecret discogsSecret = mock(DiscogsSecret.class);
-    private DiscogsApiEntityService discogsApiEntityService = new DiscogsApiEntityService(discogsSecret);
-    private final DiscogsArtistApiService discogsArtistApiService = new DiscogsArtistApiService(restTemplate, discogsApiEntityService);
+    private final DiscogsApiEntityService discogsApiEntityService = mock(DiscogsApiEntityService.class);
+    private final DiscogsArtistApiService discogsArtistApiService =
+            new DiscogsArtistApiService(restTemplate, discogsApiEntityService);
 
     @Test
     @DisplayName("Get artist from API")
     public void returnsArtist(){
         //GIVEN
-        String artistName = "hans%20hammer";
+        String artistName = "hans hammer";
         String discogsArtistId = "6666";
         String artistImageUrl = "https://img.discogs.com/wcD5QViPvggOaC3T_D5ql1rHY_E=/150x150/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(40)/discogs-images/A-12596-1565996731-5432.jpeg.jpg";
         String discogsArtistUrl = "https://api.discogs.com/artists/6666";
@@ -39,10 +39,15 @@ class DiscogsArtistApiServiceTest {
                 .discogsArtistUrl(discogsArtistUrl).build();
         DiscogsArtistSearchResults testDiscogsArtistSearchResults = DiscogsArtistSearchResults.builder()
                 .results(new DiscogsArtist[]{testDiscogsArtist}).build();
-        ResponseEntity<DiscogsArtistSearchResults> mockResponseEntity = ResponseEntity.ok(testDiscogsArtistSearchResults);
 
-        when(discogsSecret.getDiscogsToken()).thenReturn("testtest");
-        when(restTemplate.exchange(discogsApiUrl, HttpMethod.GET, discogsApiEntityService.getEntity(), DiscogsArtistSearchResults.class))
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("User-Agent", "MusiCompass/0.1");
+        headers.add("Authorization", "Discogs token=" + accessToken);
+        HttpEntity<Void> entity = new HttpEntity<>(headers);
+        when(discogsApiEntityService.createEntity()).thenReturn(entity);
+
+        ResponseEntity<DiscogsArtistSearchResults> mockResponseEntity = ResponseEntity.ok(testDiscogsArtistSearchResults);
+        when(restTemplate.exchange(discogsApiUrl, HttpMethod.GET, entity, DiscogsArtistSearchResults.class))
                 .thenReturn(mockResponseEntity);
 
         //WHEN
@@ -62,6 +67,13 @@ class DiscogsArtistApiServiceTest {
 
         DiscogsArtistSearchResults testDiscogsArtistSearchResults = DiscogsArtistSearchResults.builder()
                 .results(new DiscogsArtist[]{}).build();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("User-Agent", "MusiCompass/0.1");
+        headers.add("Authorization", "Discogs token=" + accessToken);
+        HttpEntity<Void> entity = new HttpEntity<>(headers);
+        when(discogsApiEntityService.createEntity()).thenReturn(entity);
+
         ResponseEntity<DiscogsArtistSearchResults> mockResponseEntity = ResponseEntity.ok(testDiscogsArtistSearchResults);
 
         when(discogsSecret.getDiscogsToken()).thenReturn("testtest");

@@ -18,7 +18,9 @@ class ArtistServiceTest {
 
     private final DiscogsArtistApiService testDiscogsArtistApiService = mock(DiscogsArtistApiService.class);
     private final ArtistService testArtistService = ArtistService.builder()
-            .discogsArtistApiService(testDiscogsArtistApiService).build();
+            .discogsArtistApiService(testDiscogsArtistApiService)
+            .build();
+
 
     @Test
     @DisplayName("TestArtistServiceForExistingArtist")
