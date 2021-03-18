@@ -24,7 +24,7 @@ public class ArtistService {
     }
 
     public Optional<Artist> getArtistByArtistName (String artistName) {
-        DiscogsArtistSearchResults DiscogsArtistSearchResults = discogsArtistApiService.getDiscogsArtistByArtistName(artistName, discogsSecret.getDiscogsToken());
+        DiscogsArtistSearchResults DiscogsArtistSearchResults = discogsArtistApiService.getDiscogsArtistByArtistName(artistName);
         if (DiscogsArtistSearchResults.getResults().length == 0){
             return Optional.empty();
         }

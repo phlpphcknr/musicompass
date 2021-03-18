@@ -11,8 +11,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Collection;
-import java.util.Optional;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.emptyArray;
 import static org.hamcrest.Matchers.equalTo;
@@ -21,7 +19,9 @@ import static org.mockito.Mockito.*;
 class DiscogsArtistApiServiceTest {
 
     private final RestTemplate restTemplate = mock(RestTemplate.class);
-    private final DiscogsArtistApiService discogsArtistApiService = new DiscogsArtistApiService(restTemplate);
+    private final DiscogsApiEntityService discogsApiEntityService = mock(DiscogsApiEntityService.class);
+    private final DiscogsArtistApiService discogsArtistApiService =
+            new DiscogsArtistApiService(restTemplate, discogsApiEntityService);
 
     @Test
     @DisplayName("Get artist from API")
@@ -55,7 +55,7 @@ class DiscogsArtistApiServiceTest {
                 .thenReturn(mockResponseEntity);
 
         //WHEN
-        DiscogsArtistSearchResults actual = discogsArtistApiService.getDiscogsArtistByArtistName(artistName, accessToken);
+        DiscogsArtistSearchResults actual = discogsArtistApiService.getDiscogsArtistByArtistName(artistName);
 
         //THEN
         assertThat(actual, equalTo(testDiscogsArtistSearchResults));
@@ -84,7 +84,7 @@ class DiscogsArtistApiServiceTest {
                 .thenReturn(mockResponseEntity);
 
         //WHEN
-        DiscogsArtistSearchResults actual = discogsArtistApiService.getDiscogsArtistByArtistName(artistName, accessToken);
+        DiscogsArtistSearchResults actual = discogsArtistApiService.getDiscogsArtistByArtistName(artistName);
 
         //THEN
         assertThat(actual.getResults(), emptyArray());

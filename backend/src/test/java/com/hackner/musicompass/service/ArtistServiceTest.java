@@ -19,10 +19,10 @@ import static org.mockito.Mockito.when;
 class ArtistServiceTest {
 
     private final DiscogsArtistApiService testDiscogsArtistApiService = mock(DiscogsArtistApiService.class);
-    private final DiscogsSecret testDiscogsSecret = mock(DiscogsSecret.class);
+    //private final DiscogsSecret testDiscogsSecret = mock(DiscogsSecret.class);
     private final ArtistService testArtistService = ArtistService.builder()
             .discogsArtistApiService(testDiscogsArtistApiService)
-            .discogsSecret(testDiscogsSecret).build();
+            .build();
 
     @Test
     @DisplayName("TestArtistServiceForExistingArtist")
@@ -49,8 +49,8 @@ class ArtistServiceTest {
         DiscogsArtistSearchResults testDiscogsArtistSearchResults = DiscogsArtistSearchResults.builder()
                 .results(new DiscogsArtist[]{testDiscogsArtist}).build();
 
-        when(testDiscogsSecret.getDiscogsToken()).thenReturn(testAccessToken);
-        when(testDiscogsArtistApiService.getDiscogsArtistByArtistName(artistName, testDiscogsSecret.getDiscogsToken())).thenReturn(testDiscogsArtistSearchResults);
+        //when(testDiscogsSecret.getDiscogsToken()).thenReturn(testAccessToken);
+        when(testDiscogsArtistApiService.getDiscogsArtistByArtistName(artistName)).thenReturn(testDiscogsArtistSearchResults);
 
         //WHEN
         Optional<Artist> actual = testArtistService.getArtistByArtistName(artistName);
@@ -72,8 +72,8 @@ class ArtistServiceTest {
         DiscogsArtistSearchResults testDiscogsArtistSearchResults = DiscogsArtistSearchResults.builder()
                 .results(new DiscogsArtist[]{}).build();
 
-        when(testDiscogsSecret.getDiscogsToken()).thenReturn(testAccessToken);
-        when(testDiscogsArtistApiService.getDiscogsArtistByArtistName(artistName, testDiscogsSecret.getDiscogsToken()))
+        //when(testDiscogsSecret.getDiscogsToken()).thenReturn(testAccessToken);
+        when(testDiscogsArtistApiService.getDiscogsArtistByArtistName(artistName))
                 .thenReturn(testDiscogsArtistSearchResults);
 
         //WHEN
