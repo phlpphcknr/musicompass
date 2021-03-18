@@ -4,12 +4,9 @@ import com.hackner.musicompass.discogsapi.model.DiscogsArtist;
 import com.hackner.musicompass.discogsapi.model.DiscogsArtistSearchResults;
 import com.hackner.musicompass.discogsapi.service.DiscogsArtistApiService;
 import com.hackner.musicompass.model.Artist;
-import com.hackner.musicompass.secret.DiscogsSecret;
-import org.hamcrest.Matchers;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.http.HttpHeaders;
-
 import java.util.Optional;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -32,12 +29,6 @@ class ArtistServiceTest {
         String artistImageUrl = "https://img.discogs.com/wcD5QViPvggOaC3T_D5ql1rHY_E=/150x150/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(40)/discogs-images/A-12596-1565996731-5432.jpeg.jpg";
         String discogsArtistUrl = "https://api.discogs.com/artists/6666";
 
-        Artist testArtist = Artist.builder()
-                .artistName(artistName)
-                .artistImageUrl(artistImageUrl)
-                .discogsId(discogsArtistId)
-                .discogsArtistUrl(discogsArtistUrl).build();
-
         DiscogsArtist testDiscogsArtist = DiscogsArtist.builder()
                 .discogsArtistId(discogsArtistId)
                 .artistName(artistName)
@@ -53,7 +44,11 @@ class ArtistServiceTest {
         Optional<Artist> actual = testArtistService.getArtistByArtistName(artistName);
 
         //THEN
-        assertThat(actual.get(), equalTo(testArtist));
+        assertThat(actual.get(), equalTo(Artist.builder()
+                .artistName(artistName)
+                .artistImageUrl(artistImageUrl)
+                .discogsId(discogsArtistId)
+                .discogsArtistUrl(discogsArtistUrl).build()));
     }
 
     @Test
@@ -72,6 +67,6 @@ class ArtistServiceTest {
         Optional<Artist> actual = testArtistService.getArtistByArtistName(artistName);
 
         //THEN
-        assertThat(actual, Matchers.is(Optional.empty()));
+        assertThat(actual, is(Optional.empty()));
     }
 }

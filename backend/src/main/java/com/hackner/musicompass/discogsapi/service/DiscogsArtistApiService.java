@@ -1,5 +1,6 @@
 package com.hackner.musicompass.discogsapi.service;
 
+import com.hackner.musicompass.discogsapi.model.DiscogsArtist;
 import com.hackner.musicompass.discogsapi.model.DiscogsArtistSearchResults;
 import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
@@ -28,9 +29,12 @@ public class DiscogsArtistApiService {
 
         String url = baseUrl + "/database/search?type=artist&q=" + artistName;
 
-        ResponseEntity<DiscogsArtistSearchResults> response =
-                restTemplate.exchange(url, HttpMethod.GET, discogsApiEntityService.createEntity(), DiscogsArtistSearchResults.class);
-
-        return response.getBody();
+        try {
+            ResponseEntity<DiscogsArtistSearchResults> response =
+                    restTemplate.exchange(url, HttpMethod.GET, discogsApiEntityService.createEntity(), DiscogsArtistSearchResults.class);
+            return response.getBody();
+        } catch (Exception e){
+            return DiscogsArtistSearchResults.builder().results(new DiscogsArtist[]{}).build();
+        }
     }
 }

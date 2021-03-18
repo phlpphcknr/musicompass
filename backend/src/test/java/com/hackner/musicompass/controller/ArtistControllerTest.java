@@ -3,7 +3,6 @@ package com.hackner.musicompass.controller;
 import com.hackner.musicompass.discogsapi.model.DiscogsArtist;
 import com.hackner.musicompass.discogsapi.model.DiscogsArtistSearchResults;
 import com.hackner.musicompass.discogsapi.service.DiscogsApiEntityService;
-import com.hackner.musicompass.discogsapi.service.DiscogsArtistApiService;
 import com.hackner.musicompass.model.Artist;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
