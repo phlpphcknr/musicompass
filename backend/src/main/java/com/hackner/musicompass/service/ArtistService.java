@@ -3,12 +3,9 @@ import com.hackner.musicompass.discogsapi.model.DiscogsArtist;
 import com.hackner.musicompass.discogsapi.model.DiscogsArtistSearchResults;
 import com.hackner.musicompass.model.Artist;
 import com.hackner.musicompass.discogsapi.service.DiscogsArtistApiService;
-import com.hackner.musicompass.secret.DiscogsSecret;
 import lombok.Builder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 import java.util.Optional;
 
 @Service
