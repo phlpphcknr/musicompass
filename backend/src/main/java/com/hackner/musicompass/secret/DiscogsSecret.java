@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 @Configuration
 @Repository
 public class DiscogsSecret {
-    @Value("${discogs.token}")
+
+    @Value("@discogs.token@")
     private String discogsToken;
+
 }

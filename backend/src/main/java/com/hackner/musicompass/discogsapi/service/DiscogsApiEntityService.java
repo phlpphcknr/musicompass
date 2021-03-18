@@ -1,6 +1,7 @@
 package com.hackner.musicompass.discogsapi.service;
 
 import com.hackner.musicompass.secret.DiscogsSecret;
+import lombok.Builder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,6 +9,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 
 @Configuration
+@Builder
 public class DiscogsApiEntityService {
 
     private final DiscogsSecret discogsSecret;

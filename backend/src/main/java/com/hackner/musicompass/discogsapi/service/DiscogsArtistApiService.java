@@ -1,6 +1,7 @@
 package com.hackner.musicompass.discogsapi.service;
 
 import com.hackner.musicompass.discogsapi.model.DiscogsArtistSearchResults;
+import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
@@ -10,11 +11,12 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 @Slf4j
+@Builder
 public class DiscogsArtistApiService {
 
     private RestTemplate restTemplate;
-    private String baseUrl = "https://api.discogs.com";
     private final DiscogsApiEntityService discogsApiEntityService;
+    private final String baseUrl = "https://api.discogs.com";
 
     @Autowired
     public DiscogsArtistApiService(RestTemplate restTemplate, DiscogsApiEntityService discogsApiEntityService) {
@@ -26,12 +28,8 @@ public class DiscogsArtistApiService {
 
         String url = baseUrl + "/database/search?type=artist&q=" + artistName;
 
-        //HttpHeaders headers = new HttpHeaders();
-        //headers.add("User-Agent", "MusiCompass/0.1");
-        //headers.add("Authorization", "Discogs token=" + accessToken);
-        //HttpEntity<Void> entity = new HttpEntity<>(headers);
-
-        ResponseEntity<DiscogsArtistSearchResults> response = restTemplate.exchange(url, HttpMethod.GET, discogsApiEntityService.createEntity(), DiscogsArtistSearchResults.class);
+        ResponseEntity<DiscogsArtistSearchResults> response =
+                restTemplate.exchange(url, HttpMethod.GET, discogsApiEntityService.createEntity(), DiscogsArtistSearchResults.class);
 
         return response.getBody();
     }

@@ -2,8 +2,9 @@ package com.hackner.musicompass.controller;
 
 import com.hackner.musicompass.discogsapi.model.DiscogsArtist;
 import com.hackner.musicompass.discogsapi.model.DiscogsArtistSearchResults;
+import com.hackner.musicompass.discogsapi.service.DiscogsApiEntityService;
+import com.hackner.musicompass.discogsapi.service.DiscogsArtistApiService;
 import com.hackner.musicompass.model.Artist;
-import com.hackner.musicompass.secret.DiscogsSecret;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ class ArtistControllerTest {
     private RestTemplate restTemplate;
 
     @MockBean
-    private DiscogsSecret testDiscogsSecret;
+    private DiscogsApiEntityService discogsApiEntityService;
 
     @Autowired
     private TestRestTemplate testRestTemplate;
@@ -47,7 +48,6 @@ class ArtistControllerTest {
         String discogsArtistUrl = "https://api.discogs.com/artists/6666";
         String baseUrl = "https://api.discogs.com";
         String discogsApiUrl = baseUrl + "/database/search?type=artist&q=" + artistName;
-        String testAccessToken = "testtest";
 
         DiscogsArtist testDiscogsArtist = DiscogsArtist.builder()
                 .discogsArtistId(discogsArtistId)
@@ -60,12 +60,12 @@ class ArtistControllerTest {
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("User-Agent", "MusiCompass/0.1");
-        headers.add("Authorization", "Discogs token=" + testAccessToken);
+        headers.add("Authorization", "Discogs token=testtest");
         HttpEntity<Void> entity = new HttpEntity<>(headers);
+        when(discogsApiEntityService.createEntity()).thenReturn(entity);
 
         when(restTemplate.exchange(discogsApiUrl, HttpMethod.GET, entity, DiscogsArtistSearchResults.class))
                 .thenReturn(mockResponseEntity);
-        when(testDiscogsSecret.getDiscogsToken()).thenReturn(testAccessToken);
 
         //WHEN
         ResponseEntity<Artist> controllerResponse = testRestTemplate.getForEntity(getUrl() + "/" + artistName,Artist.class);
@@ -84,12 +84,8 @@ class ArtistControllerTest {
     public void tryToFindNonExistingArtist(){
         //GIVEN
         String artistName = "King";
-        String discogsArtistId = "6666";
-        String artistImageUrl = "https://img.discogs.com/wcD5QViPvggOaC3T_D5ql1rHY_E=/150x150/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(40)/discogs-images/A-12596-1565996731-5432.jpeg.jpg";
-        String discogsArtistUrl = "https://api.discogs.com/artists/6666";
         String baseUrl = "https://api.discogs.com";
         String discogsApiUrl = baseUrl + "/database/search?type=artist&q=" + artistName;
-        String testAccessToken = "testtest";
 
         DiscogsArtistSearchResults testDiscogsArtistSearchResults = DiscogsArtistSearchResults.builder()
                 .results(new DiscogsArtist[]{}).build();
@@ -97,12 +93,12 @@ class ArtistControllerTest {
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("User-Agent", "MusiCompass/0.1");
-        headers.add("Authorization", "Discogs token=" + testAccessToken);
+        headers.add("Authorization", "Discogs token=testtest");
         HttpEntity<Void> entity = new HttpEntity<>(headers);
+        when(discogsApiEntityService.createEntity()).thenReturn(entity);
 
         when(restTemplate.exchange(discogsApiUrl, HttpMethod.GET, entity, DiscogsArtistSearchResults.class))
                 .thenReturn(mockResponseEntity);
-        when(testDiscogsSecret.getDiscogsToken()).thenReturn(testAccessToken);
 
         //WHEN
         ResponseEntity<Artist> controllerResponse = testRestTemplate.getForEntity(getUrl() + "/" + artistName,Artist.class);
