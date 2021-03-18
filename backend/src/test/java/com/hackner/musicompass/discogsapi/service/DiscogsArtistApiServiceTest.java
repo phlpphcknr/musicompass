@@ -3,9 +3,10 @@ package com.hackner.musicompass.discogsapi.service;
 import com.hackner.musicompass.discogsapi.model.DiscogsArtist;
 import com.hackner.musicompass.discogsapi.model.DiscogsArtistSearchResults;
 
-import com.hackner.musicompass.secret.DiscogsSecret;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
@@ -42,7 +43,7 @@ class DiscogsArtistApiServiceTest {
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("User-Agent", "MusiCompass/0.1");
-        headers.add("Authorization", "Discogs token=" + accessToken);
+        headers.add("Authorization", "Discogs token=testtest");
         HttpEntity<Void> entity = new HttpEntity<>(headers);
         when(discogsApiEntityService.createEntity()).thenReturn(entity);
 
@@ -70,14 +71,13 @@ class DiscogsArtistApiServiceTest {
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("User-Agent", "MusiCompass/0.1");
-        headers.add("Authorization", "Discogs token=" + accessToken);
+        headers.add("Authorization", "Discogs token=testtest");
         HttpEntity<Void> entity = new HttpEntity<>(headers);
         when(discogsApiEntityService.createEntity()).thenReturn(entity);
 
         ResponseEntity<DiscogsArtistSearchResults> mockResponseEntity = ResponseEntity.ok(testDiscogsArtistSearchResults);
 
-        when(discogsSecret.getDiscogsToken()).thenReturn("testtest");
-        when(restTemplate.exchange(discogsApiUrl, HttpMethod.GET, discogsApiEntityService.getEntity(), DiscogsArtistSearchResults.class))
+        when(restTemplate.exchange(discogsApiUrl, HttpMethod.GET, entity, DiscogsArtistSearchResults.class))
                 .thenReturn(mockResponseEntity);
 
         //WHEN
