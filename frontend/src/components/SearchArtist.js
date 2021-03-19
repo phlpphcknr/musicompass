@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro';
 import {useState} from "react";
-import {Link, Redirect} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 export default function SearchArtist(){
 
@@ -25,18 +25,16 @@ export default function SearchArtist(){
 }
 
 const SearchArtistContainer = styled.div`
-  display:flex;
-  flex-direction: row;
-  justify-content: space-evenly;
 
   form {
     display: flex;
     flex-direction: row;
+    justify-content: space-evenly;
   }
 
   input {
     flex-grow: 1;
-    text-align: center;
+    text-align: left;
     margin: 8px;
   }
 
