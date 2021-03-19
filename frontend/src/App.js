@@ -1,7 +1,8 @@
 import AppHeader from "./components/AppHeader";
 import {Route, Switch} from "react-router-dom";
 import Landing from "./pages/Landing";
-import Artist from "./pages/Artist";
+import ArtistSearchResult from "./pages/ArtistSearchResult";
+import ArtistOverview from "./pages/ArtistOverview";
 import styled from 'styled-components/macro'
 
 function App() {
@@ -12,8 +13,11 @@ function App() {
             <Route exact path="/">
                 <Landing/>
             </Route>
-            <Route exact path="/artist/:artistname">
-                <Artist/>
+            <Route exact path="/artistsearch/:artistSearchTerm">
+                <ArtistSearchResult/>
+            </Route>
+            <Route exact path="/artist/:artistName">
+                <ArtistOverview/>
             </Route>
         </Switch>
     </PageLayout>

@@ -4,7 +4,7 @@ import {Link, Redirect} from "react-router-dom";
 
 export default function SearchArtist(){
 
-    const [artistName, setArtistName] = useState('');
+    const [artistSearchTerm, setArtistSearchTerm] = useState('');
 
     return (
         <SearchArtistContainer>
@@ -12,10 +12,10 @@ export default function SearchArtist(){
                 <input
                     placeholder="the artist I want to find out about is..."
                     type="text"
-                    value={artistName}
-                    onChange={({ target }) => setArtistName(target.value)}
+                    value={artistSearchTerm}
+                    onChange={({ target }) => setArtistSearchTerm(target.value)}
                 />
-                <Link to={`/artist/${artistName}`}>
+                <Link to={`/artistsearch/${artistSearchTerm}`}>
                 <button>SEARCH</button>
                 </Link>
             </form>
@@ -43,6 +43,5 @@ const SearchArtistContainer = styled.div`
   button {
     padding: 8px;
     margin: 8px;
-    background-color: chocolate;
   }
 `
