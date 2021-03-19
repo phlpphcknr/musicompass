@@ -1,12 +1,12 @@
 import styled from 'styled-components/macro'
 
 export default function AppHeader() {
-    return (
-        <Header>
-            <h1>musiCompass</h1>
-            <h5>...discover new sounds!</h5>
-        </Header>
-    )
+  return (
+    <Header>
+      <h1>musiCompass</h1>
+      <h5>...discover new sounds!</h5>
+    </Header>
+  )
 }
 
 const Header = styled.header`

@@ -1,12 +1,7 @@
-import {useParams} from "react-router-dom";
+import { useParams } from 'react-router-dom'
 
-export default function ArtistOverview(){
+export default function ArtistOverview() {
+  const { artistName } = useParams()
 
-    const { artistName } = useParams();
-
-    return (
-        <section>
-            Hello Artist
-        </section>
-    )
+  return <section>Hello Artist</section>
 }

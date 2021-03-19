@@ -1,13 +1,12 @@
-import styled from 'styled-components/macro';
-import SearchArtist from "../components/SearchArtist";
+import styled from 'styled-components/macro'
+import SearchArtist from '../components/SearchArtist'
 
-export default function Landing(){
-
-    return (
-        <Wrapper>
-            <SearchArtist/>
-        </Wrapper>
-    )
+export default function Landing() {
+  return (
+    <Wrapper>
+      <SearchArtist />
+    </Wrapper>
+  )
 }
 
 const Wrapper = styled.div`
