@@ -5,31 +5,33 @@ import ArtistHeader from '../components/ArtistHeader'
 import { getArtistSearchResult } from '../service/musiComApiService'
 
 export default function ArtistSearchResult() {
-  const { artistSearchTerm } = useParams()
-  const [artistSearchResult, setArtistSearchResult] = useState('')
+    const {artistSearchTerm} = useParams()
+    const [artistSearchResult, setArtistSearchResult] = useState('')
 
-  useEffect(() => {
-    getArtistSearchResult(artistSearchTerm).then(setArtistSearchResult)
-  }, [artistSearchTerm])
+    useEffect(() => {
+        getArtistSearchResult(artistSearchTerm).then(setArtistSearchResult)
+    }, [artistSearchTerm])
 
-  return (
-    <SearchResults>
-      <h3>Search results for '{artistSearchTerm}'</h3>
-      <ArtistHeader artist={artistSearchResult} />
-    </SearchResults>
-  )
+    return (
+        <SearchResults>
+            <p>Search results for '{artistSearchTerm}'</p>
+            <ArtistHeader artist={artistSearchResult}/>
+        </SearchResults>
+    )
 }
 
 const SearchResults = styled.div`
-  display: block;
-  align-items: center;
-  //padding: 20px;
-  background-color: moccasin;
-  h3 {
+
+  display: flex;
+  flex-direction: column;
+  background-color: var(--secondary-color);
+  padding: 20px;
+
+  p {
     margin-bottom: 15px;
-    font-family: 'Courier New', monospace;
-    font-size: 0.8em;
-  }
-  ArtistHeader {
+    margin-top: 15px;
+    font-size: 0.6em;
+    width: 100%;
+    text-align: left;
   }
 `

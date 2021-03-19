@@ -23,6 +23,7 @@ export default function SearchArtist() {
 }
 
 const SearchArtistContainer = styled.div`
+  
   form {
     display: flex;
     flex-direction: row;

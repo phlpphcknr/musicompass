@@ -1,7 +1,15 @@
-import { useParams } from 'react-router-dom'
+import {useParams} from 'react-router-dom';
+import {useEffect} from "react";
+import {getArtistSearchResult} from "../service/musiComApiService";
 
 export default function ArtistOverview() {
-  const { artistName } = useParams()
+    const {artistName} = useParams()
 
-  return <section>Welcome to the page of {artistName}</section>
+    useEffect(() => {}, []);
+
+    return (
+        <ArtistOverview>
+            <p>Welcome {artistName}</p>
+        </ArtistOverview>
+    )
 }

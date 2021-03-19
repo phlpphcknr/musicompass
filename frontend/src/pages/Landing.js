@@ -12,4 +12,5 @@ export default function Landing() {
 const Wrapper = styled.div`
   display: grid;
   grid-template-rows: auto 1fr;
+  background-color: var(--secondary-color);
 `

@@ -8,7 +8,7 @@ import styled from 'styled-components/macro'
 export default function App() {
   return (
     <PageLayout>
-      <AppHeader />
+      <AppHeader/>
       <Switch>
         <Route exact path="/">
           <Landing />
@@ -28,5 +28,9 @@ const PageLayout = styled.div`
   height: 100vh;
   display: grid;
   grid-template-rows: auto 1fr;
-  background: #eee;
+  background: var(--secondary-color);
+  
+  
+  
+  
 `
