@@ -5,7 +5,7 @@ import ArtistSearchResult from "./pages/ArtistSearchResult";
 import ArtistOverview from "./pages/ArtistOverview";
 import styled from 'styled-components/macro'
 
-function App() {
+export default function App() {
   return (
     <PageLayout>
         <AppHeader/>
@@ -28,8 +28,5 @@ const PageLayout = styled.div`
   height: 100vh;
   display: grid;
   grid-template-rows: auto 1fr;
-
   background: #eee;
 `
-
-export default App;
