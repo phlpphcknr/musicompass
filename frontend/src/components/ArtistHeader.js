@@ -3,7 +3,7 @@ import styled from 'styled-components/macro'
 export default function ArtistHeader({ artist }) {
   return (
     <Header>
-      <img src={artist.artistImageUrl} alt={'Picture could not be loaded'} />
+      <img src={artist.artistImageUrl} alt={'Could not be loaded'} />
       <h3>{artist.artistName}</h3>
     </Header>
   )

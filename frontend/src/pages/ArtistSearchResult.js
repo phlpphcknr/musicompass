@@ -10,7 +10,7 @@ export default function ArtistSearchResult() {
 
   useEffect(() => {
     getArtistSearchResult(artistSearchTerm).then(setArtistSearchResult)
-  }, [])
+  }, [artistSearchTerm])
 
   return (
     <SearchResults>
