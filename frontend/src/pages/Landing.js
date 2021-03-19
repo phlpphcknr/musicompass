@@ -2,6 +2,7 @@ import styled from 'styled-components/macro';
 import SearchArtist from "../components/SearchArtist";
 
 export default function Landing(){
+
     return (
         <Wrapper>
             <SearchArtist/>

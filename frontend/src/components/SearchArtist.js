@@ -1,29 +1,23 @@
 import styled from 'styled-components/macro';
 import {useState} from "react";
+import {Link, Redirect} from "react-router-dom";
 
 export default function SearchArtist(){
 
     const [artistName, setArtistName] = useState('');
 
-    const handleSubmit = (event) => {
-        event.preventDefault()
-        if (!artistName) {
-            return
-        }
-        // put in action to be executed on submit ... loginUser(userName, userPassword).then(setToken)
-        setArtistName('')
-    }
-
     return (
         <SearchArtistContainer>
-            <form onSubmit={handleSubmit}>
+            <form>
                 <input
                     placeholder="the artist I want to find out about is..."
                     type="text"
                     value={artistName}
                     onChange={({ target }) => setArtistName(target.value)}
                 />
-                <button type="submit">SEARCH</button>
+                <Link to={`/artist/${artistName}`}>
+                <button>SEARCH</button>
+                </Link>
             </form>
         </SearchArtistContainer>
     )
