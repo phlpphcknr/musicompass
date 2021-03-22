@@ -13,7 +13,7 @@ export default function ArtistHeader({artist}) {
     )
 }
 
-const Header = styled.header`
+const Header = styled.section`
   display: flex;
   justify-content: space-between;
   align-items: center;

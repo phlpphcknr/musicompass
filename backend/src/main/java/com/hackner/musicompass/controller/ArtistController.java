@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
-@RequestMapping("api/artist")
+@RequestMapping("api/")
 public class ArtistController {
 
     private final ArtistService artistService;
@@ -18,7 +18,7 @@ public class ArtistController {
         this.artistService = artistService;
     }
 
-    @GetMapping("{artistName}")
+    @GetMapping("artistsearch/{artistName}")
     public Artist findArtist(@PathVariable String artistName){
         return artistService.getArtistByArtistName(artistName)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "artist name not found"));
