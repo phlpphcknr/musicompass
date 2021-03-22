@@ -29,6 +29,8 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
-
 ### VS Code ###
 .vscode/
+
+### static frontend ####
+src/main/resources/static/

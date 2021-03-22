@@ -4,5 +4,5 @@ const baseUrl = '/api'
 
 export const getArtistSearchResult = (artistSearchTerm) =>
   axios
-    .get(baseUrl + `/artist/${artistSearchTerm}`)
+    .get(baseUrl + `/artistsearch/${artistSearchTerm}`)
     .then((response) => response.data)
