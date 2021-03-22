@@ -3,7 +3,7 @@
   on:
     push:
       branches:
-        - heroku-deployment
+        - main
 
   jobs:
     build-frontend:
