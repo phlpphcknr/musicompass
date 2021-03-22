@@ -6,14 +6,14 @@ export default function ArtistHeader({artist}) {
     return (
         <Link to={`/artist/${artist.artistName}`} style={{textDecoration: 'none'}}>
             <Header>
-                <img src={artist.artistImageUrl} alt={'Could not be loaded'}/>
+                <img src={artist.artistImageUrl} alt={'Shows the artist'}/>
                 <h3>{artist.artistName}</h3>
             </Header>
         </Link>
     )
 }
 
-const Header = styled.header`
+const Header = styled.section`
   display: flex;
   justify-content: space-between;
   align-items: center;

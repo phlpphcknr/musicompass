@@ -23,6 +23,7 @@ export default function App() {
 const PageLayout = styled.div`
   height: 100vh;
   display: grid;
+  overflow-y: scroll;
   grid-template-rows: auto 1fr;
   background: var(--secondary-color);
   

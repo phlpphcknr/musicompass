@@ -22,7 +22,7 @@ export default function SearchArtist() {
   )
 }
 
-const SearchArtistContainer = styled.div`
+const SearchArtistContainer = styled.section`
   
   form {
     display: flex;
