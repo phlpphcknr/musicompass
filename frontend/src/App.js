@@ -2,6 +2,7 @@ import AppHeader from './components/AppHeader'
 import { Route, Switch } from 'react-router-dom'
 import Landing from './pages/Landing'
 import ArtistSearchResult from './pages/ArtistSearchResult'
+import ArtistOverview from './pages/ArtistOverview'
 import styled from 'styled-components/macro'
 
 export default function App() {
@@ -29,8 +30,4 @@ const PageLayout = styled.div`
   overflow-y: scroll;
   grid-template-rows: auto 1fr;
   background: var(--secondary-color);
-  
-  
-  
-  
 `
