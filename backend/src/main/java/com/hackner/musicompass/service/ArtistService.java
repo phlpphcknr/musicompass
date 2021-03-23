@@ -8,9 +8,7 @@ import lombok.Builder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 @Service
 @Builder
@@ -45,11 +43,12 @@ public class ArtistService {
         return Optional.of(new Artist().builder()
                 .artistName(discogsArtist.getArtistName())
                 .artistImageUrl(discogsArtist.getArtistImageUrl())
-                .discogsId(discogsArtist.getDiscogsArtistId())
+                .discogsArtistId(discogsArtist.getDiscogsArtistId())
                 .discogsArtistUrl(discogsArtist.getDiscogsArtistUrl()).build());
     }
 
     public Artist getArtistByArtistName(String artistName) {
+
         DiscogsArtistSearchResults DiscogsArtistSearchResults = discogsArtistApiService.getDiscogsArtistByArtistName(artistName);
 
         DiscogsArtist discogsArtist = DiscogsArtistSearchResults.getResults()[0];
@@ -57,7 +56,7 @@ public class ArtistService {
         Artist artist = new Artist().builder()
                 .artistName(discogsArtist.getArtistName())
                 .artistImageUrl(discogsArtist.getArtistImageUrl())
-                .discogsId(discogsArtist.getDiscogsArtistId())
+                .discogsArtistId(discogsArtist.getDiscogsArtistId())
                 .discogsArtistUrl(discogsArtist.getDiscogsArtistUrl()).build();
 
         artistMongoDb.save(artist);

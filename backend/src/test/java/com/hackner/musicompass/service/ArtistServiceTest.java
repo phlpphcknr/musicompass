@@ -48,7 +48,7 @@ class ArtistServiceTest {
         assertThat(actual.get(), equalTo(Artist.builder()
                 .artistName(artistName)
                 .artistImageUrl(artistImageUrl)
-                .discogsId(discogsArtistId)
+                .discogsArtistId(discogsArtistId)
                 .discogsArtistUrl(discogsArtistUrl).build()));
     }
 

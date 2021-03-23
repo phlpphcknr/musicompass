@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
 
 @Data
 @AllArgsConstructor
@@ -11,9 +12,11 @@ import lombok.NoArgsConstructor;
 @Builder
 
 public class Artist {
+
     private String artistName;
     private String artistImageUrl;
-    private String discogsId;
+    @Id
+    private String discogsArtistId;
     private String discogsArtistUrl;
 
 }
