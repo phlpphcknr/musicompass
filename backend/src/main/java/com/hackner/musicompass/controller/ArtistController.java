@@ -18,9 +18,14 @@ public class ArtistController {
         this.artistService = artistService;
     }
 
-    @GetMapping("artistsearch/{artistName}")
-    public Artist findArtist(@PathVariable String artistName){
-        return artistService.getArtistBySearchTerm(artistName)
+    @GetMapping("artistsearch/{searchTerm}")
+    public Artist findArtist(@PathVariable String searchTerm){
+        return artistService.getArtistBySearchTerm(searchTerm)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "artist name not found"));
+    }
+
+    @GetMapping("artist/{artistName}")
+    public Artist getArtist(@PathVariable String artistName){
+        return artistService.getArtistByArtistName(artistName);
     }
 }
