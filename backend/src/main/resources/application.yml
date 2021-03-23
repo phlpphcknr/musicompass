@@ -2,3 +2,4 @@ spring:
   data:
     mongodb:
       database: musicompass-cluster
+      uri: mongodb+srv://admin:${HEROKU_API_KEY}@musicompass-cluster.skim8.mongodb.net/musicompass-cluster?retryWrites=true&w=majority
