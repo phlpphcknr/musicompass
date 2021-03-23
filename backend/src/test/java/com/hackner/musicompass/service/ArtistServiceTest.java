@@ -42,7 +42,7 @@ class ArtistServiceTest {
         when(testDiscogsArtistApiService.getDiscogsArtistByArtistName(artistName)).thenReturn(testDiscogsArtistSearchResults);
 
         //WHEN
-        Optional<Artist> actual = testArtistService.getArtistByArtistName(artistName);
+        Optional<Artist> actual = testArtistService.getArtistBySearchTerm(artistName);
 
         //THEN
         assertThat(actual.get(), equalTo(Artist.builder()
@@ -65,7 +65,7 @@ class ArtistServiceTest {
                 .thenReturn(testDiscogsArtistSearchResults);
 
         //WHEN
-        Optional<Artist> actual = testArtistService.getArtistByArtistName(artistName);
+        Optional<Artist> actual = testArtistService.getArtistBySearchTerm(artistName);
 
         //THEN
         assertThat(actual, is(Optional.empty()));

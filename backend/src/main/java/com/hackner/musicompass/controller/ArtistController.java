@@ -20,7 +20,7 @@ public class ArtistController {
 
     @GetMapping("artistsearch/{artistName}")
     public Artist findArtist(@PathVariable String artistName){
-        return artistService.getArtistByArtistName(artistName)
+        return artistService.getArtistBySearchTerm(artistName)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "artist name not found"));
     }
 }
