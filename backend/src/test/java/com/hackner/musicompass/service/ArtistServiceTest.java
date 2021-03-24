@@ -1,5 +1,6 @@
 package com.hackner.musicompass.service;
 
+import com.hackner.musicompass.db.ArtistMongoDb;
 import com.hackner.musicompass.discogsapi.model.DiscogsArtist;
 import com.hackner.musicompass.discogsapi.model.DiscogsArtistSearchResults;
 import com.hackner.musicompass.discogsapi.service.DiscogsArtistApiService;
@@ -17,10 +18,8 @@ import static org.mockito.Mockito.when;
 class ArtistServiceTest {
 
     private final DiscogsArtistApiService testDiscogsArtistApiService = mock(DiscogsArtistApiService.class);
-    private final ArtistService testArtistService = ArtistService.builder()
-            .discogsArtistApiService(testDiscogsArtistApiService)
-            .build();
-
+    private final ArtistMongoDb artistMongoDb = mock(ArtistMongoDb.class);
+    private final ArtistService testArtistService =  new ArtistService(testDiscogsArtistApiService, artistMongoDb);
 
     @Test
     @DisplayName("TestArtistServiceForExistingArtist")
@@ -39,16 +38,16 @@ class ArtistServiceTest {
         DiscogsArtistSearchResults testDiscogsArtistSearchResults = DiscogsArtistSearchResults.builder()
                 .results(new DiscogsArtist[]{testDiscogsArtist}).build();
 
-        when(testDiscogsArtistApiService.getDiscogsArtistByArtistName(artistName)).thenReturn(testDiscogsArtistSearchResults);
+        when(testDiscogsArtistApiService.getDiscogsArtistByName(artistName)).thenReturn(testDiscogsArtistSearchResults);
 
         //WHEN
-        Optional<Artist> actual = testArtistService.getArtistByArtistName(artistName);
+        Optional<Artist> actual = testArtistService.getArtistBySearchTerm(artistName);
 
         //THEN
         assertThat(actual.get(), equalTo(Artist.builder()
                 .artistName(artistName)
                 .artistImageUrl(artistImageUrl)
-                .discogsId(discogsArtistId)
+                .discogsArtistId(discogsArtistId)
                 .discogsArtistUrl(discogsArtistUrl).build()));
     }
 
@@ -61,11 +60,11 @@ class ArtistServiceTest {
         DiscogsArtistSearchResults testDiscogsArtistSearchResults = DiscogsArtistSearchResults.builder()
                 .results(new DiscogsArtist[]{}).build();
 
-        when(testDiscogsArtistApiService.getDiscogsArtistByArtistName(artistName))
+        when(testDiscogsArtistApiService.getDiscogsArtistByName(artistName))
                 .thenReturn(testDiscogsArtistSearchResults);
 
         //WHEN
-        Optional<Artist> actual = testArtistService.getArtistByArtistName(artistName);
+        Optional<Artist> actual = testArtistService.getArtistBySearchTerm(artistName);
 
         //THEN
         assertThat(actual, is(Optional.empty()));

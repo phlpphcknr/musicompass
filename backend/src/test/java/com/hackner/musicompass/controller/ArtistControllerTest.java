@@ -74,7 +74,7 @@ class ArtistControllerTest {
         assertThat(controllerResponse.getBody(), is(Artist.builder()
                 .artistName(artistName)
                 .artistImageUrl(artistImageUrl)
-                .discogsId(discogsArtistId)
+                .discogsArtistId(discogsArtistId)
                 .discogsArtistUrl(discogsArtistUrl).build()));
     }
 

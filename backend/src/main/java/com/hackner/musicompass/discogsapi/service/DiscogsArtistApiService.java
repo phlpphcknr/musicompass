@@ -26,7 +26,7 @@ public class DiscogsArtistApiService {
         this.discogsApiEntityService = discogsApiEntityService;
     }
 
-    public DiscogsArtistSearchResults getDiscogsArtistByArtistName(String artistName) {
+    public DiscogsArtistSearchResults getDiscogsArtistByName(String artistName) {
 
         String url = baseUrl + "/database/search?type=artist&q=" + artistName;
 

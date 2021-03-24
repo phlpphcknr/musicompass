@@ -23,9 +23,8 @@ public class DiscogsApiEntityService {
     public HttpEntity<Void> createEntity(){
         HttpHeaders headers = new HttpHeaders();
         headers.add("User-Agent", "MusiCompass/0.1");
-        headers.add("Authorization", "Discogs token=" + discogsSecret.getDiscogsToken());
+        headers.add("Authorization", "Discogs token=" + discogsSecret.getToken());
         HttpEntity<Void> entity = new HttpEntity<>(headers);
         return entity;
     }
-
 }
