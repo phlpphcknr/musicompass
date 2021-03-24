@@ -9,6 +9,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import java.util.ArrayList;
 
 @Service
 @Slf4j
@@ -35,7 +36,7 @@ public class DiscogsArtistApiService {
                     restTemplate.exchange(url, HttpMethod.GET, discogsApiEntityService.createEntity(), DiscogsArtistSearchResults.class);
             return response.getBody();
         } catch (Exception e){
-            return DiscogsArtistSearchResults.builder().results(new DiscogsArtist[]{}).build();
+            return DiscogsArtistSearchResults.builder().results(new ArrayList<DiscogsArtist>()).build();
         }
     }
 }
