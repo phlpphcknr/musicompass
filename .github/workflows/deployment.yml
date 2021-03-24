@@ -4,7 +4,6 @@
     push:
       branches:
         - main
-        - fix-deployment-issue
 
   jobs:
     build-frontend:
