@@ -52,7 +52,7 @@ class DiscogsArtistApiServiceTest {
                 .thenReturn(mockResponseEntity);
 
         //WHEN
-        DiscogsArtistSearchResults actual = discogsArtistApiService.getDiscogsArtistByArtistName(artistName);
+        DiscogsArtistSearchResults actual = discogsArtistApiService.getDiscogsArtistByName(artistName);
 
         //THEN
         assertThat(actual, equalTo(testDiscogsArtistSearchResults));
@@ -81,7 +81,7 @@ class DiscogsArtistApiServiceTest {
                 .thenReturn(mockResponseEntity);
 
         //WHEN
-        DiscogsArtistSearchResults actual = discogsArtistApiService.getDiscogsArtistByArtistName(artistName);
+        DiscogsArtistSearchResults actual = discogsArtistApiService.getDiscogsArtistByName(artistName);
 
         //THEN
         assertThat(actual.getResults(), emptyArray());

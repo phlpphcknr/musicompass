@@ -20,14 +20,14 @@ public class ArtistService {
     }
 
     public Optional<Artist> getArtistBySearchTerm (String searchTerm) {
-        DiscogsArtistSearchResults DiscogsArtistSearchResults = discogsArtistApiService.getDiscogsArtistByArtistName(searchTerm);
-        if (DiscogsArtistSearchResults.getResults().length == 0){
+        DiscogsArtistSearchResults discogsArtistSearchResults = discogsArtistApiService.getDiscogsArtistByName(searchTerm);
+        if (discogsArtistSearchResults.getResults().length == 0){
             return Optional.empty();
         }
 
-        DiscogsArtist[] discogsArtistResultArray = DiscogsArtistSearchResults.getResults();
+        DiscogsArtist[] discogsArtistResult = discogsArtistSearchResults.getResults();
 
-        DiscogsArtist discogsArtist = discogsArtistResultArray[0];
+        DiscogsArtist discogsArtist = discogsArtistResult[0];
 
         return Optional.of(new Artist().builder()
                 .artistName(discogsArtist.getArtistName())
@@ -36,9 +36,9 @@ public class ArtistService {
                 .discogsArtistUrl(discogsArtist.getDiscogsArtistUrl()).build());
     }
 
-    public Artist getArtistByArtistName(String artistName) {
+    public Artist getArtistByName(String artistName) {
 
-        DiscogsArtistSearchResults DiscogsArtistSearchResults = discogsArtistApiService.getDiscogsArtistByArtistName(artistName);
+        DiscogsArtistSearchResults DiscogsArtistSearchResults = discogsArtistApiService.getDiscogsArtistByName(artistName);
 
         DiscogsArtist discogsArtist = DiscogsArtistSearchResults.getResults()[0];
 

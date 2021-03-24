@@ -26,6 +26,6 @@ public class ArtistController {
 
     @GetMapping("artist/{artistName}")
     public Artist getArtist(@PathVariable String artistName){
-        return artistService.getArtistByArtistName(artistName);
+        return artistService.getArtistByName(artistName);
     }
 }

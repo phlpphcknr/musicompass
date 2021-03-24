@@ -38,7 +38,7 @@ class ArtistServiceTest {
         DiscogsArtistSearchResults testDiscogsArtistSearchResults = DiscogsArtistSearchResults.builder()
                 .results(new DiscogsArtist[]{testDiscogsArtist}).build();
 
-        when(testDiscogsArtistApiService.getDiscogsArtistByArtistName(artistName)).thenReturn(testDiscogsArtistSearchResults);
+        when(testDiscogsArtistApiService.getDiscogsArtistByName(artistName)).thenReturn(testDiscogsArtistSearchResults);
 
         //WHEN
         Optional<Artist> actual = testArtistService.getArtistBySearchTerm(artistName);
@@ -60,7 +60,7 @@ class ArtistServiceTest {
         DiscogsArtistSearchResults testDiscogsArtistSearchResults = DiscogsArtistSearchResults.builder()
                 .results(new DiscogsArtist[]{}).build();
 
-        when(testDiscogsArtistApiService.getDiscogsArtistByArtistName(artistName))
+        when(testDiscogsArtistApiService.getDiscogsArtistByName(artistName))
                 .thenReturn(testDiscogsArtistSearchResults);
 
         //WHEN
