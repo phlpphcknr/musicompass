@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 @ConfigurationProperties(prefix = "discogs.auth")
 public class DiscogsSecret {
 
-    @Value("@discogs.token@")
+    @Value("${discogs.token}")
     private String discogsToken;
 
 }
