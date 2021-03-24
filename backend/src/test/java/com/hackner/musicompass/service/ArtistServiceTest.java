@@ -1,5 +1,6 @@
 package com.hackner.musicompass.service;
 
+import com.hackner.musicompass.db.ArtistMongoDb;
 import com.hackner.musicompass.discogsapi.model.DiscogsArtist;
 import com.hackner.musicompass.discogsapi.model.DiscogsArtistSearchResults;
 import com.hackner.musicompass.discogsapi.service.DiscogsArtistApiService;
@@ -17,9 +18,8 @@ import static org.mockito.Mockito.when;
 class ArtistServiceTest {
 
     private final DiscogsArtistApiService testDiscogsArtistApiService = mock(DiscogsArtistApiService.class);
-    private final ArtistService testArtistService = ArtistService.builder()
-            .discogsArtistApiService(testDiscogsArtistApiService)
-            .build();
+    private final ArtistMongoDb artistMongoDb = mock(ArtistMongoDb.class);
+    private final ArtistService testArtistService =  new ArtistService(testDiscogsArtistApiService, artistMongoDb);
 
     @Test
     @DisplayName("TestArtistServiceForExistingArtist")
