@@ -1,22 +1,26 @@
 import styled from 'styled-components/macro'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 export default function SearchArtist() {
-  const [artistSearchTerm, setArtistSearchTerm] = useState('')
+  const [artistSearchTerm, setArtistSearchTerm] = useState('');
+  const history = useHistory();
+
+  const handleSubmit = (event) => {
+      event.preventDefault();
+      history.push(`/artistsearch/${artistSearchTerm}`);
+    }
 
   return (
     <SearchArtistContainer>
-      <form>
+      <form onSubmit={handleSubmit}>
         <input
           placeholder="the artist I want to find out about is..."
           type="text"
           value={artistSearchTerm}
           onChange={({ target }) => setArtistSearchTerm(target.value)}
         />
-        <Link to={`/artistsearch/${artistSearchTerm}`}>
           <button>SEARCH</button>
-        </Link>
       </form>
     </SearchArtistContainer>
   )
