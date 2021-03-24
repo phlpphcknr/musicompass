@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 
-
 @Configuration
 @Builder
 public class DiscogsApiEntityService {
@@ -28,5 +27,4 @@ public class DiscogsApiEntityService {
         HttpEntity<Void> entity = new HttpEntity<>(headers);
         return entity;
     }
-
 }

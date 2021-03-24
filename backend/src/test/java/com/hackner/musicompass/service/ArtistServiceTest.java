@@ -21,7 +21,6 @@ class ArtistServiceTest {
             .discogsArtistApiService(testDiscogsArtistApiService)
             .build();
 
-
     @Test
     @DisplayName("TestArtistServiceForExistingArtist")
     public void getArtistFromArtistService(){

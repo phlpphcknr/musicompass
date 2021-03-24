@@ -30,14 +30,6 @@ public class ArtistService {
 
         DiscogsArtist[] discogsArtistResultArray = DiscogsArtistSearchResults.getResults();
 
-        //I want to cut the list down to the first 5 entries
-        //Iwas not able to access the variable discogsArtistResultArrayCut outside the if-else-function
-        /*if (discogsArtistResultArray.length > 5){
-            DiscogsArtist[] discogsArtistResultArrayCut = Arrays.copyOfRange(discogsArtistResultArray, 0,4);
-        }else{
-            DiscogsArtist[] discogsArtistResultArrayCut = discogsArtistResultArray;
-        }*/
-
         DiscogsArtist discogsArtist = discogsArtistResultArray[0];
 
         return Optional.of(new Artist().builder()
