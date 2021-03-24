@@ -19,7 +19,6 @@ import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@TestPropertySource(properties = "discogs.token=testtest")
 class ArtistControllerTest {
 
     @LocalServerPort
