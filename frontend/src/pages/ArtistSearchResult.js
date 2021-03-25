@@ -12,7 +12,7 @@ export default function ArtistSearchResult() {
         getArtistSearchResult(artistSearchTerm)
             .then(setArtistSearchResultList)
             .catch((error) => console.error(error))
-    }, [])
+    }, [artistSearchTerm])
 
     return (
         <SearchResults>
