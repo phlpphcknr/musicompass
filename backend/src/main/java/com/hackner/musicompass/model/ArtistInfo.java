@@ -11,7 +11,7 @@ import org.springframework.data.annotation.Id;
 @NoArgsConstructor
 @Builder
 
-public class Artist {
+public class ArtistInfo {
 
     private String artistName;
     private String artistImageUrl;

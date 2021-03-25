@@ -19,7 +19,7 @@ import static org.hamcrest.Matchers.emptyArray;
 import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.Mockito.*;
 
-class DiscogsArtistApiServiceTest {
+class DiscogsArtistInfoApiServiceTest {
 
     private final RestTemplate restTemplate = mock(RestTemplate.class);
     private final DiscogsApiEntityService discogsApiEntityService = mock(DiscogsApiEntityService.class);

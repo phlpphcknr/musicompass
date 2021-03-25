@@ -3,7 +3,7 @@ package com.hackner.musicompass.controller;
 import com.hackner.musicompass.discogsapi.model.DiscogsArtist;
 import com.hackner.musicompass.discogsapi.model.DiscogsArtistSearchResults;
 import com.hackner.musicompass.discogsapi.service.DiscogsApiEntityService;
-import com.hackner.musicompass.model.Artist;
+import com.hackner.musicompass.model.ArtistInfo;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class ArtistControllerTest {
+class ArtistInfoControllerTest {
 
     @LocalServerPort
     private int port;
@@ -71,11 +71,11 @@ class ArtistControllerTest {
                 .thenReturn(mockResponseEntity);
 
         //WHEN
-        ResponseEntity<Artist> controllerResponse = testRestTemplate.getForEntity(getUrl() + "/" + artistName,Artist.class);
+        ResponseEntity<ArtistInfo> controllerResponse = testRestTemplate.getForEntity(getUrl() + "/" + artistName, ArtistInfo.class);
 
         //THEN
         assertThat(controllerResponse.getStatusCode(), is(HttpStatus.OK));
-        assertThat(controllerResponse.getBody(), is(Artist.builder()
+        assertThat(controllerResponse.getBody(), is(ArtistInfo.builder()
                 .artistName(artistName)
                 .artistImageUrl(artistImageUrl)
                 .discogsArtistId(discogsArtistId)
@@ -104,7 +104,7 @@ class ArtistControllerTest {
                 .thenReturn(mockResponseEntity);
 
         //WHEN
-        ResponseEntity<Artist> controllerResponse = testRestTemplate.getForEntity(getUrl() + "/" + artistName,Artist.class);
+        ResponseEntity<ArtistInfo> controllerResponse = testRestTemplate.getForEntity(getUrl() + "/" + artistName, ArtistInfo.class);
 
         //THEN
         assertThat(controllerResponse.getStatusCode(), is(HttpStatus.NOT_FOUND));
