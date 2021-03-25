@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ArtistInfo {
 
-    private String artistName;
     private String artistImageUrl;
     private String discogsArtistId;
     private String discogsArtistUrl;

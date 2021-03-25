@@ -1,6 +1,7 @@
 package com.hackner.musicompass.service;
 import com.hackner.musicompass.discogsapi.model.DiscogsArtist;
 import com.hackner.musicompass.discogsapi.model.DiscogsArtistSearchResults;
+import com.hackner.musicompass.model.Artist;
 import com.hackner.musicompass.model.ArtistInfo;
 import com.hackner.musicompass.discogsapi.service.DiscogsArtistApiService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,15 +10,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class ArtistInfoService {
+public class ArtistSearchService {
     private final DiscogsArtistApiService discogsArtistApiService;
 
     @Autowired
-    public ArtistInfoService(DiscogsArtistApiService discogsArtistApiService) {
+    public ArtistSearchService(DiscogsArtistApiService discogsArtistApiService) {
         this.discogsArtistApiService = discogsArtistApiService;
     }
 
-    public List<ArtistInfo> getArtistInfoListBySearchTerm(String searchTerm) {
+    public List<Artist> getArtistInfoListBySearchTerm(String searchTerm) {
         DiscogsArtistSearchResults discogsArtistSearchResults = discogsArtistApiService.getDiscogsArtistListBySearchTerm(searchTerm);
 
         List<DiscogsArtist> discogsArtistList = discogsArtistSearchResults.getResults();
@@ -26,18 +27,19 @@ public class ArtistInfoService {
             discogsArtistList = discogsArtistList.subList(0, 5);
         }
 
-        List<ArtistInfo> artistInfoList = discogsArtistList.stream()
+        List<Artist> artistList = discogsArtistList.stream()
                 .map(discogsArtist -> {
-                    ArtistInfo artistInfo = new ArtistInfo().builder()
+                    Artist artist = new Artist().builder()
                             .artistName(discogsArtist.getArtistName())
-                            .artistImageUrl(discogsArtist.getArtistImageUrl())
-                            .discogsArtistId(discogsArtist.getDiscogsArtistId())
-                            .discogsArtistUrl(discogsArtist.getDiscogsArtistUrl()).build();
-                    return artistInfo;
+                            .artistInfo(new ArtistInfo().builder()
+                                    .artistImageUrl(discogsArtist.getArtistImageUrl())
+                                    .discogsArtistId(discogsArtist.getDiscogsArtistId())
+                                    .discogsArtistUrl(discogsArtist.getDiscogsArtistUrl()).build())
+                            .build();
+                    return artist;
                 })
                 .collect(Collectors.toList());
 
-        return artistInfoList;
-
+        return artistList;
     }
 }

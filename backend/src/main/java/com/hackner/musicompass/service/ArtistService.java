@@ -32,7 +32,6 @@ public class ArtistService {
         DiscogsArtist discogsArtist = DiscogsArtistSearchResults.getResults().get(0);
 
         ArtistInfo artistInfo = new ArtistInfo().builder()
-                .artistName(discogsArtist.getArtistName())
                 .artistImageUrl(discogsArtist.getArtistImageUrl())
                 .discogsArtistId(discogsArtist.getDiscogsArtistId())
                 .discogsArtistUrl(discogsArtist.getDiscogsArtistUrl()).build();

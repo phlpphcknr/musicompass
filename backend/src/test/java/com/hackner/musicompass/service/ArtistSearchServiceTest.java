@@ -3,6 +3,7 @@ package com.hackner.musicompass.service;
 import com.hackner.musicompass.discogsapi.model.DiscogsArtist;
 import com.hackner.musicompass.discogsapi.model.DiscogsArtistSearchResults;
 import com.hackner.musicompass.discogsapi.service.DiscogsArtistApiService;
+import com.hackner.musicompass.model.Artist;
 import com.hackner.musicompass.model.ArtistInfo;
 
 import org.junit.jupiter.api.DisplayName;
@@ -15,10 +16,10 @@ import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-class ArtistInfoServiceTest {
+class ArtistSearchServiceTest {
 
     private final DiscogsArtistApiService discogsArtistApiService = mock(DiscogsArtistApiService.class);
-    private final ArtistInfoService artistInfoService =  new ArtistInfoService(discogsArtistApiService);
+    private final ArtistSearchService artistSearchService =  new ArtistSearchService(discogsArtistApiService);
 
     @Test
     @DisplayName("Search for artist by search term returns an empty list")
@@ -33,7 +34,7 @@ class ArtistInfoServiceTest {
                 .thenReturn(discogsArtistSearchResults);
 
         //WHEN
-        List<ArtistInfo> actual = artistInfoService.getArtistInfoListBySearchTerm(searchTerm);
+        List<Artist> actual = artistSearchService.getArtistInfoListBySearchTerm(searchTerm);
 
         //THEN
         assertThat(actual.isEmpty(), is(true));
@@ -62,21 +63,30 @@ class ArtistInfoServiceTest {
                 .artistImageUrl("BohrerImageUrl")
                 .discogsArtistUrl("BohrerUrl").build();
 
-        ArtistInfo artistInfo1 = ArtistInfo.builder()
-                .discogsArtistId("111")
+        Artist artist1 = Artist.builder()
                 .artistName("Hans Hammer")
-                .artistImageUrl("HammerImageUrl")
-                .discogsArtistUrl("HammerUrl").build();
-        ArtistInfo artistInfo2 = ArtistInfo.builder()
-                .discogsArtistId("222")
+                .artistInfo(new ArtistInfo().builder()
+                        .artistImageUrl("HammerImageUrl")
+                        .discogsArtistId("111")
+                        .discogsArtistUrl("HammerUrl")
+                        .build())
+                .build();
+        Artist artist2 = Artist.builder()
                 .artistName("Hans Sichel")
-                .artistImageUrl("SichelImageUrl")
-                .discogsArtistUrl("SichelUrl").build();
-        ArtistInfo artistInfo3 = ArtistInfo.builder()
-                .discogsArtistId("333")
+                .artistInfo(new ArtistInfo().builder()
+                        .artistImageUrl("SichelImageUrl")
+                        .discogsArtistId("222")
+                        .discogsArtistUrl("SichelUrl")
+                        .build())
+                .build();
+        Artist artist3 = Artist.builder()
                 .artistName("Hans Bohrer")
-                .artistImageUrl("BohrerImageUrl")
-                .discogsArtistUrl("BohrerUrl").build();
+                .artistInfo(new ArtistInfo().builder()
+                        .artistImageUrl("BohrerImageUrl")
+                        .discogsArtistId("333")
+                        .discogsArtistUrl("BohrerUrl")
+                        .build())
+                .build();
 
         DiscogsArtistSearchResults discogsArtistSearchResults = DiscogsArtistSearchResults.builder()
                 .results(Arrays.asList(discogsArtist1,discogsArtist2,discogsArtist3)).build();
@@ -84,10 +94,10 @@ class ArtistInfoServiceTest {
         when(discogsArtistApiService.getDiscogsArtistListBySearchTerm(searchTerm)).thenReturn(discogsArtistSearchResults);
 
         //WHEN
-        List<ArtistInfo> actual = artistInfoService.getArtistInfoListBySearchTerm(searchTerm);
+        List<Artist> actual = artistSearchService.getArtistInfoListBySearchTerm(searchTerm);
 
         //THEN
-        assertThat(actual, contains(artistInfo1, artistInfo2, artistInfo3));
+        assertThat(actual, contains(artist1, artist2, artist3));
     }
 
 
@@ -128,31 +138,46 @@ class ArtistInfoServiceTest {
                 .artistImageUrl("MutterImageUrl")
                 .discogsArtistUrl("MutterUrl").build();
 
-        ArtistInfo artistInfo1 = ArtistInfo.builder()
-                .discogsArtistId("111")
+        Artist artist1 = Artist.builder()
                 .artistName("Hans Hammer")
-                .artistImageUrl("HammerImageUrl")
-                .discogsArtistUrl("HammerUrl").build();
-        ArtistInfo artistInfo2 = ArtistInfo.builder()
-                .discogsArtistId("222")
+                .artistInfo(new ArtistInfo().builder()
+                        .artistImageUrl("HammerImageUrl")
+                        .discogsArtistId("111")
+                        .discogsArtistUrl("HammerUrl")
+                        .build())
+                .build();
+        Artist artist2 = Artist.builder()
                 .artistName("Hans Sichel")
-                .artistImageUrl("SichelImageUrl")
-                .discogsArtistUrl("SichelUrl").build();
-        ArtistInfo artistInfo3 = ArtistInfo.builder()
-                .discogsArtistId("333")
+                .artistInfo(new ArtistInfo().builder()
+                        .artistImageUrl("SichelImageUrl")
+                        .discogsArtistId("222")
+                        .discogsArtistUrl("SichelUrl")
+                        .build())
+                .build();
+        Artist artist3 = Artist.builder()
                 .artistName("Hans Bohrer")
-                .artistImageUrl("BohrerImageUrl")
-                .discogsArtistUrl("BohrerUrl").build();
-        ArtistInfo artistInfo4 = ArtistInfo.builder()
-                .discogsArtistId("444")
+                .artistInfo(new ArtistInfo().builder()
+                        .artistImageUrl("BohrerImageUrl")
+                        .discogsArtistId("333")
+                        .discogsArtistUrl("BohrerUrl")
+                        .build())
+                .build();
+        Artist artist4 = Artist.builder()
                 .artistName("Hans Meisel")
-                .artistImageUrl("MeiselImageUrl")
-                .discogsArtistUrl("MeiselUrl").build();
-        ArtistInfo artistInfo5 = ArtistInfo.builder()
-                .discogsArtistId("555")
+                .artistInfo(new ArtistInfo().builder()
+                        .artistImageUrl("MeiselImageUrl")
+                        .discogsArtistId("444")
+                        .discogsArtistUrl("MeiselUrl")
+                        .build())
+                .build();
+        Artist artist5 = Artist.builder()
                 .artistName("Hans Nagel")
-                .artistImageUrl("NagelImageUrl")
-                .discogsArtistUrl("NagelUrl").build();
+                .artistInfo(new ArtistInfo().builder()
+                        .artistImageUrl("NagelImageUrl")
+                        .discogsArtistId("555")
+                        .discogsArtistUrl("NagelUrl")
+                        .build())
+                .build();
 
         DiscogsArtistSearchResults discogsArtistSearchResults = DiscogsArtistSearchResults.builder()
                 .results(Arrays.asList(discogsArtist1,discogsArtist2,discogsArtist3,discogsArtist4,discogsArtist5,discogsArtist6)).build();
@@ -160,10 +185,10 @@ class ArtistInfoServiceTest {
         when(discogsArtistApiService.getDiscogsArtistListBySearchTerm(searchTerm)).thenReturn(discogsArtistSearchResults);
 
         //WHEN
-        List<ArtistInfo> actual = artistInfoService.getArtistInfoListBySearchTerm(searchTerm);
+        List<Artist> actual = artistSearchService.getArtistInfoListBySearchTerm(searchTerm);
 
         //THEN
-        assertThat(actual, contains(artistInfo1, artistInfo2, artistInfo3, artistInfo4, artistInfo5));
+        assertThat(actual, contains(artist1, artist2, artist3, artist4, artist5));
         assertThat(actual.size(), is(5));
     }
 }
