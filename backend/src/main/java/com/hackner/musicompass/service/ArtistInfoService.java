@@ -1,5 +1,4 @@
 package com.hackner.musicompass.service;
-import com.hackner.musicompass.db.ArtistMongoDb;
 import com.hackner.musicompass.discogsapi.model.DiscogsArtist;
 import com.hackner.musicompass.discogsapi.model.DiscogsArtistSearchResults;
 import com.hackner.musicompass.model.ArtistInfo;
@@ -19,7 +18,7 @@ public class ArtistInfoService {
     }
 
     public List<ArtistInfo> getArtistInfoListBySearchTerm(String searchTerm) {
-        DiscogsArtistSearchResults discogsArtistSearchResults = discogsArtistApiService.getDiscogsArtistByName(searchTerm);
+        DiscogsArtistSearchResults discogsArtistSearchResults = discogsArtistApiService.getDiscogsArtistListBySearchTerm(searchTerm);
 
         List<DiscogsArtist> discogsArtistList = discogsArtistSearchResults.getResults();
 
