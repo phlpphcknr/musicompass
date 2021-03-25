@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
-
 import java.util.List;
 
 @Data
@@ -18,8 +17,6 @@ public class Artist {
     private String artistName;
     private ArtistInfo artistInfo;
     private List<ArtistAlbum> artistAlbums;
-    private List<ArtistSingles> artistSingles;
+    private List<ArtistSingleEp> artistSingles;
     private RecommendationTags recommendationTags;
-
-
 }

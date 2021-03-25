@@ -14,5 +14,4 @@ public class ArtistInfo {
     private String artistImageUrl;
     private String discogsArtistId;
     private String discogsArtistUrl;
-
 }

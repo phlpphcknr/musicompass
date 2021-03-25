@@ -6,9 +6,8 @@ import com.hackner.musicompass.discogsapi.model.DiscogsArtistSearchResults;
 import com.hackner.musicompass.discogsapi.service.DiscogsArtistApiService;
 import com.hackner.musicompass.model.Artist;
 import com.hackner.musicompass.model.ArtistInfo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class ArtistService {
@@ -16,6 +15,7 @@ public class ArtistService {
     private final DiscogsArtistApiService discogsArtistApiService;
     private final ArtistMongoDb artistMongoDb;
 
+    @Autowired
     public ArtistService(DiscogsArtistApiService discogsArtistApiService, ArtistMongoDb artistMongoDb) {
         this.discogsArtistApiService = discogsArtistApiService;
         this.artistMongoDb = artistMongoDb;
@@ -44,5 +44,4 @@ public class ArtistService {
 
         return artist;
     }
-
 }

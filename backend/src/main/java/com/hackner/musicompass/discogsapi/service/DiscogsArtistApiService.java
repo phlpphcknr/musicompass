@@ -14,7 +14,6 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Collections;
 import java.util.List;
 
-
 @Service
 @Slf4j
 @Builder
@@ -66,7 +65,6 @@ public class DiscogsArtistApiService {
                     releaseList.addAll(nextResponse.getBody().getResults());
                 }
             }
-
             return releaseList;
 
         } catch (Exception e) {

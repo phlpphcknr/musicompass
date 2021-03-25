@@ -5,7 +5,6 @@ import com.hackner.musicompass.discogsapi.model.DiscogsArtistSearchResults;
 import com.hackner.musicompass.discogsapi.service.DiscogsArtistApiService;
 import com.hackner.musicompass.model.Artist;
 import com.hackner.musicompass.model.ArtistInfo;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.util.Arrays;
@@ -39,7 +38,6 @@ class ArtistSearchServiceTest {
         //THEN
         assertThat(actual.isEmpty(), is(true));
     }
-
 
     @Test
     @DisplayName("Search for artist by search term returns a list with less than 5 entries")

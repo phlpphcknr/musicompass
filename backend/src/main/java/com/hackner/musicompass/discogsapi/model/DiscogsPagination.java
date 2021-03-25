@@ -18,5 +18,4 @@ public class DiscogsPagination {
     int page;
     @JsonProperty("pages")
     int pages;
-
 }

@@ -17,5 +17,4 @@ public class DiscogsArtistSearchResults {
 
     @JsonProperty("results")
     List<DiscogsArtist> results;
-
 }

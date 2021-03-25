@@ -15,9 +15,7 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
-
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -75,7 +73,6 @@ class ArtistInfoControllerTest {
                 .thenReturn(mockResponseEntity);
 
         //WHEN
-        //ResponseEntity<List<ArtistInfo>> controllerResponse = testRestTemplate.getForEntity(getUrl() + "/" + artistName, List<ArtistInfo>.class);
         ResponseEntity<List<Artist>> controllerResponse = testRestTemplate
                 .exchange(getUrl() + "/" + artistName
                         ,HttpMethod.GET
@@ -115,7 +112,6 @@ class ArtistInfoControllerTest {
                 .thenReturn(mockResponseEntity);
 
         //WHEN
-        //ResponseEntity<List<ArtistInfo>> controllerResponse = testRestTemplate.getForEntity(getUrl() + "/" + artistName, Artist.class);
         ResponseEntity<List<Artist>> actual = testRestTemplate
                 .exchange(getUrl() + "/" + artistName
                         ,HttpMethod.GET
