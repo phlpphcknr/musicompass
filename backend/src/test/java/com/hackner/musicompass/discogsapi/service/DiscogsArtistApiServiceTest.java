@@ -15,8 +15,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.emptyArray;
-import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.*;
 
 class DiscogsArtistApiServiceTest {
@@ -28,7 +27,7 @@ class DiscogsArtistApiServiceTest {
 
     @Test
     @DisplayName("Get artist from API")
-    //THis test is not needed anymore because the function is not needed anymore; still save the in simplenote!!
+
     public void returnsArtist(){
         //GIVEN
         String artistName = "hans hammer";
@@ -56,8 +55,8 @@ class DiscogsArtistApiServiceTest {
         when(restTemplate.exchange(discogsApiUrl, HttpMethod.GET, entity, DiscogsArtistSearchResults.class))
                 .thenReturn(mockResponseEntity);
 
-        //WHEN .... cut and move to simple note
-        DiscogsArtistSearchResults actual = discogsArtistApiService.getDiscogsArtistByName(artistName);
+        //WHEN
+        DiscogsArtistSearchResults actual = discogsArtistApiService.getDiscogsArtistListBySearchTerm(artistName);
 
         //THEN
         assertThat(actual, equalTo(testDiscogsArtistSearchResults));
@@ -86,10 +85,10 @@ class DiscogsArtistApiServiceTest {
                 .thenReturn(mockResponseEntity);
 
         //WHEN
-        DiscogsArtistSearchResults actual = discogsArtistApiService.getDiscogsArtistByName(artistName);
+        DiscogsArtistSearchResults actual = discogsArtistApiService.getDiscogsArtistListBySearchTerm(artistName);
 
         //THEN
-        //assertThat(actual.getResults(), emptyArray());
+        assertThat(actual.getResults(), emptyIterable());
     }
 }
 

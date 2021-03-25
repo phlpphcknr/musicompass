@@ -29,7 +29,7 @@ class ArtistInfoServiceTest {
         DiscogsArtistSearchResults discogsArtistSearchResults = DiscogsArtistSearchResults.builder()
                 .results(Collections.<DiscogsArtist>emptyList()).build();
 
-        when(discogsArtistApiService.getDiscogsArtistByName(searchTerm))
+        when(discogsArtistApiService.getDiscogsArtistListBySearchTerm(searchTerm))
                 .thenReturn(discogsArtistSearchResults);
 
         //WHEN
@@ -81,7 +81,7 @@ class ArtistInfoServiceTest {
         DiscogsArtistSearchResults discogsArtistSearchResults = DiscogsArtistSearchResults.builder()
                 .results(Arrays.asList(discogsArtist1,discogsArtist2,discogsArtist3)).build();
 
-        when(discogsArtistApiService.getDiscogsArtistByName(searchTerm)).thenReturn(discogsArtistSearchResults);
+        when(discogsArtistApiService.getDiscogsArtistListBySearchTerm(searchTerm)).thenReturn(discogsArtistSearchResults);
 
         //WHEN
         List<ArtistInfo> actual = artistInfoService.getArtistInfoListBySearchTerm(searchTerm);
@@ -157,7 +157,7 @@ class ArtistInfoServiceTest {
         DiscogsArtistSearchResults discogsArtistSearchResults = DiscogsArtistSearchResults.builder()
                 .results(Arrays.asList(discogsArtist1,discogsArtist2,discogsArtist3,discogsArtist4,discogsArtist5,discogsArtist6)).build();
 
-        when(discogsArtistApiService.getDiscogsArtistByName(searchTerm)).thenReturn(discogsArtistSearchResults);
+        when(discogsArtistApiService.getDiscogsArtistListBySearchTerm(searchTerm)).thenReturn(discogsArtistSearchResults);
 
         //WHEN
         List<ArtistInfo> actual = artistInfoService.getArtistInfoListBySearchTerm(searchTerm);

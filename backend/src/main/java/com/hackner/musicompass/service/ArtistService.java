@@ -4,8 +4,11 @@ import com.hackner.musicompass.db.ArtistMongoDb;
 import com.hackner.musicompass.discogsapi.model.DiscogsArtist;
 import com.hackner.musicompass.discogsapi.model.DiscogsArtistSearchResults;
 import com.hackner.musicompass.discogsapi.service.DiscogsArtistApiService;
+import com.hackner.musicompass.model.Artist;
 import com.hackner.musicompass.model.ArtistInfo;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class ArtistService {
@@ -18,9 +21,11 @@ public class ArtistService {
         this.artistMongoDb = artistMongoDb;
     }
 
-    public ArtistInfo getArtistByName(String artistName) {
+    public Artist getArtistByName(String artistName) {
 
-        if(artistMongoDb.findBy)
+        if(artistMongoDb.existsById(artistName)){
+            return artistMongoDb.findById(artistName).get();
+        }
 
         DiscogsArtistSearchResults DiscogsArtistSearchResults = discogsArtistApiService.getDiscogsArtistListBySearchTerm(artistName);
 
@@ -32,9 +37,13 @@ public class ArtistService {
                 .discogsArtistId(discogsArtist.getDiscogsArtistId())
                 .discogsArtistUrl(discogsArtist.getDiscogsArtistUrl()).build();
 
-        artistMongoDb.save(artistInfo);
+        Artist artist = new Artist().builder()
+                .artistName(discogsArtist.getArtistName())
+                .artistInfo(artistInfo).build();
 
-        return artistInfo;
+        artistMongoDb.save(artist);
+
+        return artist;
     }
 
 }

@@ -1,7 +1,6 @@
 package com.hackner.musicompass.controller;
 
-import com.hackner.musicompass.model.ArtistInfo;
-import com.hackner.musicompass.service.ArtistInfoService;
+import com.hackner.musicompass.model.Artist;
 import com.hackner.musicompass.service.ArtistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +22,7 @@ public class ArtistController {
     }
 
     @GetMapping("{artistName}")
-    public ArtistInfo getArtist(@PathVariable String artistName){
+    public Artist getArtist(@PathVariable String artistName){
         return artistService.getArtistByName(artistName);
     }
 }
