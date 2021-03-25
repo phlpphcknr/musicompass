@@ -18,9 +18,11 @@ public class ArtistService {
         this.artistMongoDb = artistMongoDb;
     }
 
- /*   public ArtistInfo getArtistByName(String artistName) {
+    public ArtistInfo getArtistByName(String artistName) {
 
-        DiscogsArtistSearchResults DiscogsArtistSearchResults = discogsArtistApiService.getDiscogsArtistByName(artistName);
+        if(artistMongoDb.findBy)
+
+        DiscogsArtistSearchResults DiscogsArtistSearchResults = discogsArtistApiService.getDiscogsArtistListBySearchTerm(artistName);
 
         DiscogsArtist discogsArtist = DiscogsArtistSearchResults.getResults().get(0);
 
@@ -33,6 +35,6 @@ public class ArtistService {
         artistMongoDb.save(artistInfo);
 
         return artistInfo;
-    }*/
+    }
 
 }

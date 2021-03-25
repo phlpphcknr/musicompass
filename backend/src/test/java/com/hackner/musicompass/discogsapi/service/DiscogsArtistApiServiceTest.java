@@ -19,7 +19,7 @@ import static org.hamcrest.Matchers.emptyArray;
 import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.Mockito.*;
 
-class DiscogsArtistInfoApiServiceTest {
+class DiscogsArtistApiServiceTest {
 
     private final RestTemplate restTemplate = mock(RestTemplate.class);
     private final DiscogsApiEntityService discogsApiEntityService = mock(DiscogsApiEntityService.class);
@@ -28,6 +28,7 @@ class DiscogsArtistInfoApiServiceTest {
 
     @Test
     @DisplayName("Get artist from API")
+    //THis test is not needed anymore because the function is not needed anymore; still save the in simplenote!!
     public void returnsArtist(){
         //GIVEN
         String artistName = "hans hammer";
@@ -55,7 +56,7 @@ class DiscogsArtistInfoApiServiceTest {
         when(restTemplate.exchange(discogsApiUrl, HttpMethod.GET, entity, DiscogsArtistSearchResults.class))
                 .thenReturn(mockResponseEntity);
 
-        //WHEN
+        //WHEN .... cut and move to simple note
         DiscogsArtistSearchResults actual = discogsArtistApiService.getDiscogsArtistByName(artistName);
 
         //THEN

@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 
 @Data
-public class States {
+public class Stats {
 
     @JsonProperty("want")
     private int numberOfWants;

@@ -23,5 +23,5 @@ public class DiscogsMasterRelease {
     @JsonProperty("title")
     private String fullAlbumTitle;
     @JsonProperty("community")
-    private States releaseStates;
+    private Stats releaseStats;
 }

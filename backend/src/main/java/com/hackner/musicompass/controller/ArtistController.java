@@ -2,28 +2,28 @@ package com.hackner.musicompass.controller;
 
 import com.hackner.musicompass.model.ArtistInfo;
 import com.hackner.musicompass.service.ArtistInfoService;
+import com.hackner.musicompass.service.ArtistService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import java.util.List;
 
 @RestController
-@RequestMapping("api/")
+@RequestMapping("api/artist/")
 public class ArtistController {
 
-    private final ArtistInfoService artistInfoService;
+    private final ArtistService artistService;
 
     @Autowired
-    public ArtistController(ArtistInfoService artistInfoService) {
-        this.artistInfoService = artistInfoService;
+    public ArtistController(ArtistService artistService) {
+        this.artistService = artistService;
     }
 
-    @GetMapping("artistsearch/{searchTerm}")
-    public List<ArtistInfo> findArtist(@PathVariable String searchTerm){
-        return artistInfoService.getArtistInfoListBySearchTerm(searchTerm);
-    }
-
-    @GetMapping("artist/{artistName}")
+    @GetMapping("{artistName}")
     public ArtistInfo getArtist(@PathVariable String artistName){
-        return artistInfoService.getArtistByName(artistName);
+        return artistService.getArtistByName(artistName);
     }
 }
