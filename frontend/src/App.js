@@ -16,7 +16,7 @@ export default function App() {
         <Route exact path="/artistsearch/:artistSearchTerm">
           <ArtistSearchResult />
         </Route>
-          <Route exact path="/artistInfo/:artistName">
+          <Route exact path="/artist/:artistName">
               <ArtistOverview/>
           </Route>
       </Switch>
