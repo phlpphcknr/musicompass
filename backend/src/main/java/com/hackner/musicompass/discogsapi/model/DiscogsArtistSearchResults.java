@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -16,6 +16,6 @@ import java.util.ArrayList;
 public class DiscogsArtistSearchResults {
 
     @JsonProperty("results")
-    ArrayList<DiscogsArtist> results;
+    List<DiscogsArtist> results;
 
 }

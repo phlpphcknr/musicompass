@@ -13,6 +13,10 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Arrays;
+import java.util.Collections;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
@@ -54,7 +58,7 @@ class ArtistControllerTest {
                 .artistImageUrl(artistImageUrl)
                 .discogsArtistUrl(discogsArtistUrl).build();
         DiscogsArtistSearchResults testDiscogsArtistSearchResults = DiscogsArtistSearchResults.builder()
-                .results(new DiscogsArtist[]{testDiscogsArtist}).build();
+                .results(Arrays.asList(testDiscogsArtist)).build();
         ResponseEntity<DiscogsArtistSearchResults> mockResponseEntity = ResponseEntity.ok(testDiscogsArtistSearchResults);
 
         HttpHeaders headers = new HttpHeaders();
@@ -87,7 +91,7 @@ class ArtistControllerTest {
         String discogsApiUrl = baseUrl + "/database/search?type=artist&q=" + artistName;
 
         DiscogsArtistSearchResults testDiscogsArtistSearchResults = DiscogsArtistSearchResults.builder()
-                .results(new DiscogsArtist[]{}).build();
+                .results(Collections.<DiscogsArtist>emptyList()).build();
         ResponseEntity<DiscogsArtistSearchResults> mockResponseEntity = ResponseEntity.ok(testDiscogsArtistSearchResults);
 
         HttpHeaders headers = new HttpHeaders();

@@ -6,8 +6,9 @@ import com.hackner.musicompass.model.Artist;
 import com.hackner.musicompass.discogsapi.service.DiscogsArtistApiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ArtistService {
@@ -20,21 +21,28 @@ public class ArtistService {
         this.artistMongoDb = artistMongoDb;
     }
 
-    public Optional<Artist> getArtistBySearchTerm (String searchTerm) {
+    public List<Artist> getArtistListBySearchTerm(String searchTerm) {
         DiscogsArtistSearchResults discogsArtistSearchResults = discogsArtistApiService.getDiscogsArtistByName(searchTerm);
-        if (discogsArtistSearchResults.getResults().size() == 0){
-            return Optional.empty();
+
+        List<DiscogsArtist> discogsArtistList = discogsArtistSearchResults.getResults();
+
+        if (discogsArtistList.size() > 5) {
+            discogsArtistList = discogsArtistList.subList(0, 5);
         }
 
-        ArrayList<DiscogsArtist> discogsArtistResult = discogsArtistSearchResults.getResults();
+        List<Artist> artistList = discogsArtistList.stream()
+                .map(discogsArtist -> {
+                    Artist artist = new Artist().builder()
+                            .artistName(discogsArtist.getArtistName())
+                            .artistImageUrl(discogsArtist.getArtistImageUrl())
+                            .discogsArtistId(discogsArtist.getDiscogsArtistId())
+                            .discogsArtistUrl(discogsArtist.getDiscogsArtistUrl()).build();
+                    return artist;
+                })
+                .collect(Collectors.toList());
 
-        DiscogsArtist discogsArtist = discogsArtistResult.get(0);
+        return artistList;
 
-        return Optional.of(new Artist().builder()
-                .artistName(discogsArtist.getArtistName())
-                .artistImageUrl(discogsArtist.getArtistImageUrl())
-                .discogsArtistId(discogsArtist.getDiscogsArtistId())
-                .discogsArtistUrl(discogsArtist.getDiscogsArtistUrl()).build());
     }
 
     public Artist getArtistByName(String artistName) {
