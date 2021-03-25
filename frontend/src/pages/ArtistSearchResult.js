@@ -6,18 +6,19 @@ import { getArtistSearchResult } from '../service/musiComApiService'
 
 export default function ArtistSearchResult() {
     const {artistSearchTerm} = useParams()
-    const [artistSearchResultList, setArtistSearchResultList] = useState('')
+    const [artistSearchResultList, setArtistSearchResultList] = useState([])
 
     useEffect(() => {
-        getArtistSearchResult(artistSearchTerm).then(setArtistSearchResultList)
-    }, [artistSearchTerm])
+        getArtistSearchResult(artistSearchTerm)
+            .then(setArtistSearchResultList)
+            .catch((error) => console.error(error))
+    }, [])
 
     return (
         <SearchResults>
             <p>Search results for '{artistSearchTerm}'</p>
-            {artistSearchResultList.map((artist) => (
-                <ArtistHeader artist={artist}/>
-            ))}
+            {artistSearchResultList.map((artist) =>
+                <ArtistHeader key={artist.artistName} artist={artist}/>)}
         </SearchResults>
     )
 }

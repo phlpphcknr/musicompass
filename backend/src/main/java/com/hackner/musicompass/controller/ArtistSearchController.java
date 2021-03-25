@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/artistsearch/")
+@RequestMapping("api/artistsearch")
 public class ArtistSearchController {
 
     private final ArtistSearchService artistSearchService;
