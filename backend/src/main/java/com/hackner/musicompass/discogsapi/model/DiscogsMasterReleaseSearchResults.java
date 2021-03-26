@@ -14,7 +14,7 @@ import java.util.List;
 public class DiscogsMasterReleaseSearchResults {
 
     @JsonProperty("pagination")
-    DiscogsPagination pagination;
+    private DiscogsPagination pagination;
     @JsonProperty("results")
-    List<DiscogsMasterRelease> results;
+    private List<DiscogsMasterRelease> results;
 }

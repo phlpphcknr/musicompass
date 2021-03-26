@@ -16,5 +16,5 @@ import java.util.List;
 public class DiscogsArtistSearchResults {
 
     @JsonProperty("results")
-    List<DiscogsArtist> results;
+    private List<DiscogsArtist> results;
 }

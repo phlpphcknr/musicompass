@@ -13,9 +13,9 @@ import lombok.NoArgsConstructor;
 public class DiscogsPagination {
 
     @JsonProperty("items")
-    int numberOfItems;
+    private int numberOfItems;
     @JsonProperty("page")
-    int page;
+    private int page;
     @JsonProperty("pages")
-    int pages;
+    private int pages;
 }
