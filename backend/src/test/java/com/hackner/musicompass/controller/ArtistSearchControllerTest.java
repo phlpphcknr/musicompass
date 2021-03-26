@@ -1,10 +1,12 @@
 package com.hackner.musicompass.controller;
 
+import com.hackner.musicompass.db.ArtistMongoDb;
 import com.hackner.musicompass.discogsapi.model.DiscogsArtist;
 import com.hackner.musicompass.discogsapi.model.DiscogsArtistSearchResults;
 import com.hackner.musicompass.discogsapi.service.DiscogsApiEntityService;
 import com.hackner.musicompass.model.Artist;
 import com.hackner.musicompass.model.ArtistInfo;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,17 +32,25 @@ class ArtistSearchControllerTest {
     private int port;
 
     private String getUrl() {
-        return "http://localhost:" + port + "/api/artist?q=";
+        return "http://localhost:" + port + "/api/artistsearch/";
     }
 
     @MockBean
     private RestTemplate restTemplate;
+
+    //@Autowired
+    //private ArtistMongoDb artistMongoDb;
 
     @MockBean
     private DiscogsApiEntityService discogsApiEntityService;
 
     @Autowired
     private TestRestTemplate testRestTemplate;
+
+    /*@BeforeEach
+    public void setup() {
+        artistMongoDb.deleteAll();
+    }*/
 
     @Test
     @DisplayName("Searching for artist name should return artist object")
@@ -112,7 +122,7 @@ class ArtistSearchControllerTest {
 
         //WHEN
         ResponseEntity<List<Artist>> actual = testRestTemplate
-                .exchange(getUrl() + "/" + artistName
+                .exchange(getUrl() + artistName
                         ,HttpMethod.GET
                         ,null
                         ,new ParameterizedTypeReference<List<Artist>>(){});
