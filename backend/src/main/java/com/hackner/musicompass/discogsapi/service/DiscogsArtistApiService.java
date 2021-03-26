@@ -45,24 +45,14 @@ public class DiscogsArtistApiService {
     public List<DiscogsMasterRelease> getDiscogsMasterReleaseListByArtistName(String artistName) {
 
         try {
-            ResponseEntity<DiscogsMasterReleaseSearchResults> response =
-                    restTemplate.exchange(dynamicUrl(artistName, 1),
-                            HttpMethod.GET,
-                            discogsApiEntityService.createEntity(),
-                            DiscogsMasterReleaseSearchResults.class);
-
-            List<DiscogsMasterRelease> releaseList = response.getBody().getResults();
-
-            int numberOfPages = response.getBody().getPagination().getPages();
+            DiscogsMasterReleaseSearchResults searchResults = getResponseBodyFromRestTemplate(artistName, 1);
+            List<DiscogsMasterRelease> releaseList = searchResults.getResults();
+            int numberOfPages = searchResults.getPagination().getPages();
 
             if (numberOfPages > 1) {
                 for (int i = 2; i < numberOfPages + 1; i++) {
-                    ResponseEntity<DiscogsMasterReleaseSearchResults> nextResponse =
-                            restTemplate.exchange(dynamicUrl(artistName, i),
-                                    HttpMethod.GET,
-                                    discogsApiEntityService.createEntity(),
-                                    DiscogsMasterReleaseSearchResults.class);
-                    releaseList.addAll(nextResponse.getBody().getResults());
+                    DiscogsMasterReleaseSearchResults nextResponse = getResponseBodyFromRestTemplate(artistName,i);
+                    releaseList.addAll(nextResponse.getResults());
                 }
             }
             return releaseList;
@@ -74,5 +64,14 @@ public class DiscogsArtistApiService {
 
     public String dynamicUrl(String artistName, int i){
         return baseUrl + "/database/search?type=master&artist=" + artistName + "&page=" + Integer.toString(i) + "&per-page_100";
+    }
+
+    public DiscogsMasterReleaseSearchResults getResponseBodyFromRestTemplate(String artistName, int page){
+        ResponseEntity<DiscogsMasterReleaseSearchResults> response =
+                restTemplate.exchange(dynamicUrl(artistName, page),
+                        HttpMethod.GET,
+                        discogsApiEntityService.createEntity(),
+                        DiscogsMasterReleaseSearchResults.class);
+        return response.getBody();
     }
 }
