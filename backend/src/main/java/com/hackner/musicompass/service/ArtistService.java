@@ -31,14 +31,12 @@ public class ArtistService {
 
         DiscogsArtist discogsArtist = DiscogsArtistSearchResults.getResults().get(0);
 
-        ArtistInfo artistInfo = new ArtistInfo().builder()
-                .artistImageUrl(discogsArtist.getArtistImageUrl())
-                .discogsArtistId(discogsArtist.getDiscogsArtistId())
-                .discogsArtistUrl(discogsArtist.getDiscogsArtistUrl()).build();
-
         Artist artist = new Artist().builder()
                 .artistName(discogsArtist.getArtistName())
-                .artistInfo(artistInfo).build();
+                .artistInfo(new ArtistInfo().builder()
+                        .artistImageUrl(discogsArtist.getArtistImageUrl())
+                        .discogsArtistId(discogsArtist.getDiscogsArtistId())
+                        .discogsArtistUrl(discogsArtist.getDiscogsArtistUrl()).build()).build();
 
         artistMongoDb.save(artist);
 
