@@ -24,13 +24,13 @@ import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class ArtistInfoControllerTest {
+class ArtistSearchControllerTest {
 
     @LocalServerPort
     private int port;
 
     private String getUrl() {
-        return "http://localhost:" + port + "/api/artistsearch";
+        return "http://localhost:" + port + "/api/artist?q=";
     }
 
     @MockBean
@@ -74,11 +74,10 @@ class ArtistInfoControllerTest {
 
         //WHEN
         ResponseEntity<List<Artist>> controllerResponse = testRestTemplate
-                .exchange(getUrl() + "/" + artistName
+                .exchange(getUrl() + artistName
                         ,HttpMethod.GET
                         ,null
                         ,new ParameterizedTypeReference<List<Artist>>(){});
-
 
         //THEN
         assertThat(controllerResponse.getStatusCode(), is(HttpStatus.OK));

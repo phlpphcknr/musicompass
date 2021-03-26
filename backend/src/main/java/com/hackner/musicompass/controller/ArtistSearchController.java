@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api")
+@RequestMapping("api/artist?q=")
 public class ArtistSearchController {
 
     private final ArtistSearchService artistSearchService;
@@ -17,8 +17,8 @@ public class ArtistSearchController {
         this.artistSearchService = artistSearchService;
     }
 
-    @GetMapping("artist?q={searchTerm}")
-    public List<Artist> getArtistInfoListBySearchTerm(@PathVariable String searchTerm){
-        return artistSearchService.getArtistInfoListBySearchTerm(searchTerm);
+    @GetMapping("{searchTerm}")
+    public List<Artist> getArtistListBySearchTerm(@PathVariable String searchTerm){
+        return artistSearchService.getArtistListBySearchTerm(searchTerm);
     }
 }

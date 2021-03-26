@@ -18,7 +18,7 @@ public class ArtistSearchService {
         this.discogsArtistApiService = discogsArtistApiService;
     }
 
-    public List<Artist> getArtistInfoListBySearchTerm(String searchTerm) {
+    public List<Artist> getArtistListBySearchTerm(String searchTerm) {
         DiscogsArtistSearchResults discogsArtistSearchResults = discogsArtistApiService.getDiscogsArtistListBySearchTerm(searchTerm);
 
         List<DiscogsArtist> discogsArtistList = discogsArtistSearchResults.getResults();

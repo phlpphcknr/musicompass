@@ -33,7 +33,7 @@ class ArtistSearchServiceTest {
                 .thenReturn(discogsArtistSearchResults);
 
         //WHEN
-        List<Artist> actual = artistSearchService.getArtistInfoListBySearchTerm(searchTerm);
+        List<Artist> actual = artistSearchService.getArtistListBySearchTerm(searchTerm);
 
         //THEN
         assertThat(actual.isEmpty(), is(true));
@@ -47,7 +47,7 @@ class ArtistSearchServiceTest {
         when(discogsArtistApiService.getDiscogsArtistListBySearchTerm(searchTerm)).thenReturn(getDiscogsArtistsSearchResult(3));
 
         //WHEN
-        List<Artist> actual = artistSearchService.getArtistInfoListBySearchTerm(searchTerm);
+        List<Artist> actual = artistSearchService.getArtistListBySearchTerm(searchTerm);
 
         //THEN
         assertThat(actual, is(getArtistsList(3)));
@@ -61,7 +61,7 @@ class ArtistSearchServiceTest {
         when(discogsArtistApiService.getDiscogsArtistListBySearchTerm(searchTerm)).thenReturn(getDiscogsArtistsSearchResult(6));
 
         //WHEN
-        List<Artist> actual = artistSearchService.getArtistInfoListBySearchTerm(searchTerm);
+        List<Artist> actual = artistSearchService.getArtistListBySearchTerm(searchTerm);
 
         //THEN
         assertThat(actual, is(getArtistsList(5)));
