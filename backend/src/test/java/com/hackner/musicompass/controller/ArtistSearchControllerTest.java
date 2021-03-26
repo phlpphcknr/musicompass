@@ -38,19 +38,11 @@ class ArtistSearchControllerTest {
     @MockBean
     private RestTemplate restTemplate;
 
-    //@Autowired
-    //private ArtistMongoDb artistMongoDb;
-
     @MockBean
     private DiscogsApiEntityService discogsApiEntityService;
 
     @Autowired
     private TestRestTemplate testRestTemplate;
-
-    /*@BeforeEach
-    public void setup() {
-        artistMongoDb.deleteAll();
-    }*/
 
     @Test
     @DisplayName("Searching for artist name should return artist object")
