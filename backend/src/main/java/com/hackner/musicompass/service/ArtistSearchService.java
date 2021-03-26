@@ -28,16 +28,13 @@ public class ArtistSearchService {
         }
 
         List<Artist> artistList = discogsArtistList.stream()
-                .map(discogsArtist -> {
-                    Artist artist = new Artist().builder()
+                .map(discogsArtist -> new Artist().builder()
                             .artistName(discogsArtist.getArtistName())
                             .artistInfo(new ArtistInfo().builder()
                                     .artistImageUrl(discogsArtist.getArtistImageUrl())
                                     .discogsArtistId(discogsArtist.getDiscogsArtistId())
                                     .discogsArtistUrl(discogsArtist.getDiscogsArtistUrl()).build())
-                            .build();
-                    return artist;
-                })
+                            .build())
                 .collect(Collectors.toList());
 
         return artistList;
