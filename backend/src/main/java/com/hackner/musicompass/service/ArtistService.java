@@ -17,19 +17,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.lang.Math;
 
-import static java.time.Instant.now;
-
-
 @Service
 public class ArtistService {
 
     private final DiscogsArtistApiService discogsArtistApiService;
     private final ArtistMongoDb artistMongoDb;
+    private final TimeUtils timeUtils;
 
     @Autowired
-    public ArtistService(DiscogsArtistApiService discogsArtistApiService, ArtistMongoDb artistMongoDb) {
+    public ArtistService(DiscogsArtistApiService discogsArtistApiService, ArtistMongoDb artistMongoDb, TimeUtils timeUtils) {
         this.discogsArtistApiService = discogsArtistApiService;
         this.artistMongoDb = artistMongoDb;
+        this.timeUtils = timeUtils;
     }
 
     public Artist getArtistByName(String artistName) {
@@ -75,7 +74,7 @@ public class ArtistService {
 
         Artist artist = new Artist().builder()
                 .artistName(discogsArtist.getArtistName())
-                .saveDate(Date.from(now()))
+                .saveDate(Date.from(timeUtils.now()))
                 .artistInfo(artistInfo)
                 .artistAlbums(albumList)
                 .artistSingles(singleList).build();
