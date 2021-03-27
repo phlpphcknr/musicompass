@@ -40,7 +40,7 @@ public class ArtistService {
         ArtistInfo artistInfo = new ArtistInfo().builder()
                         .artistImageUrl(discogsArtist.getArtistImageUrl())
                         .discogsArtistId(discogsArtist.getDiscogsArtistId())
-                        .discogsArtistUrl(discogsArtist.getDiscogsArtistUrl()).build());
+                        .discogsArtistUrl(discogsArtist.getDiscogsArtistUrl()).build();
 
         List<DiscogsMasterRelease> discogsMasterReleaseList = discogsArtistApiService.getDiscogsMasterReleaseListByArtistName(artistName);
 
