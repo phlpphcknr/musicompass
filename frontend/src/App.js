@@ -13,7 +13,7 @@ export default function App() {
         <Route exact path="/">
           <Landing />
         </Route>
-        <Route exact path="/artist?q=:artistSearchTerm">
+        <Route exact path="/artistsearch/:artistSearchTerm">
           <ArtistSearchResult />
         </Route>
           <Route exact path="/artist/:artistName">
