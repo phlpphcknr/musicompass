@@ -12,9 +12,13 @@ import com.hackner.musicompass.model.ArtistSingle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.lang.Math;
+
+import static java.time.Instant.now;
+
 
 @Service
 public class ArtistService {
@@ -71,6 +75,7 @@ public class ArtistService {
 
         Artist artist = new Artist().builder()
                 .artistName(discogsArtist.getArtistName())
+                .saveDate(Date.from(now()))
                 .artistInfo(artistInfo)
                 .artistAlbums(albumList)
                 .artistSingles(singleList).build();
