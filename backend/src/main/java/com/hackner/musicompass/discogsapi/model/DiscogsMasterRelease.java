@@ -14,7 +14,7 @@ import java.util.List;
 public class DiscogsMasterRelease {
 
     @JsonProperty("year")
-    private String year;
+    private int year;
     @JsonProperty("format")
     private List<String> format;
     @JsonProperty("master_id")

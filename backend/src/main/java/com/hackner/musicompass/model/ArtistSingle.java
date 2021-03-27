@@ -11,7 +11,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ArtistAlbum {
+public class ArtistSingle {
 
     private String fullTitle;
     private String discogsMasterReleaseId;

@@ -17,6 +17,6 @@ public class Artist {
     private String artistName;
     private ArtistInfo artistInfo;
     private List<ArtistAlbum> artistAlbums;
-    private List<ArtistSingleEp> artistSingles;
+    private List<ArtistSingle> artistSingles;
     private RecommendationTags recommendationTags;
 }
