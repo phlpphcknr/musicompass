@@ -1,20 +1,21 @@
 package com.hackner.musicompass.discogsapi.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.util.List;
 
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-@JsonIgnoreProperties
-public class DiscogsArtistSearchResults {
+public class DiscogsPagination {
 
-    @JsonProperty("results")
-    private List<DiscogsArtist> results;
+    @JsonProperty("items")
+    private int numberOfItems;
+    @JsonProperty("page")
+    private int page;
+    @JsonProperty("pages")
+    private int pages;
 }

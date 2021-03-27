@@ -1,9 +1,12 @@
 package com.hackner.musicompass.controller;
 
+import com.hackner.musicompass.db.ArtistMongoDb;
 import com.hackner.musicompass.discogsapi.model.DiscogsArtist;
 import com.hackner.musicompass.discogsapi.model.DiscogsArtistSearchResults;
 import com.hackner.musicompass.discogsapi.service.DiscogsApiEntityService;
 import com.hackner.musicompass.model.Artist;
+import com.hackner.musicompass.model.ArtistInfo;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,20 +14,25 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class ArtistControllerTest {
+class ArtistSearchControllerTest {
 
     @LocalServerPort
     private int port;
 
     private String getUrl() {
-        return "http://localhost:" + port + "/api/artistsearch";
+        return "http://localhost:" + port + "/api/artistsearch/";
     }
 
     @MockBean
@@ -48,14 +56,14 @@ class ArtistControllerTest {
         String baseUrl = "https://api.discogs.com";
         String discogsApiUrl = baseUrl + "/database/search?type=artist&q=" + artistName;
 
-        DiscogsArtist testDiscogsArtist = DiscogsArtist.builder()
+        DiscogsArtist discogsArtist = DiscogsArtist.builder()
                 .discogsArtistId(discogsArtistId)
                 .artistName(artistName)
                 .artistImageUrl(artistImageUrl)
                 .discogsArtistUrl(discogsArtistUrl).build();
-        DiscogsArtistSearchResults testDiscogsArtistSearchResults = DiscogsArtistSearchResults.builder()
-                .results(new DiscogsArtist[]{testDiscogsArtist}).build();
-        ResponseEntity<DiscogsArtistSearchResults> mockResponseEntity = ResponseEntity.ok(testDiscogsArtistSearchResults);
+        DiscogsArtistSearchResults discogsArtistSearchResults = DiscogsArtistSearchResults.builder()
+                .results(Arrays.asList(discogsArtist)).build();
+        ResponseEntity<DiscogsArtistSearchResults> mockResponseEntity = ResponseEntity.ok(discogsArtistSearchResults);
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("User-Agent", "MusiCompass/0.1");
@@ -67,15 +75,20 @@ class ArtistControllerTest {
                 .thenReturn(mockResponseEntity);
 
         //WHEN
-        ResponseEntity<Artist> controllerResponse = testRestTemplate.getForEntity(getUrl() + "/" + artistName,Artist.class);
+        ResponseEntity<List<Artist>> controllerResponse = testRestTemplate
+                .exchange(getUrl() + artistName
+                        ,HttpMethod.GET
+                        ,null
+                        ,new ParameterizedTypeReference<List<Artist>>(){});
 
         //THEN
         assertThat(controllerResponse.getStatusCode(), is(HttpStatus.OK));
-        assertThat(controllerResponse.getBody(), is(Artist.builder()
+        assertThat(controllerResponse.getBody(), is(List.of(Artist.builder()
                 .artistName(artistName)
-                .artistImageUrl(artistImageUrl)
-                .discogsArtistId(discogsArtistId)
-                .discogsArtistUrl(discogsArtistUrl).build()));
+                .artistInfo(ArtistInfo.builder()
+                        .artistImageUrl(artistImageUrl)
+                        .discogsArtistId(discogsArtistId)
+                        .discogsArtistUrl(discogsArtistUrl).build()).build())));
     }
 
     @Test
@@ -87,7 +100,7 @@ class ArtistControllerTest {
         String discogsApiUrl = baseUrl + "/database/search?type=artist&q=" + artistName;
 
         DiscogsArtistSearchResults testDiscogsArtistSearchResults = DiscogsArtistSearchResults.builder()
-                .results(new DiscogsArtist[]{}).build();
+                .results(Collections.<DiscogsArtist>emptyList()).build();
         ResponseEntity<DiscogsArtistSearchResults> mockResponseEntity = ResponseEntity.ok(testDiscogsArtistSearchResults);
 
         HttpHeaders headers = new HttpHeaders();
@@ -100,9 +113,13 @@ class ArtistControllerTest {
                 .thenReturn(mockResponseEntity);
 
         //WHEN
-        ResponseEntity<Artist> controllerResponse = testRestTemplate.getForEntity(getUrl() + "/" + artistName,Artist.class);
+        ResponseEntity<List<Artist>> actual = testRestTemplate
+                .exchange(getUrl() + artistName
+                        ,HttpMethod.GET
+                        ,null
+                        ,new ParameterizedTypeReference<List<Artist>>(){});
 
         //THEN
-        assertThat(controllerResponse.getStatusCode(), is(HttpStatus.NOT_FOUND));
+        assertThat(actual.getBody().isEmpty(), is(true));
     }
 }

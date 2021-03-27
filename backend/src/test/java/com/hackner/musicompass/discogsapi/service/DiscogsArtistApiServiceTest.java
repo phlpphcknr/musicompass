@@ -10,9 +10,10 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
+import java.util.Arrays;
+import java.util.Collections;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.emptyArray;
-import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.*;
 
 class DiscogsArtistApiServiceTest {
@@ -24,6 +25,7 @@ class DiscogsArtistApiServiceTest {
 
     @Test
     @DisplayName("Get artist from API")
+
     public void returnsArtist(){
         //GIVEN
         String artistName = "hans hammer";
@@ -39,7 +41,7 @@ class DiscogsArtistApiServiceTest {
                 .artistImageUrl(artistImageUrl)
                 .discogsArtistUrl(discogsArtistUrl).build();
         DiscogsArtistSearchResults testDiscogsArtistSearchResults = DiscogsArtistSearchResults.builder()
-                .results(new DiscogsArtist[]{testDiscogsArtist}).build();
+                .results(Arrays.asList(testDiscogsArtist)).build();
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("User-Agent", "MusiCompass/0.1");
@@ -52,7 +54,7 @@ class DiscogsArtistApiServiceTest {
                 .thenReturn(mockResponseEntity);
 
         //WHEN
-        DiscogsArtistSearchResults actual = discogsArtistApiService.getDiscogsArtistByName(artistName);
+        DiscogsArtistSearchResults actual = discogsArtistApiService.getDiscogsArtistListBySearchTerm(artistName);
 
         //THEN
         assertThat(actual, equalTo(testDiscogsArtistSearchResults));
@@ -67,7 +69,7 @@ class DiscogsArtistApiServiceTest {
         String discogsApiUrl = baseUrl + "/database/search?type=artist&q=" + artistName;
 
         DiscogsArtistSearchResults testDiscogsArtistSearchResults = DiscogsArtistSearchResults.builder()
-                .results(new DiscogsArtist[]{}).build();
+                .results(Collections.<DiscogsArtist>emptyList()).build();
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("User-Agent", "MusiCompass/0.1");
@@ -81,10 +83,9 @@ class DiscogsArtistApiServiceTest {
                 .thenReturn(mockResponseEntity);
 
         //WHEN
-        DiscogsArtistSearchResults actual = discogsArtistApiService.getDiscogsArtistByName(artistName);
+        DiscogsArtistSearchResults actual = discogsArtistApiService.getDiscogsArtistListBySearchTerm(artistName);
 
         //THEN
-        assertThat(actual.getResults(), emptyArray());
+        assertThat(actual.getResults(), emptyIterable());
     }
 }
-

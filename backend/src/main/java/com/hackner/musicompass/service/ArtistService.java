@@ -1,15 +1,17 @@
 package com.hackner.musicompass.service;
+
 import com.hackner.musicompass.db.ArtistMongoDb;
 import com.hackner.musicompass.discogsapi.model.DiscogsArtist;
 import com.hackner.musicompass.discogsapi.model.DiscogsArtistSearchResults;
-import com.hackner.musicompass.model.Artist;
 import com.hackner.musicompass.discogsapi.service.DiscogsArtistApiService;
+import com.hackner.musicompass.model.Artist;
+import com.hackner.musicompass.model.ArtistInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.Optional;
 
 @Service
 public class ArtistService {
+
     private final DiscogsArtistApiService discogsArtistApiService;
     private final ArtistMongoDb artistMongoDb;
 
@@ -19,34 +21,22 @@ public class ArtistService {
         this.artistMongoDb = artistMongoDb;
     }
 
-    public Optional<Artist> getArtistBySearchTerm (String searchTerm) {
-        DiscogsArtistSearchResults discogsArtistSearchResults = discogsArtistApiService.getDiscogsArtistByName(searchTerm);
-        if (discogsArtistSearchResults.getResults().length == 0){
-            return Optional.empty();
-        }
-
-        DiscogsArtist[] discogsArtistResult = discogsArtistSearchResults.getResults();
-
-        DiscogsArtist discogsArtist = discogsArtistResult[0];
-
-        return Optional.of(new Artist().builder()
-                .artistName(discogsArtist.getArtistName())
-                .artistImageUrl(discogsArtist.getArtistImageUrl())
-                .discogsArtistId(discogsArtist.getDiscogsArtistId())
-                .discogsArtistUrl(discogsArtist.getDiscogsArtistUrl()).build());
-    }
-
     public Artist getArtistByName(String artistName) {
 
-        DiscogsArtistSearchResults DiscogsArtistSearchResults = discogsArtistApiService.getDiscogsArtistByName(artistName);
+        if(artistMongoDb.existsById(artistName)){
+            return artistMongoDb.findById(artistName).get();
+        }
 
-        DiscogsArtist discogsArtist = DiscogsArtistSearchResults.getResults()[0];
+        DiscogsArtistSearchResults DiscogsArtistSearchResults = discogsArtistApiService.getDiscogsArtistListBySearchTerm(artistName);
+
+        DiscogsArtist discogsArtist = DiscogsArtistSearchResults.getResults().get(0);
 
         Artist artist = new Artist().builder()
                 .artistName(discogsArtist.getArtistName())
-                .artistImageUrl(discogsArtist.getArtistImageUrl())
-                .discogsArtistId(discogsArtist.getDiscogsArtistId())
-                .discogsArtistUrl(discogsArtist.getDiscogsArtistUrl()).build();
+                .artistInfo(new ArtistInfo().builder()
+                        .artistImageUrl(discogsArtist.getArtistImageUrl())
+                        .discogsArtistId(discogsArtist.getDiscogsArtistId())
+                        .discogsArtistUrl(discogsArtist.getDiscogsArtistUrl()).build()).build();
 
         artistMongoDb.save(artist);
 

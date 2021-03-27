@@ -3,12 +3,13 @@ package com.hackner.musicompass.controller;
 import com.hackner.musicompass.model.Artist;
 import com.hackner.musicompass.service.ArtistService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api/")
+@RequestMapping("api/artist")
 public class ArtistController {
 
     private final ArtistService artistService;
@@ -18,13 +19,7 @@ public class ArtistController {
         this.artistService = artistService;
     }
 
-    @GetMapping("artistsearch/{searchTerm}")
-    public Artist findArtist(@PathVariable String searchTerm){
-        return artistService.getArtistBySearchTerm(searchTerm)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "artist name not found"));
-    }
-
-    @GetMapping("artist/{artistName}")
+    @GetMapping("{artistName}")
     public Artist getArtist(@PathVariable String artistName){
         return artistService.getArtistByName(artistName);
     }
