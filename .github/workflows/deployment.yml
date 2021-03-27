@@ -4,6 +4,7 @@
     push:
       branches:
         - main
+        - get-multiple-search-results
 
   jobs:
     build-frontend:
