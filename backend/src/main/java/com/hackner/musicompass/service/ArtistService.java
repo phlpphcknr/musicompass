@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.lang.Math;
 
 @Service
 public class ArtistService {
@@ -52,7 +53,8 @@ public class ArtistService {
                         .format(discogsMasterRelease.getFormat())
                         .releaseYear(discogsMasterRelease.getYear())
                         .discogsWant(discogsMasterRelease.getReleaseStats().getNumberOfWants())
-                        .discogsHave(discogsMasterRelease.getReleaseStats().getNumberOfHaves()).build())
+                        .discogsHave(discogsMasterRelease.getReleaseStats().getNumberOfHaves())
+                        .globalRating(calculateGlobalRating(discogsMasterRelease.getReleaseStats().getNumberOfHaves(), discogsMasterRelease.getReleaseStats().getNumberOfWants())).build())
                 .collect(Collectors.toList());
 
         List<ArtistSingle> singleList = discogsMasterReleaseList.stream()
@@ -63,7 +65,8 @@ public class ArtistService {
                         .format(discogsMasterRelease.getFormat())
                         .releaseYear(discogsMasterRelease.getYear())
                         .discogsWant(discogsMasterRelease.getReleaseStats().getNumberOfWants())
-                        .discogsHave(discogsMasterRelease.getReleaseStats().getNumberOfHaves()).build())
+                        .discogsHave(discogsMasterRelease.getReleaseStats().getNumberOfHaves())
+                        .globalRating(calculateGlobalRating(discogsMasterRelease.getReleaseStats().getNumberOfHaves(), discogsMasterRelease.getReleaseStats().getNumberOfWants())).build())
                 .collect(Collectors.toList());
 
         Artist artist = new Artist().builder()
@@ -75,5 +78,9 @@ public class ArtistService {
         artistMongoDb.save(artist);
 
         return artist;
+    }
+
+    public double calculateGlobalRating ( int have, int want){
+        return Math.sqrt((have*want)/(have+want));
     }
 }

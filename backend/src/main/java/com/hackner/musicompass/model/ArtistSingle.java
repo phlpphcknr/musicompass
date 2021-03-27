@@ -19,4 +19,5 @@ public class ArtistSingle {
     private int releaseYear;
     private int discogsWant;
     private int discogsHave;
+    private double globalRating;
 }
