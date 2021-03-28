@@ -5,17 +5,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ArtistSingle {
+public class ArtistRelease {
 
     private String fullTitle;
     private String discogsMasterReleaseId;
-    private List<String> format;
+    private String format;
     private int releaseYear;
     private int discogsWant;
     private int discogsHave;
