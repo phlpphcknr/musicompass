@@ -93,4 +93,3 @@ class ArtistServiceTest {
         verify(artistMongoDb).save(artist);
     }
 }
-

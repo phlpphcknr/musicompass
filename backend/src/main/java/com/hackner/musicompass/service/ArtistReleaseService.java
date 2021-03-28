@@ -10,6 +10,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.lang.Math.pow;
+
 @Service
 public class ArtistReleaseService {
 
@@ -47,7 +49,10 @@ public class ArtistReleaseService {
         return null;
     }
 
-    public double calculateGlobalRating ( int have, int want){
-        return want/have*Math.pow(have, 1/8);
+    public float calculateGlobalRating ( int have, int want){
+        float doubleHave = have;
+        float doubleWant = want;
+        float result = want/have;
+        return result;
     }
 }
