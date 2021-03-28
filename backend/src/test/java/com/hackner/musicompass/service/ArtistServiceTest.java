@@ -24,7 +24,8 @@ class ArtistServiceTest {
     private final DiscogsArtistApiService discogsArtistApiService = mock(DiscogsArtistApiService.class);
     private final ArtistMongoDb artistMongoDb = mock(ArtistMongoDb.class);
     private final TimeUtils timeUtils = mock(TimeUtils.class);
-    private final ArtistService artistService = new ArtistService(discogsArtistApiService, artistMongoDb, timeUtils);
+    private final ArtistReleaseService artistReleaseService = mock(ArtistReleaseService.class);
+    private final ArtistService artistService = new ArtistService(discogsArtistApiService, artistReleaseService, artistMongoDb, timeUtils);
 
     @Test
     @DisplayName("Get Artist who is already saved in DB")
@@ -93,10 +94,3 @@ class ArtistServiceTest {
     }
 }
 
-/*
-    //THEN
-    Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
-    assertThat(claims.getSubject(), Matchers.is("jan"));
-        assertThat(claims.getIssuedAt(), Matchers.is(Date.from(now)));
-        assertThat(claims.getExpiration(), Matchers.is(Date.from(now.plus(Duration.ofHours(4)))));
-        assertThat(claims.get("data"), Matchers.is("value"));*/

@@ -20,12 +20,14 @@ import java.lang.Math;
 public class ArtistService {
 
     private final DiscogsArtistApiService discogsArtistApiService;
+    private final ArtistReleaseService artistReleaseService;
     private final ArtistMongoDb artistMongoDb;
     private final TimeUtils timeUtils;
 
     @Autowired
-    public ArtistService(DiscogsArtistApiService discogsArtistApiService, ArtistMongoDb artistMongoDb, TimeUtils timeUtils) {
+    public ArtistService(DiscogsArtistApiService discogsArtistApiService, ArtistReleaseService artistReleaseService, ArtistMongoDb artistMongoDb, TimeUtils timeUtils) {
         this.discogsArtistApiService = discogsArtistApiService;
+        this.artistReleaseService = artistReleaseService;
         this.artistMongoDb = artistMongoDb;
         this.timeUtils = timeUtils;
     }
@@ -47,31 +49,8 @@ public class ArtistService {
 
         List<DiscogsMasterRelease> discogsMasterReleaseList = discogsArtistApiService.getDiscogsMasterReleaseListByArtistName(artistName);
 
-        List<ArtistRelease> albumList = discogsMasterReleaseList.stream()
-                .filter(discogsMasterRelease -> discogsMasterRelease.getFormat().contains("Album"))
-                .map(discogsMasterRelease -> new ArtistRelease().builder()
-                        .fullTitle(discogsMasterRelease.getFullAlbumTitle())
-                        .discogsMasterReleaseId(discogsMasterRelease.getMasterId())
-                        .format("Album")
-                        .releaseYear(discogsMasterRelease.getYear())
-                        .discogsWant(discogsMasterRelease.getReleaseStats().getNumberOfWants())
-                        .discogsHave(discogsMasterRelease.getReleaseStats().getNumberOfHaves())
-                        .globalRating(calculateGlobalRating(discogsMasterRelease.getReleaseStats().getNumberOfHaves(), discogsMasterRelease.getReleaseStats().getNumberOfWants())).build())
-                .collect(Collectors.toList());
-
-
-
-        List<ArtistRelease> singleList = discogsMasterReleaseList.stream()
-                .filter(discogsMasterRelease -> discogsMasterRelease.getFormat().contains("Single"))
-                .map(discogsMasterRelease -> new ArtistRelease().builder()
-                        .fullTitle(discogsMasterRelease.getFullAlbumTitle())
-                        .discogsMasterReleaseId(discogsMasterRelease.getMasterId())
-                        .format("Single/Ep")
-                        .releaseYear(discogsMasterRelease.getYear())
-                        .discogsWant(discogsMasterRelease.getReleaseStats().getNumberOfWants())
-                        .discogsHave(discogsMasterRelease.getReleaseStats().getNumberOfHaves())
-                        .globalRating(calculateGlobalRating(discogsMasterRelease.getReleaseStats().getNumberOfHaves(), discogsMasterRelease.getReleaseStats().getNumberOfWants())).build())
-                .collect(Collectors.toList());
+        List<ArtistRelease> albumList = artistReleaseService.getSortedReleaseList("Album", discogsMasterReleaseList);
+        List<ArtistRelease> singleList = artistReleaseService.getSortedReleaseList("Single/EP", discogsMasterReleaseList);
 
         Artist artist = new Artist().builder()
                 .artistName(discogsArtist.getArtistName())
@@ -83,9 +62,5 @@ public class ArtistService {
         artistMongoDb.save(artist);
 
         return artist;
-    }
-
-    public double calculateGlobalRating ( int have, int want){
-        return want/have*Math.pow(have, 1/8);
     }
 }

@@ -4,12 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ArtistRelease {
+public class ArtistRelease implements Comparable<ArtistRelease> {
 
     private String fullTitle;
     private String discogsMasterReleaseId;
@@ -18,4 +19,17 @@ public class ArtistRelease {
     private int discogsWant;
     private int discogsHave;
     private double globalRating;
+
+    @Override
+    public int compareTo(ArtistRelease artistRelease) {
+        double otherGlobalRating = artistRelease.globalRating;
+
+        if(globalRating == otherGlobalRating){
+            return 0;
+        }else if(globalRating > otherGlobalRating){
+            return -1;
+        }else{
+            return 1;
+        }
+    }
 }
