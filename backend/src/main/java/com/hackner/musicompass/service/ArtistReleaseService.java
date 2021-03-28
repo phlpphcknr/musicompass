@@ -49,10 +49,10 @@ public class ArtistReleaseService {
         return null;
     }
 
-    public float calculateGlobalRating ( int have, int want){
-        float doubleHave = have;
-        float doubleWant = want;
-        float result = want/have;
-        return result;
+    public double calculateGlobalRating ( int have, int want){
+        double doubleHave = have;
+        double doubleWant = want;
+        double exp = 0.125;
+        return (doubleWant/doubleHave) * pow(doubleHave,exp);
     }
 }

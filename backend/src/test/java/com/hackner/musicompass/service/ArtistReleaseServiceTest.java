@@ -57,7 +57,7 @@ class ArtistReleaseServiceTest {
         int want = 128;
 
         //WHEN
-        float actual = artistReleaseService.calculateGlobalRating(have, want);
+        double actual = artistReleaseService.calculateGlobalRating(have, want);
 
         //THEN
         assertThat(actual, is(1.0));
@@ -70,9 +70,9 @@ class ArtistReleaseServiceTest {
                 .discogsMasterReleaseId("111")
                 .format("Album")
                 .releaseYear(1999)
-                .discogsWant(55)
-                .discogsHave(4400)
-                .globalRating(228.308232333)
+                .discogsWant(32768)
+                .discogsHave(65536)
+                .globalRating(2.0)
                 .build();
 
         List<ArtistRelease> results = Arrays.asList(artistRelease1);
@@ -82,7 +82,7 @@ class ArtistReleaseServiceTest {
 
     public List<DiscogsMasterRelease> getDiscogsMasterReleaseList(){
 
-        Stats stats1 = Stats.builder().numberOfWants(55).numberOfHaves(4400).build();
+        Stats stats1 = Stats.builder().numberOfWants(32768).numberOfHaves(65536).build();
         DiscogsMasterRelease discogsMasterRelease1 = DiscogsMasterRelease.builder()
                 .year(1999)
                 .format(Arrays.asList("Album","Compilation","CD"))
