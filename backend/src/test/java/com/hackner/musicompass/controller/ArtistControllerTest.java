@@ -2,7 +2,6 @@ package com.hackner.musicompass.controller;
 
 import com.hackner.musicompass.db.ArtistMongoDb;
 import com.hackner.musicompass.discogsapi.model.*;
-import com.hackner.musicompass.discogsapi.service.DiscogsApiEntityService;
 import com.hackner.musicompass.model.Artist;
 import com.hackner.musicompass.model.ArtistInfo;
 import com.hackner.musicompass.model.ArtistRelease;
@@ -67,7 +66,7 @@ class ArtistControllerTest {
 
         //THEN
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
-        assertThat(response.getBody(), equalToObject(artist));
+        assertThat(response.getBody(), equalTo(artist));
     }
 
     @Test
@@ -100,7 +99,7 @@ class ArtistControllerTest {
 
         //THEN
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
-        assertThat(response.getBody(), equalToObject(artist));
+        assertThat(response.getBody(), equalTo(artist));
         assertTrue(artistMongoDb.existsById(artistName));
     }
 
@@ -181,6 +180,4 @@ class ArtistControllerTest {
 
         return discogsArtistSearchResults;
     }
-
-
 }

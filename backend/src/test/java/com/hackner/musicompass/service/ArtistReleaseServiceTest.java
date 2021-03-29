@@ -1,8 +1,5 @@
 package com.hackner.musicompass.service;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.hackner.musicompass.discogsapi.model.DiscogsArtist;
-import com.hackner.musicompass.discogsapi.model.DiscogsArtistSearchResults;
 import com.hackner.musicompass.discogsapi.model.DiscogsMasterRelease;
 import com.hackner.musicompass.discogsapi.model.Stats;
 import com.hackner.musicompass.model.ArtistRelease;
@@ -14,7 +11,6 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 class ArtistReleaseServiceTest {
 
