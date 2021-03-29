@@ -21,7 +21,7 @@ class ArtistReleaseServiceTest {
     private final ArtistReleaseService artistReleaseService = new ArtistReleaseService();
 
     @Test
-    @DisplayName("Get album list from discogsMasterReleaseList")
+    @DisplayName("Get albums list from discogsMasterReleaseList")
     public void getAlbumList (){
         //GIVEN
         List<DiscogsMasterRelease> discogsMasterReleaseList = getDiscogsMasterReleaseList();
@@ -36,7 +36,7 @@ class ArtistReleaseServiceTest {
     }
 
     @Test
-    @DisplayName("Get album list from discogsMasterReleaseList")
+    @DisplayName("Get singles list from discogsMasterReleaseList")
     public void getSingleList (){
         //GIVEN
         List<DiscogsMasterRelease> discogsMasterReleaseList = getDiscogsMasterReleaseList();
@@ -119,6 +119,4 @@ class ArtistReleaseServiceTest {
 
         return results;
     }
-
-
 }

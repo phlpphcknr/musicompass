@@ -67,7 +67,7 @@ class ArtistServiceTest {
                         .discogsArtistId("111")
                         .discogsArtistUrl("HammerUrl")
                         .build())
-                .artistReleases(Collections.emptyList())
+                .artistAlbums(Collections.emptyList())
                 .artistSingles(Collections.emptyList())
                 .build();
 

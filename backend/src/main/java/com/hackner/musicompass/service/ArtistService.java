@@ -11,7 +11,7 @@ import com.hackner.musicompass.model.ArtistRelease;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.lang.Math;
@@ -56,7 +56,7 @@ public class ArtistService {
                 .artistName(discogsArtist.getArtistName())
                 .saveDate(Date.from(timeUtils.now()))
                 .artistInfo(artistInfo)
-                .artistReleases(albumList)
+                .artistAlbums(albumList)
                 .artistSingles(singleList).build();
 
         artistMongoDb.save(artist);

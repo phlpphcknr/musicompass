@@ -19,7 +19,7 @@ public class Artist {
     private String artistName;
     private Date saveDate;
     private ArtistInfo artistInfo;
-    private List<ArtistRelease> artistReleases;
+    private List<ArtistRelease> artistAlbums;
     private List<ArtistRelease> artistSingles;
     private RecommendationTags recommendationTags;
 }
