@@ -3,11 +3,9 @@ package com.hackner.musicompass.controller;
 import com.hackner.musicompass.db.ArtistMongoDb;
 import com.hackner.musicompass.discogsapi.model.*;
 import com.hackner.musicompass.discogsapi.service.DiscogsApiEntityService;
-import com.hackner.musicompass.discogsapi.service.DiscogsArtistApiService;
 import com.hackner.musicompass.model.Artist;
 import com.hackner.musicompass.model.ArtistInfo;
 import com.hackner.musicompass.model.ArtistRelease;
-import com.hackner.musicompass.secret.DiscogsSecret;
 import com.hackner.musicompass.service.TimeUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -17,22 +15,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.web.client.RestTemplate;
-
 
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -58,9 +49,6 @@ class ArtistControllerTest {
     @Autowired
     private ArtistMongoDb artistMongoDb;
 
-    @Autowired
-    private DiscogsApiEntityService discogsApiEntityService;
-
     @BeforeEach
     public void setup(){
         artistMongoDb.deleteAll();
@@ -73,8 +61,6 @@ class ArtistControllerTest {
         String artistName = "Prince";
         Artist artist = getArtist(artistName);
         artistMongoDb.save(artist);
-        DiscogsSecret discogsSecret = mock(DiscogsSecret.class);
-        when(discogsSecret.getToken()).thenReturn("test");
 
         //WHEN
         ResponseEntity<Artist> response = testRestTemplate.exchange(getUrl() + artistName, HttpMethod.GET, null, Artist.class);
@@ -99,10 +85,14 @@ class ArtistControllerTest {
         DiscogsMasterReleaseSearchResults discogsMasterReleaseSearchResults = getDiscogsMasterReleaseSearchResults();
         ResponseEntity<DiscogsMasterReleaseSearchResults> releaseResponseEntity = ResponseEntity.ok(discogsMasterReleaseSearchResults);
 
-        //entities von hand bauen und dann zur in der klasse erzeugten entity vergleichen
-        when(restTemplate.exchange(artistUrl, HttpMethod.GET, discogsApiEntityService.createEntity(), DiscogsArtistSearchResults.class))
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("User-Agent", "MusiCompass/0.1");
+        headers.add("Authorization", "Discogs token=test");
+        HttpEntity<Void> entity = new HttpEntity<>(headers);
+
+        when(restTemplate.exchange(artistUrl, HttpMethod.GET, entity, DiscogsArtistSearchResults.class))
                 .thenReturn(artistResponseEntity);
-        when(restTemplate.exchange(releasesUrl, HttpMethod.GET, discogsApiEntityService.createEntity(), DiscogsMasterReleaseSearchResults.class))
+        when(restTemplate.exchange(releasesUrl, HttpMethod.GET, entity, DiscogsMasterReleaseSearchResults.class))
                 .thenReturn(releaseResponseEntity);
 
         //WHEN
@@ -110,7 +100,7 @@ class ArtistControllerTest {
 
         //THEN
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
-        assertThat(response.getBody(), is(artist));
+        assertThat(response.getBody(), equalToObject(artist));
         assertTrue(artistMongoDb.existsById(artistName));
     }
 
