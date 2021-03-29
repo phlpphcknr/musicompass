@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Objects;
+
 @Builder
 @Data
 @AllArgsConstructor
@@ -20,7 +22,6 @@ public class DiscogsArtist {
     private String artistImageUrl;
     @JsonProperty("resource_url")
     private String discogsArtistUrl;
-
 }
 
 

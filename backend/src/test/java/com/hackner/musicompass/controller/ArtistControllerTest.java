@@ -22,6 +22,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.web.client.RestTemplate;
 
 
@@ -37,6 +38,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@TestPropertySource(properties="discogs.token=test")
 class ArtistControllerTest {
 
     @LocalServerPort
@@ -46,9 +48,6 @@ class ArtistControllerTest {
 
     @MockBean
     private RestTemplate restTemplate;
-
-/*    @MockBean
-    private DiscogsSecret discogsSecret;*/
 
     @Autowired
     private TimeUtils timeUtils;
@@ -91,7 +90,7 @@ class ArtistControllerTest {
         //GIVEN
         String artistName = "Prince";
         String artistUrl = "https://api.discogs.com/database/search?type=artist&q=" + artistName;
-        String releasesUrl = "https://api.discogs.com//database/search?type=master&artist=" + artistName + "&page=1&per-page_100";
+        String releasesUrl = "https://api.discogs.com/database/search?type=master&artist=" + artistName + "&page=1&per-page_100";
         Artist artist = getArtist(artistName);
 
         DiscogsArtistSearchResults discogsArtistSearchResults = getDiscogsArtistSearchResults(artistName);
@@ -100,11 +99,7 @@ class ArtistControllerTest {
         DiscogsMasterReleaseSearchResults discogsMasterReleaseSearchResults = getDiscogsMasterReleaseSearchResults();
         ResponseEntity<DiscogsMasterReleaseSearchResults> releaseResponseEntity = ResponseEntity.ok(discogsMasterReleaseSearchResults);
 
-        DiscogsSecret discogsSecret = mock(DiscogsSecret.class);
-        when(discogsSecret.getToken()).thenReturn("test");
-
-        HttpEntity<Void> testEntity = discogsApiEntityService.createEntity();
-
+        //entities von hand bauen und dann zur in der klasse erzeugten entity vergleichen
         when(restTemplate.exchange(artistUrl, HttpMethod.GET, discogsApiEntityService.createEntity(), DiscogsArtistSearchResults.class))
                 .thenReturn(artistResponseEntity);
         when(restTemplate.exchange(releasesUrl, HttpMethod.GET, discogsApiEntityService.createEntity(), DiscogsMasterReleaseSearchResults.class))
@@ -115,7 +110,7 @@ class ArtistControllerTest {
 
         //THEN
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
-        assertThat(response.getBody(), equalToObject(artist));
+        assertThat(response.getBody(), is(artist));
         assertTrue(artistMongoDb.existsById(artistName));
     }
 
