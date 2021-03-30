@@ -3,7 +3,6 @@ import {Link, useParams} from 'react-router-dom'
 import { useEffect, useState} from 'react'
 import ArtistHeader from "../components/ArtistHeader";
 import {getArtistByName} from "../service/musiComApiService";
-import ReleaseBox from "../components/ReleaseBox";
 import ReleaseDescription from "../components/ReleaseDescription";
 import ArtistRecommendation from "../components/ArtistRecommendation";
 

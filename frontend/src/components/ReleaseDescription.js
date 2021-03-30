@@ -1,9 +1,7 @@
 import styled from 'styled-components/macro'
-import {Link, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 
 export default function ReleaseDescription({release}){
-
-    const {artistName} = useParams();
 
     const renderReleaseYear = () => {
         if (release.releaseYear === 0){
