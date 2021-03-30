@@ -1,9 +1,9 @@
 import styled from "styled-components/macro";
-import { useParams } from 'react-router-dom'
+import {Link, useParams} from 'react-router-dom'
 import { useEffect, useState} from 'react'
 import ArtistHeader from "../components/ArtistHeader";
 import {getArtistByName} from "../service/musiComApiService";
-import ReleaseListLink from "../components/ReleaseListLink";
+import ReleaseBox from "../components/ReleaseBox";
 import ReleaseDescription from "../components/ReleaseDescription";
 import ArtistRecommendation from "../components/ArtistRecommendation";
 
@@ -26,18 +26,23 @@ export default function ArtistOverview(){
         )
     }
 
+    const onRecommend = () =>{};
+
     return (
         <Overview>
             <ArtistHeader key={artist.artistName} artist={artist}/>
-            <section>
-                <ReleaseListLink format={"album"} artistName={artist.artistName}/>
-                <ReleaseDescription release={artist.artistAlbums[0]}/>
-            </section>
-            <section>
-                <ReleaseListLink format={"single/EP"} artist={artist}/>
-                <ReleaseDescription release={artist.artistSingles[0]}/>
-            </section>
-            <ArtistRecommendation/>
+            <h3>Most popular/wanted album</h3>
+            <ReleaseDescription release={artist.artistAlbums[0]}/>
+            <Link to={`artist/${artistName}/albums`} >
+                <h3r>see more albums ...</h3r>
+            </Link>
+            <h3>Most popular/wanted single/EP</h3>
+            <ReleaseDescription release={artist.artistSingles[0]}/>
+            <Link to={`artist/${artistName}/singles-eps`} >
+                <h3r>see more singles/EPs ...</h3r>
+            </Link>
+            <ArtistRecommendation artistName={artistName}
+                                  onRecommend={onRecommend}/>
         </Overview>)
 
 }
@@ -48,5 +53,14 @@ const Overview = styled.div`
   flex-direction: column;
   background-color: var(--secondary-color);
   padding: 20px;
+  
+  h3{
+    margin: 10px;
+  }
+  
+  a{
+    text-align: right;
+    margin: 10px;
+  }
 
 `

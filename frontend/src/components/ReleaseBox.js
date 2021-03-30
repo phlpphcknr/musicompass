@@ -1,19 +1,20 @@
 import styled from 'styled-components/macro'
 import {Link} from "react-router-dom";
+import ReleaseDescription from "../components/ReleaseDescription";
 
-export default function ReleaseListLink ({format, artistName}){
+export default function ReleaseBox ({format, artistName}){
 
     return (
-        <ReleaseBox>
+        <ReleaseContainer>
             <h3l>Most popular/wanted {format}</h3l>
             <Link to={`artist/${artistName}/${format}s`} style={{textDecoration: 'none'}}>
                 <h3r>see more {format}s ...</h3r>
             </Link>
-        </ReleaseBox>
+        </ReleaseContainer>
     )
 }
 
-const ReleaseBox = styled.div`
+const ReleaseContainer = styled.div`
 
   display: flex;
   flex-direction: column;
@@ -32,8 +33,7 @@ const ReleaseBox = styled.div`
     padding: 0px;
     margin: 0px;
     width: 100%;
-    text-align: right;
-    font-size: 1.0em;
+    font-size: 0.6em;
     color: #636e72;
   }
   
