@@ -4,16 +4,18 @@ import Typography from '@material-ui/core/Typography';
 
 export default function ReleaseDescription({release}){
 
-    useParams();
+    const {artistName} = useParams();
 
     return (
-        <Release>
-            <img src={release.coverImageUrl} alt={'Shows the release cover'}/>
-            {/*<Typography variant="h5" component="h2">
-                {releaseList(0).fullTitle}
-            </Typography>*/}
-            <p> bla bla</p>
-        </Release>
+        <Link to={`/artist/${artistName}`} style={{textDecoration: 'none'}}>
+            <Release>
+                <img src={release.coverImageUrl} alt={'Shows the release cover'}/>
+                <section>
+                <h3>{release.fullTitle}</h3>
+                <h3>{release.releaseYear}</h3>
+                </section>
+            </Release>
+        </Link>
     )
 }
 
@@ -22,7 +24,24 @@ export default function ReleaseDescription({release}){
 const Release = styled.div`
 
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   background-color: var(--secondary-color);
   padding: 20px;
+
+  img {
+    width: 50%;
+    max-width: 120px;
+    margin: 10px;
+  }
+  
+
+  h3 {
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    text-align: center;
+    font-size: 1.0em;
+    color: #636e72;
+  }
 `

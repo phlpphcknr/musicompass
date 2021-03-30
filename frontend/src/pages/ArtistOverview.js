@@ -17,7 +17,8 @@ export default function ArtistOverview(){
             .catch((error) => console.error(error))
     },[artistName]);
 
-    if(artist.artistAlbums == undefined || artist.artistSingles == undefined){
+    if (artist.artistAlbums === undefined ||
+        artist.artistSingles === undefined){
         return(
             <section>
                 Loading
