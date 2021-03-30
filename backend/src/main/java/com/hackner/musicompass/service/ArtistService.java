@@ -34,7 +34,9 @@ public class ArtistService {
 
     public Artist getArtistByName(String artistName) {
 
-        if(artistMongoDb.existsById(artistName)){
+        if(artistMongoDb.existsById(artistName) && (
+                artistMongoDb.findById(artistName).get().getArtistAlbums().size() > 0 ||
+                artistMongoDb.findById(artistName).get().getArtistSingles().size() > 0)){
             return artistMongoDb.findById(artistName).get();
         }
 
