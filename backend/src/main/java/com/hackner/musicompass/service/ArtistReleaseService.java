@@ -34,6 +34,7 @@ public class ArtistReleaseService {
                 .fullTitle(discogsMasterRelease.getFullAlbumTitle())
                 .discogsMasterReleaseId(discogsMasterRelease.getMasterId())
                 .format(format)
+                .coverImageUrl(discogsMasterRelease.getCoverImageUrl())
                 .releaseYear(discogsMasterRelease.getYear())
                 .discogsWant(discogsMasterRelease.getReleaseStats().getNumberOfWants())
                 .discogsHave(discogsMasterRelease.getReleaseStats().getNumberOfHaves())

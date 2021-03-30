@@ -21,6 +21,8 @@ public class DiscogsMasterRelease {
     private String masterId;
     @JsonProperty("title")
     private String fullAlbumTitle;
+    @JsonProperty("thumb")
+    private String coverImageUrl;
     @JsonProperty("community")
     private Stats releaseStats;
 }
