@@ -8,28 +8,29 @@ import ReleaseDescription from "../components/ReleaseDescription";
 import ArtistRecommendation from "../components/ArtistRecommendation";
 
 export default function ArtistOverview(){
-
     const {artistName} = useParams();
-    const [artist, setArtist] = useState([]);
+    const [artist, setArtist] = useState('');
 
     useEffect(() => {
         getArtistByName(artistName)
             .then(setArtist)
             .catch((error) => console.error(error))
-    },[artistName]);
+        console.log(artist)
+    },[]);
 
 
     return (
         <Overview>
             <ArtistHeader key={artist.artistName} artist={artist}/>
-            <section>
+            <ReleaseListLink format={"album"} artistName={artist.artistName}/>
+            {/*<section>
                 <ReleaseListLink format={"album"} artistName={artist.artistName}/>
                 <ReleaseDescription releaseList={artist.artistAlbums}/>
             </section>
             <section>
                 <ReleaseListLink format={"single/EP"} artist={artist}/>
                 <ReleaseDescription releaseList={artist.artistSingles}/>
-            </section>
+            </section>*/}
             <ArtistRecommendation/>
         </Overview>)
 

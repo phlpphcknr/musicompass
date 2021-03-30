@@ -1,1 +1,3 @@
-export default function ArtistRecommendation (){}
+export default function ArtistRecommendation (){
+    return <></>
+}
