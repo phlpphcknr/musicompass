@@ -15,20 +15,27 @@ export default function ArtistOverview(){
         getArtistByName(artistName)
             .then(setArtist)
             .catch((error) => console.error(error))
-    },[]);
+    },[artistName]);
 
+    if(artist.artistAlbums == undefined || artist.artistSingles == undefined){
+        return(
+            <section>
+                Loading
+            </section>
+        )
+    }
 
     return (
         <Overview>
             <ArtistHeader key={artist.artistName} artist={artist}/>
             <section>
                 <ReleaseListLink format={"album"} artistName={artist.artistName}/>
-                <ReleaseDescription artist={artist} index={0}/>
+                <ReleaseDescription release={artist.artistAlbums[0]}/>
             </section>
-            {/*<section>
+            <section>
                 <ReleaseListLink format={"single/EP"} artist={artist}/>
                 <ReleaseDescription release={artist.artistSingles[0]}/>
-            </section>*/}
+            </section>
             <ArtistRecommendation/>
         </Overview>)
 
