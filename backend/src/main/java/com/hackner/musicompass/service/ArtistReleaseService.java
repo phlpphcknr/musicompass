@@ -17,26 +17,38 @@ public class ArtistReleaseService {
 
     public List<ArtistRelease> getSortedReleaseList(String format, List<DiscogsMasterRelease> discogsMasterReleaseList){
 
-        List<String> discogsFormat = convertToDiscogsFormat(format);
-
-        List<ArtistRelease> formatList = discogsMasterReleaseList.stream()
-                .filter(discogsMasterRelease -> discogsMasterRelease.getFormat().stream()
-                        .anyMatch(discogsFormat::contains)) //this will get a list element from stream and call discogsFormat contains(list element)
-                .map(discogsMasterRelease -> new ArtistRelease().builder()
-                        .fullTitle(discogsMasterRelease.getFullAlbumTitle())
-                        .discogsMasterReleaseId(discogsMasterRelease.getMasterId())
-                        .format(format)
-                        .releaseYear(discogsMasterRelease.getYear())
-                        .discogsWant(discogsMasterRelease.getReleaseStats().getNumberOfWants())
-                        .discogsHave(discogsMasterRelease.getReleaseStats().getNumberOfHaves())
-                        .globalRating(calculateGlobalRating(discogsMasterRelease.getReleaseStats().getNumberOfHaves(), discogsMasterRelease.getReleaseStats().getNumberOfWants())).build())
+        List<DiscogsMasterRelease> formatFilteredList = filterDiscogsMasterReleaseListForFormat(format, discogsMasterReleaseList);
+        List<ArtistRelease> convertedFormattedList = formatFilteredList.stream()
+                .map(discogsMasterRelease -> convertDiscogsMasterReleaseToArtistRelease(format, discogsMasterRelease))
                 .collect(Collectors.toList());
 
-        List<ArtistRelease> arrayList = new ArrayList<ArtistRelease>(formatList);
+        List<ArtistRelease> arrayList = new ArrayList<ArtistRelease>(convertedFormattedList);
         Collections.sort(arrayList);
         List<ArtistRelease> sortedList = arrayList;
 
         return sortedList;
+    }
+
+    public ArtistRelease convertDiscogsMasterReleaseToArtistRelease (String format, DiscogsMasterRelease discogsMasterRelease){
+        return new ArtistRelease().builder()
+                .fullTitle(discogsMasterRelease.getFullAlbumTitle())
+                .discogsMasterReleaseId(discogsMasterRelease.getMasterId())
+                .format(format)
+                .releaseYear(discogsMasterRelease.getYear())
+                .discogsWant(discogsMasterRelease.getReleaseStats().getNumberOfWants())
+                .discogsHave(discogsMasterRelease.getReleaseStats().getNumberOfHaves())
+                .globalRating(calculateGlobalRating(
+                        discogsMasterRelease.getReleaseStats().getNumberOfHaves(),
+                        discogsMasterRelease.getReleaseStats().getNumberOfWants()))
+                .build();
+    }
+
+    public List<DiscogsMasterRelease> filterDiscogsMasterReleaseListForFormat(String format, List<DiscogsMasterRelease> discogsMasterReleaseList) {
+        List<String> discogsFormat = convertToDiscogsFormat(format);
+        return discogsMasterReleaseList.stream()
+                .filter(discogsMasterRelease -> discogsMasterRelease.getFormat().stream()
+                        .anyMatch(discogsFormat::contains))
+                .collect(Collectors.toList());
     }
 
     public List<String> convertToDiscogsFormat (String format){
