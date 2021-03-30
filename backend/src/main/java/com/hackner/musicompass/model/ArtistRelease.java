@@ -14,6 +14,7 @@ public class ArtistRelease implements Comparable<ArtistRelease> {
     private String fullTitle;
     private String discogsMasterReleaseId;
     private String format;
+    private String coverImageUrl;
     private int releaseYear;
     private int discogsWant;
     private int discogsHave;

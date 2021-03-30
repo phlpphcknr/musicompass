@@ -65,6 +65,7 @@ class ArtistReleaseServiceTest {
                 .fullTitle("someTitle")
                 .discogsMasterReleaseId("111")
                 .format("Album")
+                .coverImageUrl("someOtherCoverImageUrl")
                 .releaseYear(1999)
                 .discogsWant(32768)
                 .discogsHave(65536)
@@ -84,6 +85,7 @@ class ArtistReleaseServiceTest {
                 .format(Arrays.asList("Album","Compilation","CD"))
                 .masterId("111")
                 .fullAlbumTitle("someTitle")
+                .coverImageUrl("someOtherCoverImageUrl")
                 .releaseStats(stats1)
                 .build();
         Stats stats2 = Stats.builder().numberOfWants(110).numberOfHaves(88).build();
@@ -92,6 +94,7 @@ class ArtistReleaseServiceTest {
                 .format(Arrays.asList("Album","LP"))
                 .masterId("112")
                 .fullAlbumTitle("anotherTitle")
+                .coverImageUrl("someOtherCoverImageUrl")
                 .releaseStats(stats2)
                 .build();
         Stats stats3 = Stats.builder().numberOfWants(110).numberOfHaves(176).build();
@@ -100,6 +103,7 @@ class ArtistReleaseServiceTest {
                 .format(Arrays.asList("Single","CD"))
                 .masterId("113")
                 .fullAlbumTitle("differentTitle")
+                .coverImageUrl("someOtherCoverImageUrl")
                 .releaseStats(stats3)
                 .build();
         Stats stats4 = Stats.builder().numberOfWants(110).numberOfHaves(44).build();
@@ -108,6 +112,7 @@ class ArtistReleaseServiceTest {
                 .format(Arrays.asList("EP","12\""))
                 .masterId("114")
                 .fullAlbumTitle("oneMoreTitle")
+                .coverImageUrl("someOtherCoverImageUrl")
                 .releaseStats(stats4)
                 .build();
 
