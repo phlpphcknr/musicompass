@@ -50,6 +50,8 @@ class ArtistServiceTest {
 
         //THEN
         assertThat(actual, equalTo(artist));
+        verify(artistMongoDb).existsById(artistName);
+        verify(artistMongoDb).findById(artistName);
     }
 
     @Test
