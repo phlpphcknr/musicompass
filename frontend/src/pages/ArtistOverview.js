@@ -5,6 +5,7 @@ import ArtistHeader from "../components/ArtistHeader";
 import {getArtistByName} from "../service/musiComApiService";
 import ReleaseListLink from "../components/ReleaseListLink";
 import ReleaseDescription from "../components/ReleaseDescription";
+import ArtistRecommendation from "../components/ArtistRecommendation";
 
 export default function ArtistOverview(){
 
@@ -22,14 +23,14 @@ export default function ArtistOverview(){
         <Overview>
             <ArtistHeader key={artist.artistName} artist={artist}/>
             <section>
-                <ReleaseListLink format={"album"} artist={artist}/>
-                <ReleaseDescription/>
+                <ReleaseListLink format={"album"} artistName={artist.artistName}/>
+                <ReleaseDescription releaseList={artist.artistAlbums}/>
             </section>
             <section>
                 <ReleaseListLink format={"single/EP"} artist={artist}/>
-                <ReleaseDescription/>
+                <ReleaseDescription releaseList={artist.artistSingles}/>
             </section>
-
+            <ArtistRecommendation/>
         </Overview>)
 
 }

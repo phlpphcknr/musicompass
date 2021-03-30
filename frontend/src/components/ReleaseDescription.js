@@ -1,19 +1,20 @@
 import styled from 'styled-components/macro'
 import {Link} from "react-router-dom";
 
-export default function ReleaseDescription({format, artist}){
+export default function ReleaseDescription({releaseList}){
 
     return (
-        <ReleaseBox>
+        <Release>
+            <img src={releaseList(0).artistImageUrl} alt={'Shows the artist'}/>
             <p>Most popular & wanted {format}</p>
             <Link to={`artist/${artist.artistName}/${format}s`}>
                 <p>see more {format}s ...</p>
             </Link>
-        </ReleaseBox>
+        </Release>
     )
 }
 
-const ReleaseBox = styled.div`
+const Release = styled.div`
 
   display: flex;
   flex-direction: column;
