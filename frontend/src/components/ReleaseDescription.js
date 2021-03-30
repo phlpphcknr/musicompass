@@ -1,5 +1,4 @@
 import styled from 'styled-components/macro'
-import {useParams} from "react-router-dom";
 
 export default function ReleaseDescription({release}){
 
