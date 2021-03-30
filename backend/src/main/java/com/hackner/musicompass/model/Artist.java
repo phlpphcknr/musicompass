@@ -1,11 +1,11 @@
 package com.hackner.musicompass.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.Id;
+
+import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Data
 @Builder
@@ -13,10 +13,14 @@ import java.util.List;
 @NoArgsConstructor
 public class Artist {
 
+
     @Id
     private String artistName;
+    @EqualsAndHashCode.Exclude
+    private Date saveDate;
     private ArtistInfo artistInfo;
-    private List<ArtistAlbum> artistAlbums;
-    private List<ArtistSingleEp> artistSingles;
+    private List<ArtistRelease> artistAlbums;
+    private List<ArtistRelease> artistSingles;
     private RecommendationTags recommendationTags;
+
 }

@@ -1,12 +1,9 @@
 package com.hackner.musicompass.controller;
 
-import com.hackner.musicompass.db.ArtistMongoDb;
 import com.hackner.musicompass.discogsapi.model.DiscogsArtist;
 import com.hackner.musicompass.discogsapi.model.DiscogsArtistSearchResults;
-import com.hackner.musicompass.discogsapi.service.DiscogsApiEntityService;
 import com.hackner.musicompass.model.Artist;
 import com.hackner.musicompass.model.ArtistInfo;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +13,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.web.client.RestTemplate;
 import java.util.Arrays;
 import java.util.Collections;
@@ -26,6 +24,7 @@ import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@TestPropertySource(properties="discogs.token=test")
 class ArtistSearchControllerTest {
 
     @LocalServerPort
@@ -37,9 +36,6 @@ class ArtistSearchControllerTest {
 
     @MockBean
     private RestTemplate restTemplate;
-
-    @MockBean
-    private DiscogsApiEntityService discogsApiEntityService;
 
     @Autowired
     private TestRestTemplate testRestTemplate;
@@ -67,9 +63,8 @@ class ArtistSearchControllerTest {
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("User-Agent", "MusiCompass/0.1");
-        headers.add("Authorization", "Discogs token=testtest");
+        headers.add("Authorization", "Discogs token=test");
         HttpEntity<Void> entity = new HttpEntity<>(headers);
-        when(discogsApiEntityService.createEntity()).thenReturn(entity);
 
         when(restTemplate.exchange(discogsApiUrl, HttpMethod.GET, entity, DiscogsArtistSearchResults.class))
                 .thenReturn(mockResponseEntity);
@@ -107,7 +102,6 @@ class ArtistSearchControllerTest {
         headers.add("User-Agent", "MusiCompass/0.1");
         headers.add("Authorization", "Discogs token=testtest");
         HttpEntity<Void> entity = new HttpEntity<>(headers);
-        when(discogsApiEntityService.createEntity()).thenReturn(entity);
 
         when(restTemplate.exchange(discogsApiUrl, HttpMethod.GET, entity, DiscogsArtistSearchResults.class))
                 .thenReturn(mockResponseEntity);

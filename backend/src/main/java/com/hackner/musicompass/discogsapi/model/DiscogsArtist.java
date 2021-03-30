@@ -20,7 +20,6 @@ public class DiscogsArtist {
     private String artistImageUrl;
     @JsonProperty("resource_url")
     private String discogsArtistUrl;
-
 }
 
 
