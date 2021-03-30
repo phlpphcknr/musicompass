@@ -2,17 +2,17 @@ import styled from 'styled-components/macro'
 import {Link, useParams} from "react-router-dom";
 import Typography from '@material-ui/core/Typography';
 
-export default function ReleaseDescription({releaseList}){
+export default function ReleaseDescription({artist, index}){
 
     useParams();
 
     return (
         <Release>
-            <img src={releaseList(0).artistImageUrl} alt={'Shows the release cover'}/>
+            <img src={artist.artistAlbums[index]?.coverImageUrl} alt={'Shows the release cover'}/>
             {/*<Typography variant="h5" component="h2">
                 {releaseList(0).fullTitle}
             </Typography>*/}
-            <p>Most popular & wanted {releaseList(0).format}</p>
+            <p>Most popular & wanted {artist.artistAlbums[index]?.format}</p>
         </Release>
     )
 }
