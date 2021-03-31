@@ -4,8 +4,8 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.List;
 
-public interface RecommendationCategoryMongoDb extends PagingAndSortingRepository<String[], String> {
+public interface RecommendationCategoryMongoDb extends PagingAndSortingRepository<List<String>, String> {
 
-    List<String[]> findAll();
+    List<List<String>> findAll();
 
 }

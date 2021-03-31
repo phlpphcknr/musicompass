@@ -12,6 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 public class RecommendationTagsDto {
 
+    private String artistName;
     private List<String> genres;
     private List<String> roles;
     private String gender;

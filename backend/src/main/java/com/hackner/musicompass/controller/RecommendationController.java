@@ -4,10 +4,9 @@ import com.hackner.musicompass.model.RecommendationTagsDto;
 import com.hackner.musicompass.model.RecommendationTags;
 import com.hackner.musicompass.service.RecommendationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/recommendation")
@@ -22,6 +21,11 @@ public class RecommendationController {
 
     @PostMapping("{artistName}")
     public RecommendationTags changeRecommendationTag(@RequestBody RecommendationTagsDto recommendationTagsDto){
-        return this.recommendationService.changeRecommendationTags(RecommendationTagsDto recommendationTagsDto);
+        return this.recommendationService.changeRecommendationTags(recommendationTagsDto);
+    }
+
+    @GetMapping()
+    public List<List<String>> getRecommendationCategoryValues(){
+        return recommendationService.getRecommendationCategoryValues();
     }
 }
