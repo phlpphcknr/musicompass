@@ -8,7 +8,7 @@ import ArtistRecommendation from "../components/ArtistRecommendation";
 
 export default function ArtistOverview(){
     const {artistName} = useParams();
-    const [artist, setArtist] = useState('');
+    const [artist, setArtist] = useState();
 
     useEffect(() => {
         getArtistByName(artistName)
@@ -16,8 +16,7 @@ export default function ArtistOverview(){
             .catch((error) => console.error(error))
     },[artistName]);
 
-    if (artist.artistAlbums === undefined ||
-        artist.artistSingles === undefined){
+    if (!artist){
         return(
             <section>
                 Loading
