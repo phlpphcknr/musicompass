@@ -3,8 +3,9 @@ package com.hackner.musicompass.service;
 import com.hackner.musicompass.db.ArtistMongoDb;
 import com.hackner.musicompass.db.RecommendationCategoryMongoDb;
 import com.hackner.musicompass.model.Artist;
+import com.hackner.musicompass.model.RecommendationCategory;
 import com.hackner.musicompass.model.RecommendationTags;
-import com.hackner.musicompass.model.RecommendationTagsDto;
+import com.hackner.musicompass.controller.model.RecommendationTagsDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,7 +44,7 @@ public class RecommendationService {
         return recommendationTags;
     }
 
-    public List<List<String>> getRecommendationCategoryValues(){
+    public List<RecommendationCategory> getRecommendationCategoryValues(){
         return recommendationCategoryMongoDb.findAll();
     }
 

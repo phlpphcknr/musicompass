@@ -1,6 +1,7 @@
 package com.hackner.musicompass.controller;
 
-import com.hackner.musicompass.model.RecommendationTagsDto;
+import com.hackner.musicompass.model.RecommendationCategory;
+import com.hackner.musicompass.controller.model.RecommendationTagsDto;
 import com.hackner.musicompass.model.RecommendationTags;
 import com.hackner.musicompass.service.RecommendationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class RecommendationController {
     }
 
     @GetMapping()
-    public List<List<String>> getRecommendationCategoryValues(){
+    public List<RecommendationCategory> getRecommendationCategoryValues(){
         return recommendationService.getRecommendationCategoryValues();
     }
 }

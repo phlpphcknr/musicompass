@@ -1,4 +1,4 @@
-package com.hackner.musicompass.model;
+package com.hackner.musicompass.controller.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
