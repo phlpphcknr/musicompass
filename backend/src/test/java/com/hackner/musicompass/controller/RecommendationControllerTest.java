@@ -63,5 +63,20 @@ class RecommendationControllerTest {
                 .categoryValues(Arrays.asList("Genre1", "Genre2")).build()));
     }
 
+    @Test
+    @DisplayName("Change recommendation tags for already existing recommendation tags")
+    public void changeExistingRecommendationTags(){
+        //GIVEN
+
+        //WHEN
+        ResponseEntity <List<RecommendationCategory>> response = testRestTemplate.exchange(getUrl() + artistName,
+                HttpMethod.POST,
+                null,
+                new ParameterizedTypeReference<List<RecommendationCategory>>() {});
+
+
+        //THEN
+    }
+
 
 }
