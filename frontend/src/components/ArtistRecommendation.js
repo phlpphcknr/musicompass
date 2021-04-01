@@ -1,4 +1,5 @@
 import styled from 'styled-components/macro'
+import RecommendationTagElement from "./RecommendationTagElement";
 
 export default function ArtistRecommendation ({onRecommend, artistName}){
 
@@ -6,6 +7,7 @@ export default function ArtistRecommendation ({onRecommend, artistName}){
 
     return(
     <ArtistRecommender>
+        <RecommendationTagElement/>
         <button onClick={recommend} >RECOMMEND</button>
     </ArtistRecommender>
     )
