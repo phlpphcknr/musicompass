@@ -20,6 +20,7 @@ export default createGlobalStyle`
   
   a{
     text-decoration: none;
+    color: chocolate;
     :hover {
       opacity: var(--opacity-hover);
     }

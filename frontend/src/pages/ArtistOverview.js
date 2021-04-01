@@ -39,6 +39,7 @@ export default function ArtistOverview(){
             <Link to={`artist/${artistName}/singles-eps`} >
                 <h5>see more singles/EPs ...</h5>
             </Link>
+            <h3>Recommend '{artistName}' to other users</h3>
             <ArtistRecommendation artistName={artistName}
                                   onRecommend={onRecommend}/>
         </Overview>)
@@ -54,6 +55,10 @@ const Overview = styled.div`
   
   h3{
     margin: 10px;
+  }
+  
+  h5{
+    margin: 0px 20px;
   }
   
   a{
