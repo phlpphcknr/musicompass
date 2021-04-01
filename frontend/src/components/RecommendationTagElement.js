@@ -1,7 +1,6 @@
 import styled from 'styled-components/macro';
 import { Multiselect } from 'multiselect-react-dropdown';
 import {useEffect, useState, useRef} from 'react';
-import {getRecommendationTagCategories} from "../service/musiComApiService";
 
 
 export default function RecommendationTagElement ({recommendationTagObject}){
@@ -10,7 +9,7 @@ export default function RecommendationTagElement ({recommendationTagObject}){
 
     const selectionLimit =
         recommendationTagObject.categoryName == "Gender" ? 1 :
-        recommendationTagObject.categoryName == "Roles" ? 2 : 3
+        recommendationTagObject.categoryName == "Roles" ? 2 : 3;
 
 
     return(
@@ -28,7 +27,6 @@ export default function RecommendationTagElement ({recommendationTagObject}){
             />
         </RecommendationTag>
     )
-
 }
 
 const RecommendationTag = styled.section`
@@ -40,47 +38,3 @@ const RecommendationTag = styled.section`
     width: 90px;
   }
 `
-
-
-/*
-return(
-    <RecommendationTags>
-        <Category>
-            <h5>Gender:</h5>
-            <select>
-                <option value="female">Female</option>
-                <option value="Male">Male</option>
-                <option value="female">Diverse</option>
-            </select>
-        </Category>
-        <Category>
-            <h5>Role:</h5>
-            <select>
-                <option value="female">Singer</option>
-                <option value="Male">Guitarist</option>
-                <option value="female">Pianist</option>
-            </select>
-        </Category>
-        <Category>
-            <h5>Genre:</h5>
-            <select>
-                <option value="female">Singer</option>
-                <option value="Male">Guitarist</option>
-                <option value="female">Pianist</option>
-            </select>
-        </Category>
-    </RecommendationTags>
-)
-
-}
-
-const RecommendationTags = styled.section`
-  display: flex;
-  flex-direction: column;
-`
-
-const Category = styled.section`
-  display: flex;
-  justify-content: space-between;
-  margin: 5px;
-`*/
