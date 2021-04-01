@@ -16,3 +16,6 @@ export const getRecommendationTagCategories = () =>
     axios
         .get(baseUrl + `/recommendation`)
         .then((response) => response.data)
+
+export const postRecommendationTag = (recommendationTagsDto) =>
+    axios.post

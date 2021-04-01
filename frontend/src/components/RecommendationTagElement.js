@@ -1,10 +1,17 @@
 import styled from 'styled-components/macro';
 import { Multiselect } from 'multiselect-react-dropdown';
-import {useEffect, useState} from 'react';
+import {useEffect, useState, useRef} from 'react';
 import {getRecommendationTagCategories} from "../service/musiComApiService";
 
 
 export default function RecommendationTagElement ({recommendationTagObject}){
+
+    const recommendationValueRef = useRef();
+
+    const selectionLimit =
+        recommendationTagObject.categoryName == "Gender" ? 1 :
+        recommendationTagObject.categoryName == "Roles" ? 2 : 3
+
 
     return(
         <RecommendationTag>
@@ -12,7 +19,9 @@ export default function RecommendationTagElement ({recommendationTagObject}){
             <Multiselect
                 options={recommendationTagObject.categoryValues} // Options to display in the dropdown
                 isObject={false}
-                selectedValues={selectedValues} // Preselected value to persist in dropdown
+                ref={recommendationValueRef}
+                selectionLimit = {selectionLimit}
+                //selectedValues={selectedValues} // Preselected value to persist in dropdown
                 //onSelect={onSelect} // Function will trigger on select event
                 //onRemove={onRemove} // Function will trigger on remove event
                 displayValue="name" // Property name to display in the dropdown options
