@@ -18,17 +18,13 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 
-import java.lang.reflect.Type;
 import java.time.Instant;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class RecommendationControllerTest {
@@ -54,8 +50,8 @@ class RecommendationControllerTest {
     @DisplayName("Get recommendation category values")
     public void getRecommendationCategoryValues(){
         //GIVEN
-        recommendationCategoryMongoDb.save(RecommendationCategory.builder().categoryName("Genre").categoryValues(Arrays.asList("Genre1", "Genre2")).build());
-        recommendationCategoryMongoDb.save(RecommendationCategory.builder().categoryName("Role").categoryValues(Arrays.asList("Role1","Role2")).build());
+        recommendationCategoryMongoDb.save(RecommendationCategory.builder().categoryName("Genre").categoryValues(List.of("Genre1", "Genre2")).build());
+        recommendationCategoryMongoDb.save(RecommendationCategory.builder().categoryName("Role").categoryValues(List.of("Role1","Role2")).build());
 
         //WHEN
         ResponseEntity <List<RecommendationCategory>> response = testRestTemplate.exchange(getUrl(),
@@ -66,7 +62,7 @@ class RecommendationControllerTest {
         //THEN
         assertThat(response.getBody(), hasItem(RecommendationCategory.builder()
                 .categoryName("Genre")
-                .categoryValues(Arrays.asList("Genre1", "Genre2")).build()));
+                .categoryValues(List.of("Genre1", "Genre2")).build()));
     }
 
     @Test
@@ -74,11 +70,11 @@ class RecommendationControllerTest {
     public void changeExistingRecommendationTags(){
         //GIVEN
         String artistName ="artistName";
-        List<String> genresBefore = Arrays.asList("Genre1", "Genre2");
-        List<String> rolesBefore = Arrays.asList("Role1","Role2");
+        List<String> genresBefore = List.of("Genre1", "Genre2");
+        List<String> rolesBefore = List.of("Role1","Role2");
         String genderBefore = "Gender";
-        List<String> genresAfter = Arrays.asList("Genre1", "Genre5");
-        List<String> rolesAfter = Arrays.asList("Role0","Role2");
+        List<String> genresAfter = List.of("Genre1", "Genre5");
+        List<String> rolesAfter = List.of("Role0","Role2");
         String genderAfter = "differentGender";
         Instant before = Instant.ofEpochSecond(Instant.now().getEpochSecond());
 
