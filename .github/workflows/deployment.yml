@@ -4,6 +4,7 @@
     push:
       branches:
         - main
+        - backend-wip
 
   jobs:
     build-frontend:
