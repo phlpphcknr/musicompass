@@ -20,17 +20,21 @@ const Header = styled.section`
   padding: 20px;
   background: var(--primary-color);
   box-shadow: 0px 2px 4px #333;
+  
   img {
-    width: 50%;
     max-width: 120px;
+    max-height: 120px;
+    width: auto;
+    height: auto;
     margin: 10px;
   }
+  
   h3 {
     padding: 0px;
     margin: 0px;
     width: 100%;
     text-align: center;
-    font-size: 1.0em;
+    font-size: 1.6em;
     color: #636e72;
   }
 `
