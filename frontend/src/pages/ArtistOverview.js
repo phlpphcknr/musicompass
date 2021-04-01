@@ -55,6 +55,7 @@ const Overview = styled.div`
   
   h3{
     margin: 10px;
+    font-size: 0.9em;
   }
   
   h5{
