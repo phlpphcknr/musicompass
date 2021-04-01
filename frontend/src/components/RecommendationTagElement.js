@@ -6,17 +6,13 @@ import {getRecommendationTagCategories} from "../service/musiComApiService";
 
 export default function RecommendationTagElement ({recommendationTagObject}){
 
-
-    //const onSelect = ();
-
-
     return(
         <RecommendationTag>
             <h5>{recommendationTagObject.categoryName}:</h5>
             <Multiselect
                 options={recommendationTagObject.categoryValues} // Options to display in the dropdown
                 isObject={false}
-                //selectedValues={selectedValues} // Preselected value to persist in dropdown
+                selectedValues={selectedValues} // Preselected value to persist in dropdown
                 //onSelect={onSelect} // Function will trigger on select event
                 //onRemove={onRemove} // Function will trigger on remove event
                 displayValue="name" // Property name to display in the dropdown options
