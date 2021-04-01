@@ -1,50 +1,38 @@
-import styled from 'styled-components/macro'
-import { Multiselect } from 'multiselect-react-dropdown'
+import styled from 'styled-components/macro';
+import { Multiselect } from 'multiselect-react-dropdown';
+import {useEffect, useState} from 'react';
+import {getRecommendationTagCategories} from "../service/musiComApiService";
 
 
-export default function RecommendationTagElement (){
+export default function RecommendationTagElement ({recommendationTagObject}){
 
-    const values = {
-        options: [{name: 'Srigar', id: 1},{name: 'Sam', id: 2}]
-    };
+
+    //const onSelect = ();
 
 
     return(
-        <RecommendationTags>
-            <h5>Gender:</h5>
+        <RecommendationTag>
+            <h5>{recommendationTagObject.categoryName}:</h5>
             <Multiselect
-                options={values.options} // Options to display in the dropdown
-                //selectedValues={values.selectedValue} // Preselected value to persist in dropdown
+                options={recommendationTagObject.categoryValues} // Options to display in the dropdown
+                isObject={false}
+                //selectedValues={selectedValues} // Preselected value to persist in dropdown
                 //onSelect={onSelect} // Function will trigger on select event
                 //onRemove={onRemove} // Function will trigger on remove event
                 displayValue="name" // Property name to display in the dropdown options
             />
-            <h5>Role:</h5>
-            <Multiselect
-                options={values.options} // Options to display in the dropdown
-                //selectedValues={values.selectedValue} // Preselected value to persist in dropdown
-                //onSelect={onSelect} // Function will trigger on select event
-                //onRemove={onRemove} // Function will trigger on remove event
-                displayValue="name" // Property name to display in the dropdown options
-            />
-            <h5>Genre:</h5>
-            <Multiselect
-                options={values.options} // Options to display in the dropdown
-                //selectedValues={values.selectedValue} // Preselected value to persist in dropdown
-                //onSelect={onSelect} // Function will trigger on select event
-                //onRemove={onRemove} // Function will trigger on remove event
-                displayValue="name" // Property name to display in the dropdown options
-            />
-        </RecommendationTags>
+        </RecommendationTag>
     )
 
 }
 
-const RecommendationTags = styled.section`
+const RecommendationTag = styled.section`
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  
   
   h5{
+    width: 90px;
   }
 `
 

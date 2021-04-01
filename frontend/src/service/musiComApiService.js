@@ -14,5 +14,5 @@ export const getArtistByName = (artistName) =>
 
 export const getRecommendationTagCategories = () =>
     axios
-        .get(baseUrl + "/recommendation")
+        .get(baseUrl + `/recommendation`)
         .then((response) => response.data)
