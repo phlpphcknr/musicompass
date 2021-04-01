@@ -4,8 +4,6 @@ import { Multiselect } from 'multiselect-react-dropdown'
 
 export default function RecommendationTagElement (){
 
-
-
     const values = {
         options: [{name: 'Srigar', id: 1},{name: 'Sam', id: 2}]
     };
@@ -45,6 +43,9 @@ export default function RecommendationTagElement (){
 const RecommendationTags = styled.section`
   display: flex;
   flex-direction: column;
+  
+  h5{
+  }
 `
 
 
