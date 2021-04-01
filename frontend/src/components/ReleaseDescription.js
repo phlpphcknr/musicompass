@@ -2,20 +2,12 @@ import styled from 'styled-components/macro'
 
 export default function ReleaseDescription({release}){
 
-    const renderReleaseYear = () => {
-        if (release.releaseYear === 0){
-            return <></>
-        } else {
-            return <h3>{release.releaseYear}</h3>
-        }
-    }
-
     return (
         <Release>
             <img src={release.coverImageUrl} alt={'Shows the release cover'}/>
             <section>
                 <h3>{release.fullTitle}</h3>
-                {renderReleaseYear()}
+                {release.releaseYear !== 0 && <h3>{release.releaseYear}</h3>}
             </section>
         </Release>
     )
@@ -28,7 +20,7 @@ const Release = styled.section`
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  margin: 0px 20px 0px 20px;
+  margin: 0px 20px;
   background-color: var(--primary-color);
   box-shadow: 0px 0px 6px #333;
   

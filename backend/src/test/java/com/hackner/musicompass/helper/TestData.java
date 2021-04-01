@@ -14,7 +14,6 @@ import java.util.List;
 public class TestData {
 
     public Artist getArtist(String artistName, Date saveDate){
-        //Date saveDate = Date.from(timeUtils.now());
         ArtistInfo artistInfo = ArtistInfo.builder()
                 .discogsArtistId("111")
                 .artistImageUrl("imageUrl")

@@ -32,12 +32,12 @@ export default function ArtistOverview(){
             <h3>Most popular/wanted album</h3>
             <ReleaseDescription release={artist.artistAlbums[0]}/>
             <Link to={`artist/${artistName}/albums`} >
-                <h3r>see more albums ...</h3r>
+                <h5>see more albums ...</h5>
             </Link>
             <h3>Most popular/wanted single/EP</h3>
             <ReleaseDescription release={artist.artistSingles[0]}/>
             <Link to={`artist/${artistName}/singles-eps`} >
-                <h3r>see more singles/EPs ...</h3r>
+                <h5>see more singles/EPs ...</h5>
             </Link>
             <ArtistRecommendation artistName={artistName}
                                   onRecommend={onRecommend}/>
