@@ -20,7 +20,7 @@ public class RecommendationController {
         this.recommendationService = recommendationService;
     }
 
-    @PostMapping("{artistName}")
+    @PostMapping()
     public RecommendationTags changeRecommendationTag(@RequestBody RecommendationTagsDto recommendationTagsDto){
         return this.recommendationService.changeRecommendationTags(recommendationTagsDto);
     }

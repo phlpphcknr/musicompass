@@ -19,7 +19,9 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 
 import java.lang.reflect.Type;
+import java.time.Instant;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -72,24 +74,47 @@ class RecommendationControllerTest {
     public void changeExistingRecommendationTags(){
         //GIVEN
         String artistName ="artistName";
-        List<String> genres = Arrays.asList("Genre1","Genre2");
-        List<String> roles = Arrays.asList("Role1","Role2");
+        List<String> genresBefore = Arrays.asList("Genre1", "Genre2");
+        List<String> rolesBefore = Arrays.asList("Role1","Role2");
+        String genderBefore = "Gender";
+        List<String> genresAfter = Arrays.asList("Genre1", "Genre5");
+        List<String> rolesAfter = Arrays.asList("Role0","Role2");
+        String genderAfter = "differentGender";
+        Instant before = Instant.ofEpochSecond(Instant.now().getEpochSecond());
+
         RecommendationTagsDto recommendationTagsDto = RecommendationTagsDto.builder()
                 .artistName(artistName)
-                .genres(genres)
-                .roles(roles)
-                .gender("Gender").build();
-        artistMongoDb.save(Artist.builder().artistName(artistName).build());
+                .genres(genresAfter)
+                .roles(rolesAfter)
+                .gender(genderAfter).build();
+
+        RecommendationTags recommendationTagsBefore = RecommendationTags.builder()
+                .recommended(true)
+                .genres(genresBefore)
+                .roles(rolesBefore)
+                .changeDate(Date.from(before))
+                .gender(genderBefore).build();
+
+        RecommendationTags recommendationTagsAfter = RecommendationTags.builder()
+                .recommended(true)
+                .genres(genresAfter)
+                .roles(rolesAfter)
+                .gender(genderAfter).build();
+
+        artistMongoDb.save(Artist.builder()
+                .artistName(artistName)
+                .recommendationTags(recommendationTagsBefore).build());
 
         //WHEN
         HttpEntity<RecommendationTagsDto> entity = new HttpEntity<>(recommendationTagsDto);
-        ResponseEntity <RecommendationTags> response = testRestTemplate.exchange(getUrl() + artistName,
+        ResponseEntity <RecommendationTags> response = testRestTemplate.exchange(getUrl(),
                 HttpMethod.POST,
                 entity,
                 RecommendationTags.class);
 
         //THEN
-        assertThat(response.getBody(), equalTo());
+        assertThat(response.getBody(), equalTo(recommendationTagsAfter));
+        assertTrue(response.getBody().getChangeDate().after(Date.from(before)));
 
     }
 

@@ -1,9 +1,6 @@
 package com.hackner.musicompass.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Date;
 import java.util.List;
@@ -18,5 +15,6 @@ public class RecommendationTags {
     private List<String> genres;
     private List<String> roles;
     private String gender;
+    @EqualsAndHashCode.Exclude
     private Date changeDate;
 }
