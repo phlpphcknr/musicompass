@@ -10,6 +10,8 @@ export default function ArtistRecommendation ({currentRecommendationTags, artist
     const [rolesTags, setRolesTags] = useState([]);
     const [genreTags, setGenreTags] = useState([]);
 
+    //const [recommendationTagsInitial, setRecommendationTagsInitial] = useState();
+
     const [genderTagInitial, setGenderTagInitial] = useState('');
     const [rolesTagsInitial, setRolesTagsInitial] = useState([]);
     const [genreTagsInitial, setGenreTagsInitial] = useState([]);
@@ -19,6 +21,7 @@ export default function ArtistRecommendation ({currentRecommendationTags, artist
             .then(setRecommendationTagCategories)
             .catch((error) => console.error(error))
         if(currentRecommendationTags.recommended === true){
+            //setRecommendationTagsInitial(currentRecommendationTags);
             setGenderTagInitial(currentRecommendationTags.gender)
             setRolesTagsInitial(currentRecommendationTags.roles)
             setGenreTagsInitial(currentRecommendationTags.genre)
@@ -27,7 +30,17 @@ export default function ArtistRecommendation ({currentRecommendationTags, artist
     );
 
     function onClick() {
-        postRecommendationTag({artistName, genreTags, rolesTags, genderTag})
+        //const recommendationTagsDto = {artistName, genreTags, rolesTags, genderTag};
+        console.log(artistName)
+        console.log(genreTags)
+        console.log(rolesTags)
+        console.log(genderTag)
+        /*postRecommendationTag({artistName, genreTags, rolesTags, genderTag})
+            .then((recommendationTags) => {
+                setGenderTagInitial(recommendationTags.gender)
+                setRolesTagsInitial(recommendationTags.roles)
+                setGenreTagsInitial(recommendationTags.genre)
+            })*/
     };
 
     if(!recommendationTagCategories){
@@ -44,14 +57,17 @@ export default function ArtistRecommendation ({currentRecommendationTags, artist
                 <RecommendationTagElement key={recommendationTagCategories[0].categoryName}
                                           recommendationTagObject={recommendationTagCategories[0]}
                                           getRecommendation={genreTagsInitial}
+                                          //getRecommendation={recommendationTagsInitial.genre}
                                           setRecommendation={setGenreTags}/>
                 <RecommendationTagElement key={recommendationTagCategories[1].categoryName}
                                           recommendationTagObject={recommendationTagCategories[1]}
                                           getRecommendation={rolesTagsInitial}
+                                          //getRecommendation={recommendationTagsInitial.roles}
                                           setRecommendation={setRolesTags}/>
                 <RecommendationTagElement key={recommendationTagCategories[2].categoryName}
                                           recommendationTagObject={recommendationTagCategories[2]}
                                           getRecommendation={genderTagInitial}
+                                          //getRecommendation={recommendationTagsInitial.gender}
                                           setRecommendation={setGenderTag}/>
             </RecommendationTags>
             <button onClick={onClick}> RECOMMEND </button>
