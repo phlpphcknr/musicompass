@@ -59,7 +59,7 @@ export default function ArtistRecommendation ({currentRecommendationTags, artist
                                           getRecommendation={genderTagInitial}
                                           setRecommendation={setGenderTag}/>
             </RecommendationTags>
-            <button onClick={onClick}> RECOMMEND </button>
+            <button onClick={onClick} > RECOMMEND </button>
         </ArtistRecommender>
     )
 }
