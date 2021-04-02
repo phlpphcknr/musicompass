@@ -53,7 +53,7 @@ public class ArtistService {
 
         RecommendationTags recommendationTags = RecommendationTags.builder()
                 .recommended(false)
-                .gender("")
+                .gender(List.of())
                 .roles(List.of())
                 .genres(List.of()).build();
 

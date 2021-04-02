@@ -74,7 +74,8 @@ class ArtistServiceTest {
                 .artistAlbums(Collections.emptyList())
                 .artistSingles(Collections.emptyList())
                 .recommendationTags(RecommendationTags.builder()
-                        .recommended(false).gender("")
+                        .recommended(false)
+                        .gender(List.of())
                         .roles(List.of())
                         .genres(List.of()).build())
                 .build();

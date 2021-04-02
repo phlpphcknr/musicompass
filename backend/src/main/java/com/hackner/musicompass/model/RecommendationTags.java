@@ -14,7 +14,7 @@ public class RecommendationTags {
     private Boolean recommended;
     private List<String> genres;
     private List<String> roles;
-    private String gender;
+    private List<String> gender;
     @EqualsAndHashCode.Exclude
     private Date changeDate;
 }

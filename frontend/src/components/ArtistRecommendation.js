@@ -6,7 +6,7 @@ import {getRecommendationTagCategories, postRecommendationTag} from "../service/
 export default function ArtistRecommendation ({currentRecommendationTags, artistName}){
 
     const [recommendationTagCategories, setRecommendationTagCategories] = useState();
-    const [genderTag, setGenderTag] = useState('');
+    const [genderTag, setGenderTag] = useState([]);
     const [rolesTags, setRolesTags] = useState([]);
     const [genreTags, setGenreTags] = useState([]);
 
@@ -27,8 +27,7 @@ export default function ArtistRecommendation ({currentRecommendationTags, artist
     );
 
     function onClick() {
-        const gender = genderTag[0]
-        postRecommendationTag({artistName, genreTags, rolesTags, gender})
+        postRecommendationTag({artistName, genreTags, rolesTags, genderTag})
             .then((recommendationTags) => {
                 setGenderTagInitial(recommendationTags.gender)
                 setRolesTagsInitial(recommendationTags.roles)

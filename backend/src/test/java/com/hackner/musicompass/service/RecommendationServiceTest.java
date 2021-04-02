@@ -52,12 +52,12 @@ class RecommendationServiceTest {
     public void changeExistingRecommendationTags(){
         //GIVEN
         String artistName = "artistName";
-        List<String> genresBefore = Arrays.asList("Genre1", "Genre2");
-        List<String> rolesBefore = Arrays.asList("Role1","Role2");
-        String genderBefore = "Gender";
-        List<String> genresAfter = Arrays.asList("Genre1", "Genre5");
-        List<String> rolesAfter = Arrays.asList("Role0","Role2");
-        String genderAfter = "differentGender";
+        List<String> genresBefore = List.of("Genre1", "Genre2");
+        List<String> rolesBefore = List.of("Role1","Role2");
+        List<String> genderBefore = List.of("Gender");
+        List<String> genresAfter = List.of("Genre1", "Genre5");
+        List<String> rolesAfter = List.of("Role0","Role2");
+        List<String> genderAfter = List.of("differentGender");
         Instant before = Instant.ofEpochSecond(Instant.now().getEpochSecond());
         Instant after = Instant.ofEpochSecond(Instant.now().getEpochSecond()+5);
 
@@ -106,9 +106,9 @@ class RecommendationServiceTest {
     public void setRecommendationTags(){
         //GIVEN
         String artistName = "artistName";
-        List<String> genresAfter = Arrays.asList("Genre1", "Genre5");
-        List<String> rolesAfter = Arrays.asList("Role0","Role2");
-        String genderAfter = "differentGender";
+        List<String> genresAfter = List.of("Genre1", "Genre5");
+        List<String> rolesAfter = List.of("Role0","Role2");
+        List<String> genderAfter = List.of("differentGender");
         Instant after = Instant.ofEpochSecond(Instant.now().getEpochSecond());
 
         RecommendationTagsDto recommendationTagsDto = RecommendationTagsDto.builder()

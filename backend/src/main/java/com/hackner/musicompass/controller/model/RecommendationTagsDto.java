@@ -18,7 +18,7 @@ public class RecommendationTagsDto {
     private List<String> genres;
     @JsonProperty("rolesTags")
     private List<String> roles;
-    @JsonProperty("gender")
-    private String gender;
+    @JsonProperty("genderTag")
+    private List<String> gender;
 
 }
