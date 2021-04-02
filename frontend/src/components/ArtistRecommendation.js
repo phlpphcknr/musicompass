@@ -21,17 +21,18 @@ export default function ArtistRecommendation ({currentRecommendationTags, artist
         if(currentRecommendationTags.recommended === true){
             setGenderTagInitial(currentRecommendationTags.gender)
             setRolesTagsInitial(currentRecommendationTags.roles)
-            setGenreTagsInitial(currentRecommendationTags.genre)
+            setGenreTagsInitial(currentRecommendationTags.genres)
         }
         },[]
     );
 
     function onClick() {
-        postRecommendationTag({artistName, genreTags, rolesTags, genderTag})
+        const gender = genderTag[0]
+        postRecommendationTag({artistName, genreTags, rolesTags, gender})
             .then((recommendationTags) => {
                 setGenderTagInitial(recommendationTags.gender)
                 setRolesTagsInitial(recommendationTags.roles)
-                setGenreTagsInitial(recommendationTags.genre)
+                setGenreTagsInitial(recommendationTags.genres)
             })
     };
 
