@@ -1,22 +1,31 @@
 import styled from 'styled-components/macro'
 import RecommendationTagElement from "./RecommendationTagElement";
 import {useEffect, useState} from 'react';
-import {getRecommendationTagCategories} from "../service/musiComApiService";
+import {getRecommendationTagCategories, postRecommendationTag} from "../service/musiComApiService";
 
-export default function ArtistRecommendation ({onRecommend, artistName}){
+export default function ArtistRecommendation ({currentRecommendationTags, artistName}){
 
     const [recommendationTagCategories, setRecommendationTagCategories] = useState();
-    const [genderTag, setGenderTag] = useState();
-    const [rolesTag, setRolesTag] = useState();
-    const [genreTag, setGenreTag] = useState();
+    const [genderTag, setGenderTag] = useState('');
+    const [rolesTag, setRolesTag] = useState([]);
+    const [genreTag, setGenreTag] = useState([]);
 
     useEffect(() => {
         getRecommendationTagCategories()
             .then(setRecommendationTagCategories)
             .catch((error) => console.error(error))
+        if(currentRecommendationTags.recommended === true){
+            setGenderTag(currentRecommendationTags.gender)
+            setRolesTag(currentRecommendationTags.roles)
+            setGenreTag(currentRecommendationTags.genre)
+        }
+
     },);
 
-    const recommend = () => {};
+    const recommend = () => {
+        postRecommendationTag({artistName, })
+
+    };
 
     if(!recommendationTagCategories){
         return(
@@ -26,14 +35,21 @@ export default function ArtistRecommendation ({onRecommend, artistName}){
         )
     }
 
-
     return(
         <ArtistRecommender>
             <RecommendationTags>
-                {recommendationTagCategories.map((recommendationTagCategory) =>
-                    <RecommendationTagElement key={recommendationTagCategory.categoryName}
-                                              recommendationTagObject={recommendationTagCategory}
-                                              setRecommendation={setRecommendationTag(recommendationTagCategory.categoryName)}/>)}
+                <RecommendationTagElement key={recommendationTagCategories[0].categoryName}
+                                          recommendationTagObject={recommendationTagCategories[0]}
+                                          getRecommendation={genreTag}
+                                          setRecommendation={setGenreTag}/>
+                <RecommendationTagElement key={recommendationTagCategories[1].categoryName}
+                                          recommendationTagObject={recommendationTagCategories[1]}
+                                          getRecommendation={rolesTag}
+                                          setRecommendation={setRolesTag}/>
+                <RecommendationTagElement key={recommendationTagCategories[2].categoryName}
+                                          recommendationTagObject={recommendationTagCategories[2]}
+                                          getRecommendation={genderTag}
+                                          setRecommendation={setGenderTag}/>
             </RecommendationTags>
             <button onClick={recommend}>RECOMMEND</button>
         </ArtistRecommender>
@@ -54,3 +70,17 @@ const RecommendationTags = styled.section`
   display: flex;
   flex-direction: column;
 `
+
+
+/*
+return(
+    <ArtistRecommender>
+        <RecommendationTags>
+            {recommendationTagCategories.map((recommendationTagCategory) =>
+                <RecommendationTagElement key={recommendationTagCategory.categoryName}
+                                          recommendationTagObject={recommendationTagCategory}
+                                          setRecommendation={setRecommendationTag(recommendationTagCategory.categoryName)}/>)}
+        </RecommendationTags>
+        <button onClick={recommend}>RECOMMEND</button>
+    </ArtistRecommender>
+)*/

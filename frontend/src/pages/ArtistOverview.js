@@ -24,8 +24,6 @@ export default function ArtistOverview(){
         )
     }
 
-    const onRecommend = () =>{};
-
     return (
         <Overview>
             <ArtistHeader key={artist.artistName} artist={artist}/>
@@ -41,7 +39,7 @@ export default function ArtistOverview(){
             </Link>
             <h3>Recommend '{artistName}' to other users</h3>
             <ArtistRecommendation artistName={artistName}
-                                  onRecommend={onRecommend}/>
+                                  currentRecommendationTags={artist.recommendationTags}/>
         </Overview>)
 
 }

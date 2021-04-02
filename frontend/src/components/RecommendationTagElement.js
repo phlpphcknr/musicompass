@@ -3,13 +3,13 @@ import { Multiselect } from 'multiselect-react-dropdown';
 import {useEffect, useState, useRef} from 'react';
 
 
-export default function RecommendationTagElement ({recommendationTagObject}){
+export default function RecommendationTagElement ({recommendationTagObject, getRecommendation, setRecommendation}){
 
     const recommendationValueRef = useRef();
 
     const selectionLimit =
-        recommendationTagObject.categoryName == "Gender" ? 1 :
-        recommendationTagObject.categoryName == "Roles" ? 2 : 3;
+        recommendationTagObject.categoryName === "Gender" ? 1 :
+        recommendationTagObject.categoryName === "Roles" ? 2 : 3;
 
 
     return(
@@ -20,7 +20,7 @@ export default function RecommendationTagElement ({recommendationTagObject}){
                 isObject={false}
                 ref={recommendationValueRef}
                 selectionLimit = {selectionLimit}
-                //selectedValues={selectedValues} // Preselected value to persist in dropdown
+                selectedValues={getRecommendation} // Preselected value to persist in dropdown
                 //onSelect={onSelect} // Function will trigger on select event
                 //onRemove={onRemove} // Function will trigger on remove event
                 displayValue="name" // Property name to display in the dropdown options
