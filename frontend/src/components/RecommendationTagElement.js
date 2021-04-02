@@ -1,4 +1,5 @@
 import styled from 'styled-components/macro';
+import GlobalStyle from "./GlobalStyle";
 import { Multiselect } from 'multiselect-react-dropdown';
 import {useEffect, useRef} from 'react';
 
@@ -15,6 +16,11 @@ export default function RecommendationTagElement ({recommendationTagObject, getR
         setRecommendation(recommendationValueRef.current.getSelectedItems)
     },[])
 
+    const style = {
+        chips: {
+            background: "chocolate"
+        }
+    };
 
     return(
         <RecommendationTag>
@@ -25,6 +31,9 @@ export default function RecommendationTagElement ({recommendationTagObject, getR
                 ref={recommendationValueRef}
                 selectionLimit = {selectionLimit}
                 selectedValues={getRecommendation} // Preselected value to persist in dropdown
+                closeIcon = "cancel"
+                style={style}
+                //id="css_custom"
                 //onSelect={onSelect} // Function will trigger on select event
                 //onRemove={onRemove} // Function will trigger on remove event
                 displayValue="name" // Property name to display in the dropdown options
@@ -41,4 +50,5 @@ const RecommendationTag = styled.section`
   h5{
     width: 90px;
   }
+  
 `
