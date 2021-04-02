@@ -5,6 +5,7 @@ import com.hackner.musicompass.discogsapi.model.*;
 import com.hackner.musicompass.model.Artist;
 import com.hackner.musicompass.model.ArtistInfo;
 import com.hackner.musicompass.model.ArtistRelease;
+import com.hackner.musicompass.model.RecommendationTags;
 import com.hackner.musicompass.service.TimeUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -132,12 +133,14 @@ class ArtistControllerTest {
                 .build();
         List<ArtistRelease> artistAlbums = Arrays.asList(artistRelease1);
         List<ArtistRelease> artistSingles = Arrays.asList(artistRelease2);
+        RecommendationTags recommendationTags = RecommendationTags.builder().recommended(false).build();
         Artist artist = Artist.builder()
                 .artistName(artistName)
                 .saveDate(saveDate)
                 .artistInfo(artistInfo)
                 .artistAlbums(artistAlbums)
-                .artistSingles(artistSingles).build();
+                .artistSingles(artistSingles)
+                .recommendationTags(recommendationTags).build();
         return artist;
     }
 

@@ -8,6 +8,7 @@ import com.hackner.musicompass.discogsapi.service.DiscogsArtistApiService;
 import com.hackner.musicompass.model.Artist;
 import com.hackner.musicompass.model.ArtistInfo;
 import com.hackner.musicompass.model.ArtistRelease;
+import com.hackner.musicompass.model.RecommendationTags;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,12 +51,15 @@ public class ArtistService {
         List<ArtistRelease> albumList = artistReleaseService.getSortedReleaseList("Album", discogsMasterReleaseList);
         List<ArtistRelease> singleList = artistReleaseService.getSortedReleaseList("Single/EP", discogsMasterReleaseList);
 
+        RecommendationTags recommendationTags = RecommendationTags.builder().recommended(false).build();
+
         Artist artist = new Artist().builder()
                 .artistName(discogsArtist.getArtistName())
                 .saveDate(Date.from(timeUtils.now()))
                 .artistInfo(artistInfo)
                 .artistAlbums(albumList)
-                .artistSingles(singleList).build();
+                .artistSingles(singleList)
+                .recommendationTags(recommendationTags).build();
 
         artistMongoDb.save(artist);
 

@@ -6,6 +6,7 @@ import com.hackner.musicompass.discogsapi.model.DiscogsArtistSearchResults;
 import com.hackner.musicompass.discogsapi.service.DiscogsArtistApiService;
 import com.hackner.musicompass.model.Artist;
 import com.hackner.musicompass.model.ArtistInfo;
+import com.hackner.musicompass.model.RecommendationTags;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -71,6 +72,7 @@ class ArtistServiceTest {
                         .build())
                 .artistAlbums(Collections.emptyList())
                 .artistSingles(Collections.emptyList())
+                .recommendationTags(RecommendationTags.builder().recommended(false).build())
                 .build();
 
         DiscogsArtist discogsArtist = DiscogsArtist.builder()
