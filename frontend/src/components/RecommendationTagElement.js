@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro';
 import { Multiselect } from 'multiselect-react-dropdown';
-import {useEffect, useState, useRef} from 'react';
+import {useEffect, useRef} from 'react';
 
 
 export default function RecommendationTagElement ({recommendationTagObject, getRecommendation, setRecommendation}){
