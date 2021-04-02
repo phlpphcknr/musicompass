@@ -31,16 +31,16 @@ export default function ArtistRecommendation ({currentRecommendationTags, artist
 
     function onClick() {
         //const recommendationTagsDto = {artistName, genreTags, rolesTags, genderTag};
-        console.log(artistName)
+      /*  console.log(artistName)
         console.log(genreTags)
         console.log(rolesTags)
-        console.log(genderTag)
-        /*postRecommendationTag({artistName, genreTags, rolesTags, genderTag})
+        console.log(genderTag)*/
+        postRecommendationTag({artistName, genreTags, rolesTags, genderTag})
             .then((recommendationTags) => {
                 setGenderTagInitial(recommendationTags.gender)
                 setRolesTagsInitial(recommendationTags.roles)
                 setGenreTagsInitial(recommendationTags.genre)
-            })*/
+            })
     };
 
     if(!recommendationTagCategories){

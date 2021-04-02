@@ -12,15 +12,9 @@ export default function RecommendationTagElement ({recommendationTagObject, getR
         recommendationTagObject.categoryName === "Roles" ? 2 : 3;
 
     useEffect(() => {
-        setRecommendation(recommendationValueRef.current)
+        setRecommendation(recommendationValueRef.current.getSelectedItems)
     },[])
 
-/*    const onSelect = () => {
-        setRecommendation(recommendationValueRef.current)
-    }
-    const onRemove = () => {
-        setRecommendation(recommendationValueRef.current)
-    }*/
 
     return(
         <RecommendationTag>
