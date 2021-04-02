@@ -5,17 +5,20 @@ import {getRecommendationTagCategories} from "../service/musiComApiService";
 
 export default function ArtistRecommendation ({onRecommend, artistName}){
 
-    const [recommendationTagObjects, setRecommendationTagObjects] = useState();
+    const [recommendationTagCategories, setRecommendationTagCategories] = useState();
+    const [genderTag, setGenderTag] = useState();
+    const [rolesTag, setRolesTag] = useState();
+    const [genreTag, setGenreTag] = useState();
 
     useEffect(() => {
         getRecommendationTagCategories()
-            .then(setRecommendationTagObjects)
+            .then(setRecommendationTagCategories)
             .catch((error) => console.error(error))
     },);
 
     const recommend = () => {};
 
-    if(!recommendationTagObjects){
+    if(!recommendationTagCategories){
         return(
             <section>
                 Loading
@@ -23,12 +26,14 @@ export default function ArtistRecommendation ({onRecommend, artistName}){
         )
     }
 
+
     return(
         <ArtistRecommender>
             <RecommendationTags>
-                {recommendationTagObjects.map((recommendationTagObject) =>
-                    <RecommendationTagElement key={recommendationTagObject.categoryName}
-                                              recommendationTagObject={recommendationTagObject}/>)}
+                {recommendationTagCategories.map((recommendationTagCategory) =>
+                    <RecommendationTagElement key={recommendationTagCategory.categoryName}
+                                              recommendationTagObject={recommendationTagCategory}
+                                              setRecommendation={setRecommendationTag(recommendationTagCategory.categoryName)}/>)}
             </RecommendationTags>
             <button onClick={recommend}>RECOMMEND</button>
         </ArtistRecommender>
