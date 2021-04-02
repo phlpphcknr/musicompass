@@ -51,7 +51,11 @@ public class ArtistService {
         List<ArtistRelease> albumList = artistReleaseService.getSortedReleaseList("Album", discogsMasterReleaseList);
         List<ArtistRelease> singleList = artistReleaseService.getSortedReleaseList("Single/EP", discogsMasterReleaseList);
 
-        RecommendationTags recommendationTags = RecommendationTags.builder().recommended(false).build();
+        RecommendationTags recommendationTags = RecommendationTags.builder()
+                .recommended(false)
+                .gender("")
+                .roles(List.of())
+                .genres(List.of()).build();
 
         Artist artist = new Artist().builder()
                 .artistName(discogsArtist.getArtistName())

@@ -14,6 +14,7 @@ import java.sql.Date;
 import java.time.Instant;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -72,7 +73,10 @@ class ArtistServiceTest {
                         .build())
                 .artistAlbums(Collections.emptyList())
                 .artistSingles(Collections.emptyList())
-                .recommendationTags(RecommendationTags.builder().recommended(false).build())
+                .recommendationTags(RecommendationTags.builder()
+                        .recommended(false).gender("")
+                        .roles(List.of())
+                        .genres(List.of()).build())
                 .build();
 
         DiscogsArtist discogsArtist = DiscogsArtist.builder()

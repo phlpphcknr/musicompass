@@ -133,7 +133,11 @@ class ArtistControllerTest {
                 .build();
         List<ArtistRelease> artistAlbums = Arrays.asList(artistRelease1);
         List<ArtistRelease> artistSingles = Arrays.asList(artistRelease2);
-        RecommendationTags recommendationTags = RecommendationTags.builder().recommended(false).build();
+        RecommendationTags recommendationTags = RecommendationTags.builder()
+                .recommended(false)
+                .gender("")
+                .roles(List.of())
+                .genres(List.of()).build();
         Artist artist = Artist.builder()
                 .artistName(artistName)
                 .saveDate(saveDate)
