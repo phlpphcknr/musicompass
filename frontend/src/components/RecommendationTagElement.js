@@ -11,13 +11,16 @@ export default function RecommendationTagElement ({recommendationTagObject, getR
         recommendationTagObject.categoryName === "Gender" ? 1 :
         recommendationTagObject.categoryName === "Roles" ? 2 : 3;
 
-    const onSelect = () => {
-        setRecommendation(recommendationValueRef)
-    }
+    useEffect(() => {
+        setRecommendation(recommendationValueRef.current)
+    },[])
 
-    const onRemove = () => {
-        setRecommendation(recommendationValueRef)
+/*    const onSelect = () => {
+        setRecommendation(recommendationValueRef.current)
     }
+    const onRemove = () => {
+        setRecommendation(recommendationValueRef.current)
+    }*/
 
     return(
         <RecommendationTag>
@@ -28,8 +31,8 @@ export default function RecommendationTagElement ({recommendationTagObject, getR
                 ref={recommendationValueRef}
                 selectionLimit = {selectionLimit}
                 selectedValues={getRecommendation} // Preselected value to persist in dropdown
-                onSelect={onSelect} // Function will trigger on select event
-                onRemove={onRemove} // Function will trigger on remove event
+                //onSelect={onSelect} // Function will trigger on select event
+                //onRemove={onRemove} // Function will trigger on remove event
                 displayValue="name" // Property name to display in the dropdown options
             />
         </RecommendationTag>

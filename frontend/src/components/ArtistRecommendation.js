@@ -10,19 +10,23 @@ export default function ArtistRecommendation ({currentRecommendationTags, artist
     const [rolesTags, setRolesTags] = useState([]);
     const [genreTags, setGenreTags] = useState([]);
 
+    const [genderTagInitial, setGenderTagInitial] = useState('');
+    const [rolesTagsInitial, setRolesTagsInitial] = useState([]);
+    const [genreTagsInitial, setGenreTagsInitial] = useState([]);
+
     useEffect(() => {
         getRecommendationTagCategories()
             .then(setRecommendationTagCategories)
             .catch((error) => console.error(error))
         if(currentRecommendationTags.recommended === true){
-            setGenderTag(currentRecommendationTags.gender)
-            setRolesTags(currentRecommendationTags.roles)
-            setGenreTags(currentRecommendationTags.genre)
+            setGenderTagInitial(currentRecommendationTags.gender)
+            setRolesTagsInitial(currentRecommendationTags.roles)
+            setGenreTagsInitial(currentRecommendationTags.genre)
         }
+        },[]
+    );
 
-    },);
-
-    const recommend = () => {
+    function onClick() {
         postRecommendationTag({artistName, genreTags, rolesTags, genderTag})
     };
 
@@ -39,18 +43,18 @@ export default function ArtistRecommendation ({currentRecommendationTags, artist
             <RecommendationTags>
                 <RecommendationTagElement key={recommendationTagCategories[0].categoryName}
                                           recommendationTagObject={recommendationTagCategories[0]}
-                                          getRecommendation={genreTags}
+                                          getRecommendation={genreTagsInitial}
                                           setRecommendation={setGenreTags}/>
                 <RecommendationTagElement key={recommendationTagCategories[1].categoryName}
                                           recommendationTagObject={recommendationTagCategories[1]}
-                                          getRecommendation={rolesTags}
+                                          getRecommendation={rolesTagsInitial}
                                           setRecommendation={setRolesTags}/>
                 <RecommendationTagElement key={recommendationTagCategories[2].categoryName}
                                           recommendationTagObject={recommendationTagCategories[2]}
-                                          getRecommendation={genderTag}
+                                          getRecommendation={genderTagInitial}
                                           setRecommendation={setGenderTag}/>
             </RecommendationTags>
-            <button onClick={recommend}>RECOMMEND</button>
+            <button onClick={onClick}> RECOMMEND </button>
         </ArtistRecommender>
     )
 }
