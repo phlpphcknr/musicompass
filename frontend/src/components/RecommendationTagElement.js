@@ -19,7 +19,6 @@ export default function RecommendationTagElement ({recommendationTagObject, getR
     const style = {
         chips: {
             background: "chocolate"
-
         },
         option: {
             color: "black",
