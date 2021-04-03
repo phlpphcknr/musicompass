@@ -66,11 +66,10 @@ public class ArtistReleaseService {
         double doubleHave = have;
         double doubleWant = want;
         double exp = 0.125;
-        if (doubleWant/doubleHave < 1){
-            double fraction = doubleWant/doubleHave;
-        }else{
-            double fraction = pow(doubleWant/doubleHave, 0.5);
+        double fraction = doubleWant/doubleHave;
+        if (doubleWant/doubleHave > 1){
+            fraction = pow(fraction, 0.5);
         }
-        return (doubleWant/doubleHave) * pow(doubleHave,exp);
+        return fraction * pow(doubleHave,exp);
     }
 }
