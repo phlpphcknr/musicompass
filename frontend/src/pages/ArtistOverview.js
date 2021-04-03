@@ -27,16 +27,28 @@ export default function ArtistOverview(){
     return (
         <Overview>
             <ArtistHeader key={artist.artistName} artist={artist}/>
+
             <h3>Most popular/wanted album</h3>
-            <ReleaseDescription release={artist.artistAlbums[0]}/>
-            <Link to={`artist/${artistName}/albums`} >
-                <h5>see more albums ...</h5>
-            </Link>
+            {artist.artistAlbums.length === 0
+                ? <h5>Unfortunately, there are no albums to be displayed</h5>
+                : <>
+                    <ReleaseDescription release={artist.artistAlbums[0]}/>
+                    <Link to={`artist/${artistName}/albums`}>
+                        <h5>see more albums ...</h5>
+                    </Link>
+                </>
+            }
             <h3>Most popular/wanted single/EP</h3>
-            <ReleaseDescription release={artist.artistSingles[0]}/>
-            <Link to={`artist/${artistName}/singles-eps`} >
-                <h5>see more singles/EPs ...</h5>
-            </Link>
+            {artist.artistSingles.length === 0
+                ? <h5>Unfortunately, there are no singles/EPs to be displayed</h5>
+                : <>
+                    <ReleaseDescription release={artist.artistSingles[0]}/>
+                    <Link to={`artist/${artistName}/singles-eps`}>
+                        <h5>see more singles/EPs ...</h5>
+                    </Link>
+                </>
+            }
+
             <h3>Recommend '{artistName}' to other users</h3>
             <ArtistRecommendation artistName={artistName}
                                   currentRecommendationTags={artist.recommendationTags}/>
