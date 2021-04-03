@@ -1,5 +1,6 @@
 package com.hackner.musicompass.service;
 
+import com.hackner.musicompass.controller.model.RecommendationRequestDto;
 import com.hackner.musicompass.db.ArtistMongoDb;
 import com.hackner.musicompass.db.RecommendationCategoryMongoDb;
 import com.hackner.musicompass.model.Artist;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 @Service
 public class RecommendationService {
@@ -48,4 +51,28 @@ public class RecommendationService {
         return recommendationCategoryMongoDb.findAll();
     }
 
+    public String getArtistRecommendation(RecommendationRequestDto recommendationRequestDto){
+
+        List<Artist> artists = artistMongoDb.findAll();
+
+        List<Artist> genreFilteredArtists = filterByRecommendationTags(artists, recommendationRequestDto.getGenres());
+        List<Artist> genreRoleFilteredArtists = filterByRecommendationTags(genreFilteredArtists, recommendationRequestDto.getRoles());
+        List<Artist> fullyFilteredArtists = filterByRecommendationTags(genreRoleFilteredArtists, recommendationRequestDto.getGender());
+
+        Random rand = new Random();
+
+        return fullyFilteredArtists.get(rand.nextInt(fullyFilteredArtists.size())).getArtistName();
+    }
+
+    public List<Artist> filterByRecommendationTags(List<Artist> artists, List<String> filterCriteria){
+
+        if(filterCriteria.size() != 0){
+            List<Artist> criteriaFilteredList = artists.stream()
+                    .filter(artist ->
+                            artist.getRecommendationTags().getGenres().retainAll(filterCriteria))
+                    .collect(Collectors.toList());
+            return criteriaFilteredList;
+        }
+        return artists;
+    }
 }
