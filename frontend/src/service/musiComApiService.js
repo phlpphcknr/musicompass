@@ -24,5 +24,5 @@ export const postRecommendationTag = ({artistName, genreTags, rolesTags, genderT
 
 export const getRecommendation = ({genreTags, rolesTags, genderTag}) =>
     axios
-        .post(baseUrl + `/getrecommendation`,{genreTags, rolesTags, genderTag})
+        .post(baseUrl + `/recommendation/get`,{genreTags, rolesTags, genderTag})
         .then((response) => response.data)

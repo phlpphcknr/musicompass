@@ -29,4 +29,9 @@ public class RecommendationController {
     public List<RecommendationCategory> getRecommendationCategoryValues(){
         return recommendationService.getRecommendationCategoryValues();
     }
+
+    @PostMapping("/get")
+    public String getArtistRecommendation(){
+        return recommendationService.getArtistRecommendation();
+    }
 }
