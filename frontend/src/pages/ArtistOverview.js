@@ -5,6 +5,7 @@ import ArtistHeader from "../components/ArtistHeader";
 import {getArtistByName} from "../service/musiComApiService";
 import ReleaseDescription from "../components/ReleaseDescription";
 import ArtistRecommendation from "../components/ArtistRecommendation";
+import ReleasePlaceholder from "../components/ReleasePlaceholder";
 
 export default function ArtistOverview(){
     const {artistName} = useParams();
@@ -30,7 +31,7 @@ export default function ArtistOverview(){
 
             <h3>Most popular/wanted album</h3>
             {artist.artistAlbums.length === 0
-                ? <h5>Unfortunately, there are no albums to be displayed</h5>
+                ? <ReleasePlaceholder releasetype={"albums"}/>
                 : <>
                     <ReleaseDescription release={artist.artistAlbums[0]}/>
                     <Link to={`artist/${artistName}/albums`}>
@@ -40,7 +41,7 @@ export default function ArtistOverview(){
             }
             <h3>Most popular/wanted single/EP</h3>
             {artist.artistSingles.length === 0
-                ? <h5>Unfortunately, there are no singles/EPs to be displayed</h5>
+                ? <ReleasePlaceholder releasetype={"singles/EPs"}/>
                 : <>
                     <ReleaseDescription release={artist.artistSingles[0]}/>
                     <Link to={`artist/${artistName}/singles-eps`}>
