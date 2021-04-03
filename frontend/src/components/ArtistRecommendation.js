@@ -66,12 +66,17 @@ export default function ArtistRecommendation ({currentRecommendationTags, artist
 
 const ArtistRecommender = styled.section`
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   padding: 20px;
   margin: 0px 20px;
   background: var(--primary-color);
   box-shadow: 0px 2px 4px #333;
+
+  button{
+    margin: 20px 0px 0px 0px;
+  }
 `
 
 const RecommendationTags = styled.section`
