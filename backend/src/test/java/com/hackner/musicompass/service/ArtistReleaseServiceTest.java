@@ -28,7 +28,7 @@ class ArtistReleaseServiceTest {
         //THEN
         assertThat(actual.size(), is(2));
         assertThat(actual.get(0).getGlobalRating() > actual.get(1).getGlobalRating(), is(true));
-        assertThat(actual.get(1), equalTo(getArtistReleaseList().get(0)));
+        assertThat(actual.get(0), equalTo(getArtistReleaseList().get(0)));
     }
 
     @Test
