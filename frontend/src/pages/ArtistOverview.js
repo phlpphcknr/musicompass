@@ -17,6 +17,14 @@ export default function ArtistOverview(){
             .catch((error) => console.error(error))
     },[artistName]);
 
+    if (artistName === "not-found"){
+        return (
+            <Overview>
+                <h4>sorry, no artist was found for your criteria</h4>
+            </Overview>
+        )
+    }
+
     if (!artist){
         return(
             <section>
@@ -67,6 +75,10 @@ const Overview = styled.div`
   h3{
     margin: 10px;
     font-size: 0.9em;
+  }
+  
+  h4{
+    margin: 20px;
   }
   
   h5{

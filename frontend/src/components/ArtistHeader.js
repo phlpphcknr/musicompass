@@ -6,7 +6,7 @@ export default function ArtistHeader({artist}) {
     return (
         <Link to={`/artist/${artist.artistName}`} style={{textDecoration: 'none'}}>
             <Header>
-                <img src={artist.artistInfo.artistImageUrl} alt={'Shows the artist'}/>
+                <img src={artist.artistInfo.artistImageUrl} alt={'not available'}/>
                 <h2>{artist.artistName}</h2>
             </Header>
         </Link>
