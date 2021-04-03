@@ -28,7 +28,7 @@ class ArtistReleaseServiceTest {
         //THEN
         assertThat(actual.size(), is(2));
         assertThat(actual.get(0).getGlobalRating() > actual.get(1).getGlobalRating(), is(true));
-        assertThat(actual.get(0), equalTo(getArtistReleaseList().get(0)));
+        assertThat(actual.get(1), equalTo(getArtistReleaseList().get(0)));
     }
 
     @Test
@@ -88,7 +88,7 @@ class ArtistReleaseServiceTest {
                 .coverImageUrl("someOtherCoverImageUrl")
                 .releaseStats(stats1)
                 .build();
-        Stats stats2 = Stats.builder().numberOfWants(110).numberOfHaves(88).build();
+        Stats stats2 = Stats.builder().numberOfWants(122).numberOfHaves(78).build();
         DiscogsMasterRelease discogsMasterRelease2 = DiscogsMasterRelease.builder()
                 .year(1999)
                 .format(Arrays.asList("Album","LP"))
