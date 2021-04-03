@@ -55,36 +55,46 @@ public class RecommendationService {
 
         List<Artist> artists = artistMongoDb.findAll();
 
-        List<Artist> genreFilteredArtists = filterByRecommendationTags(artists, recommendationRequestDto.getGenres());
-        List<Artist> genreRoleFilteredArtists = filterByRecommendationTags(genreFilteredArtists, recommendationRequestDto.getRoles());
-        List<Artist> fullyFilteredArtists = filterByRecommendationTags(genreRoleFilteredArtists, recommendationRequestDto.getGender());
+        List<Artist> genreFilteredArtists = filterByRecommendationTags(artists, recommendationRequestDto.getGenres(), "genres");
+        List<Artist> genreRoleFilteredArtists = filterByRecommendationTags(genreFilteredArtists, recommendationRequestDto.getRoles(), "roles");
+        List<Artist> fullyFilteredArtists = filterByRecommendationTags(genreRoleFilteredArtists, recommendationRequestDto.getGender(), "gender");
 
         Random rand = new Random();
 
         return fullyFilteredArtists.get(rand.nextInt(fullyFilteredArtists.size())).getArtistName();
     }
 
-    public List<Artist> filterByRecommendationTags(List<Artist> artists, List<String> filterCriteria) {
+    public List<Artist> filterByRecommendationTags(List<Artist> artists, List<String> filterCriteria, String filterCategory ) {
 
         if (filterCriteria.isEmpty()) {
             return artists;
         }
 
-        List<Artist> criteriaFilteredList = artists.stream()
-                .filter(artist ->
-                        artist.getRecommendationTags().getGenres().retainAll(filterCriteria))
-                .collect(Collectors.toList());
-        return criteriaFilteredList;
-    }
-
-
-/*        if(filterCriteria.isEmpty()){
+        if (filterCategory == "genres") {
             List<Artist> criteriaFilteredList = artists.stream()
                     .filter(artist ->
-                            artist.getRecommendationTags().getGenres().retainAll(filterCriteria))
+                            artist.getRecommendationTags().getGenres().containsAll(filterCriteria))
                     .collect(Collectors.toList());
             return criteriaFilteredList;
         }
-        return artists;}*/
+
+        if (filterCategory == "roles") {
+            List<Artist> criteriaFilteredList = artists.stream()
+                    .filter(artist ->
+                            artist.getRecommendationTags().getRoles().containsAll(filterCriteria))
+                    .collect(Collectors.toList());
+            return criteriaFilteredList;
+        }
+
+        if (filterCategory == "gender") {
+            List<Artist> criteriaFilteredList = artists.stream()
+                    .filter(artist ->
+                            artist.getRecommendationTags().getGender().containsAll(filterCriteria))
+                    .collect(Collectors.toList());
+            return criteriaFilteredList;
+        }
+
+        return artists;
+    }
 
 }
