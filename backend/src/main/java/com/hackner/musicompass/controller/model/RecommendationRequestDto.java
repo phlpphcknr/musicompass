@@ -14,10 +14,11 @@ import java.util.List;
 @NoArgsConstructor
 public class RecommendationRequestDto {
 
+    @JsonProperty("genderTag")
+    private List<String> gender;
     @JsonProperty("genreTags")
     private List<String> genres;
     @JsonProperty("rolesTags")
     private List<String> roles;
-    @JsonProperty("genderTag")
-    private List<String> gender;
+
 }

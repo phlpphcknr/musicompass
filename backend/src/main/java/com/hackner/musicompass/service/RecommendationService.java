@@ -64,15 +64,27 @@ public class RecommendationService {
         return fullyFilteredArtists.get(rand.nextInt(fullyFilteredArtists.size())).getArtistName();
     }
 
-    public List<Artist> filterByRecommendationTags(List<Artist> artists, List<String> filterCriteria){
+    public List<Artist> filterByRecommendationTags(List<Artist> artists, List<String> filterCriteria) {
 
-        if(filterCriteria.size() != 0){
+        if (filterCriteria.isEmpty()) {
+            return artists;
+        }
+
+        List<Artist> criteriaFilteredList = artists.stream()
+                .filter(artist ->
+                        artist.getRecommendationTags().getGenres().retainAll(filterCriteria))
+                .collect(Collectors.toList());
+        return criteriaFilteredList;
+    }
+
+
+/*        if(filterCriteria.isEmpty()){
             List<Artist> criteriaFilteredList = artists.stream()
                     .filter(artist ->
                             artist.getRecommendationTags().getGenres().retainAll(filterCriteria))
                     .collect(Collectors.toList());
             return criteriaFilteredList;
         }
-        return artists;
-    }
+        return artists;}*/
+
 }
