@@ -1,5 +1,4 @@
 import styled from 'styled-components/macro';
-import GlobalStyle from "./GlobalStyle";
 import { Multiselect } from 'multiselect-react-dropdown';
 import {useEffect, useRef} from 'react';
 
