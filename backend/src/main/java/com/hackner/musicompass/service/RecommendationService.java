@@ -59,9 +59,12 @@ public class RecommendationService {
         List<Artist> genreRoleFilteredArtists = filterByRecommendationTags(genreFilteredArtists, recommendationRequestDto.getRoles(), "roles");
         List<Artist> fullyFilteredArtists = filterByRecommendationTags(genreRoleFilteredArtists, recommendationRequestDto.getGender(), "gender");
 
-        Random rand = new Random();
+        if(fullyFilteredArtists.size() > 0){
+            Random rand = new Random();
+            return fullyFilteredArtists.get(rand.nextInt(fullyFilteredArtists.size())).getArtistName();
+        }
 
-        return fullyFilteredArtists.get(rand.nextInt(fullyFilteredArtists.size())).getArtistName();
+        return "not-found";
     }
 
     public List<Artist> filterByRecommendationTags(List<Artist> artists, List<String> filterCriteria, String filterCategory ) {
