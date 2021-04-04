@@ -18,6 +18,7 @@ const Header = styled.section`
   justify-content: space-between;
   align-items: center;
   padding: 20px;
+  margin: 10px 0px;
   background: var(--primary-color);
   box-shadow: 0px 2px 4px #333;
   
