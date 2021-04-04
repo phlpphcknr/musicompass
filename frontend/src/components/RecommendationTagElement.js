@@ -27,7 +27,7 @@ export default function RecommendationTagElement ({recommendationTagObject, getR
 
     return(
         <RecommendationTag>
-            <h5>{recommendationTagObject.categoryName}:</h5>
+            <p>{recommendationTagObject.categoryName}:</p>
             <Multiselect
                 options={recommendationTagObject.categoryValues} // Options to display in the dropdown
                 isObject={false}
@@ -47,10 +47,13 @@ export default function RecommendationTagElement ({recommendationTagObject, getR
 
 const RecommendationTag = styled.section`
   display: flex;
+  flex-direction: column;
   align-items: center;
   
   
-  h5{
+  p{
+    font-size: 16px;
+    font-weight: bold;
     width: 90px;
   }
   

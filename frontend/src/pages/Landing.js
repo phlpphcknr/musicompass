@@ -16,6 +16,7 @@ const Wrapper = styled.div`
   display: grid;
   grid-template-rows: auto auto auto 1fr;
   background-color: var(--secondary-color);
+  padding: 20px;
 
   h3{
     margin: 10px 30px;

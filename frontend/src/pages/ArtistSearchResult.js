@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import ArtistHeader from '../components/ArtistHeader'
 import { getArtistSearchResult } from '../service/musiComApiService'
+import SearchArtist from "../components/SearchArtist";
 
 export default function ArtistSearchResult() {
     const {artistSearchTerm} = useParams()
@@ -16,6 +17,7 @@ export default function ArtistSearchResult() {
 
     return (
         <SearchResults>
+            <SearchArtist/>
             <p>Search results for '{artistSearchTerm}'</p>
             {artistSearchResultList.map((artist) =>
                 <ArtistHeader key={artist.artistName} artist={artist}/>)}
@@ -33,7 +35,7 @@ const SearchResults = styled.div`
   p {
     margin-bottom: 15px;
     margin-top: 15px;
-    font-size: 0.6em;
+    font-size: 1.0em;
     width: 100%;
     text-align: left;
   }

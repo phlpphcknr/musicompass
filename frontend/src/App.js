@@ -10,20 +10,22 @@ export default function App() {
   return (
       <PageLayout>
           <AppHeader/>
-          <Switch>
-              <Route exact path="/">
-                  <Landing/>
-              </Route>
-              <Route exact path="/artistsearch/:artistSearchTerm">
-                  <ArtistSearchResult/>
-              </Route>
-              <Route exact path="/artist/:artistName">
-                  <ArtistOverview/>
-              </Route>
-              <Route exact path="/artist/:artistName/:releaseType">
-                  <ArtistReleaseOverview/>
-              </Route>
-          </Switch>
+          <main>
+              <Switch>
+                  <Route exact path="/">
+                      <Landing/>
+                  </Route>
+                  <Route exact path="/artistsearch/:artistSearchTerm">
+                      <ArtistSearchResult/>
+                  </Route>
+                  <Route exact path="/artist/:artistName">
+                      <ArtistOverview/>
+                  </Route>
+                  <Route exact path="/artist/:artistName/:releaseType">
+                      <ArtistReleaseOverview/>
+                  </Route>
+              </Switch>
+          </main>
       </PageLayout>
   )
 }
@@ -34,4 +36,12 @@ const PageLayout = styled.div`
   overflow-y: scroll;
   grid-template-rows: auto 1fr;
   background: var(--secondary-color);
+  
+  AppHeader{
+    
+  }
+  
+  main{
+    overflow-y: scroll;
+  }
 `
