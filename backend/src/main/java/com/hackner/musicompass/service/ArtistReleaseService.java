@@ -26,7 +26,7 @@ public class ArtistReleaseService {
                 .collect(Collectors.toList());
 
         List<ArtistRelease> arrayList = new ArrayList<ArtistRelease>(convertedFormattedList);
-        Collections.sort(arrayList);
+        Collections.sort(arrayList, Collections.reverseOrder());
         List<ArtistRelease> sortedList = arrayList;
 
         return sortedList;
@@ -66,9 +66,9 @@ public class ArtistReleaseService {
     }
 
     public double calculateGlobalRating ( int have, int want){
-        if(have == 0){
-            double exception = 0.000;
-            return exception;
+        if(have == 0 || want == 0){
+            double nullRating = 0.000;
+            return nullRating;
         };
         double doubleHave = have;
         double doubleWant = want;
