@@ -13,7 +13,7 @@ export default function RecommendationTagElement ({recommendationTagObject, getR
 
     useEffect(() => {
         setRecommendation(recommendationValueRef.current.getSelectedItems)
-    },[])
+    },[recommendationValueRef])
 
     const style = {
         chips: {
