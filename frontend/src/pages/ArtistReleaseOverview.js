@@ -48,7 +48,7 @@ export default function ArtistReleaseOverview(){
             <ArtistHeader key={artist.artistName} artist={artist}/>
             <h3>Most popular/wanted {releaseType.replace("-", "/")}</h3>
             {releaseList()}
-            <Link to={`artist/${artistName}`}>
+            <Link to={`/artist/${artistName}`}>
                 <h5>back to artist page ...</h5>
             </Link>
         </ReleaseOverview>
