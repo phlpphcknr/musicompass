@@ -66,6 +66,10 @@ public class ArtistReleaseService {
     }
 
     public double calculateGlobalRating ( int have, int want){
+        if(have == 0){
+            double exception = 0.000;
+            return exception;
+        };
         double doubleHave = have;
         double doubleWant = want;
         double exp = 0.2;
@@ -73,7 +77,8 @@ public class ArtistReleaseService {
         if (doubleWant/doubleHave > 1){
             fraction = pow(fraction, 0.4);
         }
-        return round(fraction * pow(doubleHave,exp), 3);
+        double value = fraction * pow(doubleHave,exp);
+        return round(value, 3);
     }
 
     public static double round(double value, int places){
