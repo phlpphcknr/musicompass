@@ -57,7 +57,7 @@ public class ArtistReleaseService {
 
     public List<String> convertToDiscogsFormat (String format){
         if(format.equals("Album")){
-            return Arrays.asList("Album", "LP", "Mini-Album");
+            return Arrays.asList("Album");
         }
         if(format.equals("Single/EP")){
             return Arrays.asList("7\"","10\"","12\"", "EP", "Single", "Maxi-Single");
