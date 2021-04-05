@@ -1,4 +1,4 @@
-import {Link, useHistory, useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {getArtistByName} from "../service/musiComApiService";
 import styled from "styled-components/macro";
@@ -9,7 +9,6 @@ export default function ArtistReleaseOverview(){
     const {artistName} = useParams();
     const {releaseType} = useParams();
     const [artist, setArtist] = useState();
-    const history = useHistory();
 
     useEffect(() => {
         getArtistByName(artistName)
