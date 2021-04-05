@@ -1,5 +1,5 @@
 import RecommendationTagElement from "./RecommendationTagElement";
-import {getRecommendation, getRecommendationTagCategories, postRecommendationTag} from "../service/musiComApiService";
+import {getRecommendation, getRecommendationTagCategories} from "../service/musiComApiService";
 import {useEffect, useState} from "react";
 import styled from "styled-components/macro";
 import {useHistory} from "react-router-dom";
@@ -22,6 +22,7 @@ export default function GetArtistRecommendation(){
     function onClick() {
         getRecommendation({genreTags, rolesTags, genderTag})
             .then((response) => history.push(`/artist/${response}`))
+            .catch((error) => console.error(error))
     };
 
     if(!recommendationTagCategories){

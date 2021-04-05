@@ -119,7 +119,7 @@ class ArtistControllerTest {
                 .releaseYear(1999)
                 .discogsWant(32768)
                 .discogsHave(65536)
-                .globalRating(2.0)
+                .globalRating(4.595)
                 .build();
         ArtistRelease artistRelease2 = ArtistRelease.builder()
                 .fullTitle("someOtherTitle")
@@ -129,7 +129,7 @@ class ArtistControllerTest {
                 .releaseYear(1999)
                 .discogsWant(32768)
                 .discogsHave(65536)
-                .globalRating(2.0)
+                .globalRating(4.595)
                 .build();
         List<ArtistRelease> artistAlbums = List.of(artistRelease1);
         List<ArtistRelease> artistSingles = List.of(artistRelease2);

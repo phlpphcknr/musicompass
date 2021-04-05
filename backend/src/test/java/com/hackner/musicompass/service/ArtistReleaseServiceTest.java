@@ -49,14 +49,14 @@ class ArtistReleaseServiceTest {
     @DisplayName("Test global rating calculation")
     public void getGlobalRatingValue(){
         //GIVEN
-        int have = 256;
-        int want = 128;
+        int have = 1024;
+        int want = 32768;
 
         //WHEN
         double actual = artistReleaseService.calculateGlobalRating(have, want);
 
         //THEN
-        assertThat(actual, is(1.0));
+        assertThat(actual, is(16.0));
     }
 
     public List<ArtistRelease> getArtistReleaseList(){
@@ -67,9 +67,9 @@ class ArtistReleaseServiceTest {
                 .format("Album")
                 .coverImageUrl("someOtherCoverImageUrl")
                 .releaseYear(1999)
-                .discogsWant(32768)
-                .discogsHave(65536)
-                .globalRating(2.0)
+                .discogsWant(50000)
+                .discogsHave(100000)
+                .globalRating(5.0)
                 .build();
 
         List<ArtistRelease> results = Arrays.asList(artistRelease1);
@@ -79,7 +79,7 @@ class ArtistReleaseServiceTest {
 
     public List<DiscogsMasterRelease> getDiscogsMasterReleaseList(){
 
-        Stats stats1 = Stats.builder().numberOfWants(32768).numberOfHaves(65536).build();
+        Stats stats1 = Stats.builder().numberOfWants(50000).numberOfHaves(100000).build();
         DiscogsMasterRelease discogsMasterRelease1 = DiscogsMasterRelease.builder()
                 .year(1999)
                 .format(Arrays.asList("Album","Compilation","CD"))
@@ -88,7 +88,7 @@ class ArtistReleaseServiceTest {
                 .coverImageUrl("someOtherCoverImageUrl")
                 .releaseStats(stats1)
                 .build();
-        Stats stats2 = Stats.builder().numberOfWants(122).numberOfHaves(78).build();
+        Stats stats2 = Stats.builder().numberOfWants(1082).numberOfHaves(108).build();
         DiscogsMasterRelease discogsMasterRelease2 = DiscogsMasterRelease.builder()
                 .year(1999)
                 .format(Arrays.asList("Album","LP"))

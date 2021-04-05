@@ -1,5 +1,5 @@
 import styled from "styled-components/macro";
-import {Link, useParams} from 'react-router-dom'
+import {Link, useHistory, useParams} from 'react-router-dom'
 import { useEffect, useState} from 'react'
 import ArtistHeader from "../components/ArtistHeader";
 import {getArtistByName} from "../service/musiComApiService";
@@ -10,14 +10,18 @@ import ReleasePlaceholder from "../components/ReleasePlaceholder";
 export default function ArtistOverview(){
     const {artistName} = useParams();
     const [artist, setArtist] = useState();
+    const history = useHistory();
 
     useEffect(() => {
         getArtistByName(artistName)
             .then(setArtist)
-            .catch((error) => console.error(error))
-    },[artistName]);
+            .catch((error) => {
+                console.error(error)
+                history.push(`/artist/error-not-found`);
+            })
+    },[artistName, history]);
 
-    if (artistName === "not-found"){
+    if (artistName === "error-not-found"){
         return (
             <Overview>
                 <h4>sorry, no artist was found for your criteria</h4>

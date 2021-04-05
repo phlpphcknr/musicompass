@@ -13,6 +13,16 @@ export default createGlobalStyle`
     --secondary-color: moccasin;
     --opacity-hover:0.7;
   }
+  
+  section{
+    padding: 0px;
+    margin: 0px;
+  }
+  
+  p{
+    font-weight: bold;
+  }
+  
   h5{
     margin: 0;
     padding: 0;

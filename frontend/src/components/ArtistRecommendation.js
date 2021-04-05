@@ -23,7 +23,7 @@ export default function ArtistRecommendation ({currentRecommendationTags, artist
             setRolesTagsInitial(currentRecommendationTags.roles)
             setGenreTagsInitial(currentRecommendationTags.genres)
         }
-        },[]
+        },[currentRecommendationTags]
     );
 
     function onClick() {

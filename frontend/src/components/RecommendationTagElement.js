@@ -8,12 +8,13 @@ export default function RecommendationTagElement ({recommendationTagObject, getR
     const recommendationValueRef = useRef();
 
     const selectionLimit =
-        recommendationTagObject.categoryName === "Gender" ? 1 :
-        recommendationTagObject.categoryName === "Roles" ? 2 : 3;
+        recommendationTagObject.categoryName === "Gender" ? 1
+        : recommendationTagObject.categoryName === "Roles" ? 2
+        : 3;
 
     useEffect(() => {
         setRecommendation(recommendationValueRef.current.getSelectedItems)
-    },[])
+    },[setRecommendation])
 
     const style = {
         chips: {
@@ -29,17 +30,14 @@ export default function RecommendationTagElement ({recommendationTagObject, getR
         <RecommendationTag>
             <p>{recommendationTagObject.categoryName}:</p>
             <Multiselect
-                options={recommendationTagObject.categoryValues} // Options to display in the dropdown
+                options={recommendationTagObject.categoryValues}
                 isObject={false}
                 ref={recommendationValueRef}
                 selectionLimit = {selectionLimit}
-                selectedValues={getRecommendation} // Preselected value to persist in dropdown
+                selectedValues={getRecommendation}
                 closeIcon = "cancel"
                 style={style}
-                //id="css_custom"
-                //onSelect={onSelect} // Function will trigger on select event
-                //onRemove={onRemove} // Function will trigger on remove event
-                displayValue="name" // Property name to display in the dropdown options
+                displayValue="name"
             />
         </RecommendationTag>
     )

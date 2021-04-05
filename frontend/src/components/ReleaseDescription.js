@@ -4,7 +4,7 @@ export default function ReleaseDescription({release}){
 
     return (
         <Release>
-            <img src={release.coverImageUrl} alt={'Shows the release cover'}/>
+            <img src={release.coverImageUrl} alt=""/>
             <section>
                 <h3>{release.fullTitle}</h3>
                 {release.releaseYear !== 0 && <h3>{release.releaseYear}</h3>}

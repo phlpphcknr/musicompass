@@ -29,6 +29,8 @@ public class RecommendationService {
         this.timeUtils = timeUtils;
     }
 
+
+
     public RecommendationTags changeRecommendationTags (RecommendationTagsDto recommendationTagsDto){
 
         Artist artist = artistMongoDb.findById(recommendationTagsDto.getArtistName()).get();
@@ -51,29 +53,35 @@ public class RecommendationService {
         return recommendationCategoryMongoDb.findAll();
     }
 
+    enum FilterCategory{
+        GENRES, ROLES, GENDER
+    }
+
     public String getArtistRecommendation(RecommendationRequestDto recommendationRequestDto){
 
         List<Artist> artists = artistMongoDb.findAll();
 
-        List<Artist> genreFilteredArtists = filterByRecommendationTags(artists, recommendationRequestDto.getGenres(), "genres");
-        List<Artist> genreRoleFilteredArtists = filterByRecommendationTags(genreFilteredArtists, recommendationRequestDto.getRoles(), "roles");
-        List<Artist> fullyFilteredArtists = filterByRecommendationTags(genreRoleFilteredArtists, recommendationRequestDto.getGender(), "gender");
+        FilterCategory genres = FilterCategory.GENRES;
+        List<Artist> genreFilteredArtists = filterByRecommendationTags(artists, recommendationRequestDto.getGenres(), genres);
+        FilterCategory roles = FilterCategory.ROLES;
+        List<Artist> genreRoleFilteredArtists = filterByRecommendationTags(genreFilteredArtists, recommendationRequestDto.getRoles(), roles);
+        FilterCategory gender = FilterCategory.GENDER;
+        List<Artist> fullyFilteredArtists = filterByRecommendationTags(genreRoleFilteredArtists, recommendationRequestDto.getGender(), gender);
 
         if(fullyFilteredArtists.size() > 0){
             Random rand = new Random();
             return fullyFilteredArtists.get(rand.nextInt(fullyFilteredArtists.size())).getArtistName();
         }
-
-        return "not-found";
+        return "error-not-found";
     }
 
-    public List<Artist> filterByRecommendationTags(List<Artist> artists, List<String> filterCriteria, String filterCategory ) {
+    public List<Artist> filterByRecommendationTags(List<Artist> artists, List<String> filterCriteria, FilterCategory filterCategory) {
 
         if (filterCriteria.isEmpty()) {
             return artists;
         }
 
-        if (filterCategory == "genres") {
+        if (filterCategory == FilterCategory.GENRES) {
             List<Artist> criteriaFilteredList = artists.stream()
                     .filter(artist ->
                             artist.getRecommendationTags().getGenres().containsAll(filterCriteria))
@@ -81,7 +89,7 @@ public class RecommendationService {
             return criteriaFilteredList;
         }
 
-        if (filterCategory == "roles") {
+        if (filterCategory == FilterCategory.ROLES) {
             List<Artist> criteriaFilteredList = artists.stream()
                     .filter(artist ->
                             artist.getRecommendationTags().getRoles().containsAll(filterCriteria))
@@ -89,7 +97,7 @@ public class RecommendationService {
             return criteriaFilteredList;
         }
 
-        if (filterCategory == "gender") {
+        if (filterCategory == FilterCategory.GENDER) {
             List<Artist> criteriaFilteredList = artists.stream()
                     .filter(artist ->
                             artist.getRecommendationTags().getGender().containsAll(filterCriteria))
@@ -99,5 +107,4 @@ public class RecommendationService {
 
         return artists;
     }
-
 }
