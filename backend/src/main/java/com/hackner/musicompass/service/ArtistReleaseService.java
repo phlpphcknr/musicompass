@@ -66,8 +66,8 @@ public class ArtistReleaseService {
 
     public List<DiscogsMasterRelease> removeDuplicates (List<DiscogsMasterRelease> duplicateList) {
         Map<String, DiscogsMasterRelease> map = duplicateList.stream()
-                .collect(Collectors.toMap(DiscogsMasterRelease::getMasterId, release -> release));
-        List<DiscogsMasterRelease> result = new ArrayList(map.values());
+                .collect(Collectors.toMap(DiscogsMasterRelease::getMasterId, DiscogsMasterRelease));
+        List<DiscogsMasterRelease> result = new ArrayList<DiscogsMasterRelease>(map.values());
         return result;
     }
 
