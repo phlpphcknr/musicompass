@@ -19,6 +19,14 @@ export default createGlobalStyle`
     margin: 0px;
   }
   
+  img{
+    max-width: 120px;
+    max-height: 120px;
+    width: auto;
+    height: auto;
+    margin: 10px;
+  }
+  
   p{
     font-weight: bold;
   }
