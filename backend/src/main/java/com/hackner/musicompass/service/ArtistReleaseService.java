@@ -6,14 +6,10 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.lang.Math.pow;
-import static java.lang.Math.round;
 
 @Service
 public class ArtistReleaseService {
@@ -48,7 +44,12 @@ public class ArtistReleaseService {
     }
 
     public List<DiscogsMasterRelease> filterDiscogsMasterReleaseListForFormat(String format, List<DiscogsMasterRelease> discogsMasterReleaseList) {
+        List<DiscogsMasterRelease> filteredList = formatFilter(format, discogsMasterReleaseList);
+        //return removeDuplicates(filteredList);
+        return filteredList;
+    }
 
+    public List<DiscogsMasterRelease> formatFilter(String format, List<DiscogsMasterRelease> discogsMasterReleaseList){
         if(format == "Album"){
             return  discogsMasterReleaseList.stream()
                     .filter(discogsMasterRelease -> discogsMasterRelease.getFormat().contains(format))
@@ -57,12 +58,19 @@ public class ArtistReleaseService {
 
         if(format == "Single/EP") {
             return discogsMasterReleaseList.stream()
-                    .filter(discogsMasterRelease -> !discogsMasterRelease.getFormat().contains("Album"))
-                    .filter(discogsMasterRelease -> !discogsMasterRelease.getFormat().contains("Compilation"))
+                    .filter(discogsMasterRelease -> !discogsMasterRelease.getFormat().contains("Album")
+                            && !discogsMasterRelease.getFormat().contains("Compilation"))
                     .collect(Collectors.toList());
         }
         return discogsMasterReleaseList;
     }
+
+/*    public List<DiscogsMasterRelease> removeDuplicates (List<DiscogsMasterRelease> duplicateList) {
+        Map<String, DiscogsMasterRelease> map = duplicateList.stream()
+                .collect(Collectors.toMap(DiscogsMasterRelease::getMasterId, release -> release));
+        List<DiscogsMasterRelease> result = new ArrayList(map.values());
+        return result;
+    }*/
 
     public double calculateGlobalRating ( int have, int want){
         if(have == 0 || want == 0){
