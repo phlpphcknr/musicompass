@@ -74,7 +74,7 @@ public class ArtistReleaseService {
         double doubleWant = want;
         double exp = 0.2;
         double fraction = doubleWant/doubleHave;
-        if (doubleWant/doubleHave > 1){
+        if (fraction > 1){
             fraction = pow(fraction, 0.4);
         }
         double value = fraction * pow(doubleHave,exp);
