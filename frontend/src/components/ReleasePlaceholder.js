@@ -21,8 +21,6 @@ const Release = styled.section`
   box-shadow: 0px 0px 6px #333;
   
   section {
-    padding: 0px;
-    margin: 0px;
     width: 100%;
     text-align: center;
     color: #636e72;

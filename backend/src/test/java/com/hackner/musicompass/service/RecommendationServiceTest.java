@@ -141,4 +141,7 @@ class RecommendationServiceTest {
         verify(artistMongoDb).save(artistAfter);
         assertThat(actual, equalTo(recommendationTagsAfter));
     }
+/*
+    @Test
+    @DisplayName("Get Artist Recommendation which is not available")*/
 }

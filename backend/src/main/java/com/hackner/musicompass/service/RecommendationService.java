@@ -8,7 +8,9 @@ import com.hackner.musicompass.model.RecommendationCategory;
 import com.hackner.musicompass.model.RecommendationTags;
 import com.hackner.musicompass.controller.model.RecommendationTagsDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Date;
 import java.util.List;
@@ -72,8 +74,7 @@ public class RecommendationService {
             Random rand = new Random();
             return fullyFilteredArtists.get(rand.nextInt(fullyFilteredArtists.size())).getArtistName();
         }
-
-        return "not-found";
+        return "error-not-found";
     }
 
     public List<Artist> filterByRecommendationTags(List<Artist> artists, List<String> filterCriteria, FilterCategory filterCategory) {

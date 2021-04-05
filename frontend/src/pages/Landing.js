@@ -6,7 +6,7 @@ export default function Landing() {
   return (
       <Wrapper>
           <SearchArtist/>
-          <h3>Set some tags and get an artist recommendation</h3>
+          <p>Set some tags and get an artist recommendation</p>
           <GetArtistRecommendation/>
       </Wrapper>
   )
@@ -17,8 +17,7 @@ const Wrapper = styled.div`
   grid-template-rows: auto auto auto 1fr;
   background-color: var(--secondary-color);
 
-  h3{
+  p{
     margin: 10px 30px;
-    font-size: 0.9em;
   }
 `

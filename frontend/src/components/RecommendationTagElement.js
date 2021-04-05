@@ -27,19 +27,16 @@ export default function RecommendationTagElement ({recommendationTagObject, getR
 
     return(
         <RecommendationTag>
-            <h5>{recommendationTagObject.categoryName}:</h5>
+            <p>{recommendationTagObject.categoryName}:</p>
             <Multiselect
-                options={recommendationTagObject.categoryValues} // Options to display in the dropdown
+                options={recommendationTagObject.categoryValues}
                 isObject={false}
                 ref={recommendationValueRef}
                 selectionLimit = {selectionLimit}
-                selectedValues={getRecommendation} // Preselected value to persist in dropdown
+                selectedValues={getRecommendation}
                 closeIcon = "cancel"
                 style={style}
-                //id="css_custom"
-                //onSelect={onSelect} // Function will trigger on select event
-                //onRemove={onRemove} // Function will trigger on remove event
-                displayValue="name" // Property name to display in the dropdown options
+                displayValue="name"
             />
         </RecommendationTag>
     )
@@ -50,7 +47,7 @@ const RecommendationTag = styled.section`
   align-items: center;
   
   
-  h5{
+  p{
     width: 90px;
   }
   
