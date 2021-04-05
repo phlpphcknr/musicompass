@@ -7,18 +7,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RecommendationTagsDto {
+public class RecommendationRequestDto {
 
-    private String artistName;
+    @JsonProperty("genderTag")
+    private List<String> gender;
     @JsonProperty("genreTags")
     private List<String> genres;
     @JsonProperty("rolesTags")
     private List<String> roles;
-    @JsonProperty("genderTag")
-    private List<String> gender;
 
 }

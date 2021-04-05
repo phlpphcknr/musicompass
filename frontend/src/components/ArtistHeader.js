@@ -3,11 +3,13 @@ import {Link} from "react-router-dom";
 
 export default function ArtistHeader({artist}) {
 
+
+
     return (
         <Link to={`/artist/${artist.artistName}`} style={{textDecoration: 'none'}}>
             <Header>
-                <img src={artist.artistInfo.artistImageUrl} alt={'Shows the artist'}/>
-                <h3>{artist.artistName}</h3>
+                <img src={artist.artistInfo.artistImageUrl} alt="" />
+                <h2>{artist.artistName}</h2>
             </Header>
         </Link>
     )
@@ -29,12 +31,12 @@ const Header = styled.section`
     margin: 10px;
   }
   
-  h3 {
+  h2 {
     padding: 0px;
     margin: 0px;
     width: 100%;
     text-align: center;
-    font-size: 1.6em;
+    font-size: 1.2em;
     color: #636e72;
   }
 `

@@ -5,6 +5,7 @@ import com.hackner.musicompass.discogsapi.model.*;
 import com.hackner.musicompass.model.Artist;
 import com.hackner.musicompass.model.ArtistInfo;
 import com.hackner.musicompass.model.ArtistRelease;
+import com.hackner.musicompass.model.RecommendationTags;
 import com.hackner.musicompass.service.TimeUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -118,7 +119,7 @@ class ArtistControllerTest {
                 .releaseYear(1999)
                 .discogsWant(32768)
                 .discogsHave(65536)
-                .globalRating(2.0)
+                .globalRating(4.595)
                 .build();
         ArtistRelease artistRelease2 = ArtistRelease.builder()
                 .fullTitle("someOtherTitle")
@@ -128,16 +129,22 @@ class ArtistControllerTest {
                 .releaseYear(1999)
                 .discogsWant(32768)
                 .discogsHave(65536)
-                .globalRating(2.0)
+                .globalRating(4.595)
                 .build();
-        List<ArtistRelease> artistAlbums = Arrays.asList(artistRelease1);
-        List<ArtistRelease> artistSingles = Arrays.asList(artistRelease2);
+        List<ArtistRelease> artistAlbums = List.of(artistRelease1);
+        List<ArtistRelease> artistSingles = List.of(artistRelease2);
+        RecommendationTags recommendationTags = RecommendationTags.builder()
+                .recommended(false)
+                .gender(List.of())
+                .roles(List.of())
+                .genres(List.of()).build();
         Artist artist = Artist.builder()
                 .artistName(artistName)
                 .saveDate(saveDate)
                 .artistInfo(artistInfo)
                 .artistAlbums(artistAlbums)
-                .artistSingles(artistSingles).build();
+                .artistSingles(artistSingles)
+                .recommendationTags(recommendationTags).build();
         return artist;
     }
 
@@ -146,7 +153,7 @@ class ArtistControllerTest {
         DiscogsMasterRelease discogsMasterRelease1 = DiscogsMasterRelease.builder()
                 .fullAlbumTitle("someTitle")
                 .masterId("111")
-                .format(Arrays.asList("Album","CD"))
+                .format(List.of("Album","CD"))
                 .coverImageUrl("coverImageUrl")
                 .year(1999)
                 .releaseStats(Stats.builder().numberOfWants(32768).numberOfHaves(65536).build())
@@ -154,7 +161,7 @@ class ArtistControllerTest {
         DiscogsMasterRelease discogsMasterRelease2 = DiscogsMasterRelease.builder()
                 .fullAlbumTitle("someOtherTitle")
                 .masterId("222")
-                .format(Arrays.asList("Single","7\""))
+                .format(List.of("Single","7\""))
                 .coverImageUrl("someOtherCoverImageUrl")
                 .year(1999)
                 .releaseStats(Stats.builder().numberOfWants(32768).numberOfHaves(65536).build())
@@ -164,7 +171,7 @@ class ArtistControllerTest {
 
         DiscogsMasterReleaseSearchResults discogsMasterReleaseSearchResults = DiscogsMasterReleaseSearchResults.builder()
                 .pagination(discogsPagination)
-                .results(Arrays.asList(discogsMasterRelease1,discogsMasterRelease2)).build();
+                .results(List.of(discogsMasterRelease1,discogsMasterRelease2)).build();
 
         return discogsMasterReleaseSearchResults;
     }
@@ -181,7 +188,7 @@ class ArtistControllerTest {
                 .artistImageUrl(artistImageUrl)
                 .discogsArtistUrl(discogsArtistUrl).build();
         DiscogsArtistSearchResults discogsArtistSearchResults = DiscogsArtistSearchResults.builder()
-                .results(Arrays.asList(discogsArtist)).build();
+                .results(List.of(discogsArtist)).build();
 
         return discogsArtistSearchResults;
     }

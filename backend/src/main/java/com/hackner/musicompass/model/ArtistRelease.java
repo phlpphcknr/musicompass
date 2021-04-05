@@ -22,13 +22,6 @@ public class ArtistRelease implements Comparable<ArtistRelease> {
 
     @Override
     public int compareTo(ArtistRelease artistRelease) {
-        double otherGlobalRating = artistRelease.globalRating;
-        if(globalRating == otherGlobalRating){
-            return 0;
-        }else if(globalRating > otherGlobalRating){
-            return -1;
-        }else{
-            return 1;
-        }
+        return Double.compare(this.globalRating, artistRelease.globalRating);
     }
 }

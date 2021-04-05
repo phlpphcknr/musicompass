@@ -6,6 +6,7 @@ import com.hackner.musicompass.discogsapi.model.DiscogsArtistSearchResults;
 import com.hackner.musicompass.discogsapi.service.DiscogsArtistApiService;
 import com.hackner.musicompass.model.Artist;
 import com.hackner.musicompass.model.ArtistInfo;
+import com.hackner.musicompass.model.RecommendationTags;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,6 +14,7 @@ import java.sql.Date;
 import java.time.Instant;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -71,6 +73,11 @@ class ArtistServiceTest {
                         .build())
                 .artistAlbums(Collections.emptyList())
                 .artistSingles(Collections.emptyList())
+                .recommendationTags(RecommendationTags.builder()
+                        .recommended(false)
+                        .gender(List.of())
+                        .roles(List.of())
+                        .genres(List.of()).build())
                 .build();
 
         DiscogsArtist discogsArtist = DiscogsArtist.builder()

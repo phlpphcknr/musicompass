@@ -4,6 +4,8 @@ import com.hackner.musicompass.discogsapi.model.DiscogsMasterRelease;
 import com.hackner.musicompass.model.ArtistRelease;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -11,6 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static java.lang.Math.pow;
+import static java.lang.Math.round;
 
 @Service
 public class ArtistReleaseService {
@@ -23,7 +26,7 @@ public class ArtistReleaseService {
                 .collect(Collectors.toList());
 
         List<ArtistRelease> arrayList = new ArrayList<ArtistRelease>(convertedFormattedList);
-        Collections.sort(arrayList);
+        Collections.sort(arrayList, Collections.reverseOrder());
         List<ArtistRelease> sortedList = arrayList;
 
         return sortedList;
@@ -63,9 +66,24 @@ public class ArtistReleaseService {
     }
 
     public double calculateGlobalRating ( int have, int want){
+        if(have == 0 || want == 0){
+            double nullRating = 0.000;
+            return nullRating;
+        };
         double doubleHave = have;
         double doubleWant = want;
-        double exp = 0.125;
-        return (doubleWant/doubleHave) * pow(doubleHave,exp);
+        double exp = 0.2;
+        double fraction = doubleWant/doubleHave;
+        if (fraction > 1){
+            fraction = pow(fraction, 0.4);
+        }
+        double value = fraction * pow(doubleHave,exp);
+        return round(value, 3);
+    }
+
+    public static double round(double value, int places){
+        BigDecimal bd = BigDecimal.valueOf(value);
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 }

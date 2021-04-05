@@ -1,38 +1,28 @@
-import styled from 'styled-components/macro'
 import RecommendationTagElement from "./RecommendationTagElement";
-import {useEffect, useState} from 'react';
-import {getRecommendationTagCategories, postRecommendationTag} from "../service/musiComApiService";
+import {getRecommendation, getRecommendationTagCategories} from "../service/musiComApiService";
+import {useEffect, useState} from "react";
+import styled from "styled-components/macro";
+import {useHistory} from "react-router-dom";
 
-export default function ArtistRecommendation ({currentRecommendationTags, artistName}){
+export default function GetArtistRecommendation(){
 
     const [recommendationTagCategories, setRecommendationTagCategories] = useState();
     const [genderTag, setGenderTag] = useState([]);
     const [rolesTags, setRolesTags] = useState([]);
     const [genreTags, setGenreTags] = useState([]);
-
-    const [genderTagInitial, setGenderTagInitial] = useState('');
-    const [rolesTagsInitial, setRolesTagsInitial] = useState([]);
-    const [genreTagsInitial, setGenreTagsInitial] = useState([]);
+    const history = useHistory();
 
     useEffect(() => {
-        getRecommendationTagCategories()
-            .then(setRecommendationTagCategories)
-            .catch((error) => console.error(error))
-        if(currentRecommendationTags.recommended === true){
-            setGenderTagInitial(currentRecommendationTags.gender)
-            setRolesTagsInitial(currentRecommendationTags.roles)
-            setGenreTagsInitial(currentRecommendationTags.genres)
-        }
-        },[currentRecommendationTags]
+            getRecommendationTagCategories()
+                .then(setRecommendationTagCategories)
+                .catch((error) => console.error(error))
+        },[]
     );
 
     function onClick() {
-        postRecommendationTag({artistName, genreTags, rolesTags, genderTag})
-            .then((recommendationTags) => {
-                setGenderTagInitial(recommendationTags.gender)
-                setRolesTagsInitial(recommendationTags.roles)
-                setGenreTagsInitial(recommendationTags.genres)
-            })
+        getRecommendation({genreTags, rolesTags, genderTag})
+            .then((response) => history.push(`/artist/${response}`))
+            .catch((error) => console.error(error))
     };
 
     if(!recommendationTagCategories){
@@ -48,18 +38,18 @@ export default function ArtistRecommendation ({currentRecommendationTags, artist
             <RecommendationTags>
                 <RecommendationTagElement key={recommendationTagCategories[0].categoryName}
                                           recommendationTagObject={recommendationTagCategories[0]}
-                                          getRecommendation={genreTagsInitial}
+                                          getRecommendation={[]}
                                           setRecommendation={setGenreTags}/>
                 <RecommendationTagElement key={recommendationTagCategories[1].categoryName}
                                           recommendationTagObject={recommendationTagCategories[1]}
-                                          getRecommendation={rolesTagsInitial}
+                                          getRecommendation={[]}
                                           setRecommendation={setRolesTags}/>
                 <RecommendationTagElement key={recommendationTagCategories[2].categoryName}
                                           recommendationTagObject={recommendationTagCategories[2]}
-                                          getRecommendation={genderTagInitial}
+                                          getRecommendation={[]}
                                           setRecommendation={setGenderTag}/>
             </RecommendationTags>
-            <button onClick={onClick} > RECOMMEND </button>
+            <button onClick={onClick} > GET RECOMMENDATION </button>
         </ArtistRecommender>
     )
 }
@@ -73,7 +63,7 @@ const ArtistRecommender = styled.section`
   margin: 0px 20px;
   background: var(--primary-color);
   box-shadow: 0px 2px 4px #333;
-
+  
   button{
     margin: 20px 0px 0px 0px;
   }
