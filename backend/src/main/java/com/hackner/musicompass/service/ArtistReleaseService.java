@@ -48,21 +48,20 @@ public class ArtistReleaseService {
     }
 
     public List<DiscogsMasterRelease> filterDiscogsMasterReleaseListForFormat(String format, List<DiscogsMasterRelease> discogsMasterReleaseList) {
-        List<String> discogsFormat = convertToDiscogsFormat(format);
-        return discogsMasterReleaseList.stream()
-                .filter(discogsMasterRelease -> discogsMasterRelease.getFormat().stream()
-                        .anyMatch(discogsFormat::contains))
-                .collect(Collectors.toList());
-    }
 
-    public List<String> convertToDiscogsFormat (String format){
-        if(format.equals("Album")){
-            return Arrays.asList("Album");
+        if(format == "Album"){
+            return  discogsMasterReleaseList.stream()
+                    .filter(discogsMasterRelease -> discogsMasterRelease.getFormat().contains(format))
+                    .collect(Collectors.toList());
         }
-        if(format.equals("Single/EP")){
-            return Arrays.asList("7\"","10\"","12\"", "EP", "Single", "Maxi-Single");
+
+        if(format == "Single/EP") {
+            return discogsMasterReleaseList.stream()
+                    .filter(discogsMasterRelease -> !discogsMasterRelease.getFormat().contains("Album"))
+                    .filter(discogsMasterRelease -> !discogsMasterRelease.getFormat().contains("Compilation"))
+                    .collect(Collectors.toList());
         }
-        return null;
+        return discogsMasterReleaseList;
     }
 
     public double calculateGlobalRating ( int have, int want){
