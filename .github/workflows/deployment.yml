@@ -4,6 +4,7 @@
     push:
       branches:
         - main
+        - frontend-recommendation
 
   jobs:
     build-frontend:
