@@ -45,8 +45,7 @@ public class ArtistReleaseService {
 
     public List<DiscogsMasterRelease> filterDiscogsMasterReleaseListForFormat(String format, List<DiscogsMasterRelease> discogsMasterReleaseList) {
         List<DiscogsMasterRelease> filteredList = formatFilter(format, discogsMasterReleaseList);
-        //return removeDuplicates(filteredList);
-        return filteredList;
+        return removeDuplicates(filteredList);
     }
 
     public List<DiscogsMasterRelease> formatFilter(String format, List<DiscogsMasterRelease> discogsMasterReleaseList){
@@ -65,12 +64,12 @@ public class ArtistReleaseService {
         return discogsMasterReleaseList;
     }
 
-/*    public List<DiscogsMasterRelease> removeDuplicates (List<DiscogsMasterRelease> duplicateList) {
+    public List<DiscogsMasterRelease> removeDuplicates (List<DiscogsMasterRelease> duplicateList) {
         Map<String, DiscogsMasterRelease> map = duplicateList.stream()
                 .collect(Collectors.toMap(DiscogsMasterRelease::getMasterId, release -> release));
         List<DiscogsMasterRelease> result = new ArrayList(map.values());
         return result;
-    }*/
+    }
 
     public double calculateGlobalRating ( int have, int want){
         if(have == 0 || want == 0){
