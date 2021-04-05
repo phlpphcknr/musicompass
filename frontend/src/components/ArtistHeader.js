@@ -3,10 +3,12 @@ import {Link} from "react-router-dom";
 
 export default function ArtistHeader({artist}) {
 
+
+
     return (
         <Link to={`/artist/${artist.artistName}`} style={{textDecoration: 'none'}}>
             <Header>
-                <img src={artist.artistInfo.artistImageUrl} alt={'not available'}/>
+                <img src={artist.artistInfo.artistImageUrl} alt="" />
                 <h2>{artist.artistName}</h2>
             </Header>
         </Link>

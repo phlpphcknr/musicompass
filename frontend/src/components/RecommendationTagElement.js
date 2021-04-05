@@ -8,8 +8,9 @@ export default function RecommendationTagElement ({recommendationTagObject, getR
     const recommendationValueRef = useRef();
 
     const selectionLimit =
-        recommendationTagObject.categoryName === "Gender" ? 1 :
-        recommendationTagObject.categoryName === "Roles" ? 2 : 3;
+        recommendationTagObject.categoryName === "Gender" ? 1
+        : recommendationTagObject.categoryName === "Roles" ? 2
+        : 3;
 
     useEffect(() => {
         setRecommendation(recommendationValueRef.current.getSelectedItems)
