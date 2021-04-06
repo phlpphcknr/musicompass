@@ -49,18 +49,21 @@ public class ArtistReleaseService {
     }
 
     public List<DiscogsMasterRelease> formatFilter(String format, List<DiscogsMasterRelease> discogsMasterReleaseList){
+
         if(format == "Album"){
+            List<String> discogsFormat = List.of("Album" , "LP");
             return  discogsMasterReleaseList.stream()
-                    .filter(discogsMasterRelease -> discogsMasterRelease.getFormat().contains(format))
+                    .filter(discogsMasterRelease -> discogsMasterRelease.getFormat().stream().anyMatch(discogsFormat::contains))
                     .collect(Collectors.toList());
         }
 
         if(format == "Single/EP") {
+            List<String> discogsFormat = List.of("Album" , "LP", "Compilation");
             return discogsMasterReleaseList.stream()
-                    .filter(discogsMasterRelease -> !discogsMasterRelease.getFormat().contains("Album")
-                            && !discogsMasterRelease.getFormat().contains("Compilation"))
+                    .filter(discogsMasterRelease -> !discogsMasterRelease.getFormat().stream().anyMatch(discogsFormat::contains))
                     .collect(Collectors.toList());
         }
+
         return discogsMasterReleaseList;
     }
 
