@@ -18,35 +18,24 @@ export default function RecommendationTagElement ({recommendationTagObject, getR
 
     const style = {
 
-        multiSelectContainer: {
-
-        },
-
-        inputField: {
-            //"min-width": "300px",
-            "font-style": "Courier New"
-        },
-
-        placeholder: {
-            "font-style": "Courier New"
-        },
         chips: {
-            background: "chocolate"
+            background: "chocolate",
+            "font-size": "14px",
+            "font-weight": "bold"
         },
+
         searchBox:{
             "border-color": "chocolate",
             "border-width": "thin",
             "border-radius": "0px",
             margin: "2px"
         },
-        multiselectContainer: {
-          color: "chocolate"
-        },
+
         option: {
             color: "black",
             background: "moccasin",
             "font-size": "14px"
-        },
+        }
     };
 
     return(
@@ -73,6 +62,5 @@ export default function RecommendationTagElement ({recommendationTagObject, getR
 const RecommendationTag = styled.section`
   display: flex;
   align-items: center;
-  border-width: 
   
 `

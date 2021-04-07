@@ -6,7 +6,6 @@ export default createGlobalStyle`
     margin: 0;
     padding: 0;
     height: 100%;
-    //font-size: 112.5%;
     font-family: "Courier New";
     background-color: var(--seondary-color);
     --primary-color: #fdcb6e;
@@ -37,6 +36,10 @@ export default createGlobalStyle`
   }
   
   .searchBox#css_custom_input::placeholder{
+    color: black;
+  }
+
+  .searchBox#css_custom_input{
     font-family: "Courier New";
     font-weight: bold;
     color: black;
