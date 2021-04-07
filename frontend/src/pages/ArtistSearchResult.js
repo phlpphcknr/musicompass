@@ -8,8 +8,6 @@ export default function ArtistSearchResult() {
     const {artistSearchTerm} = useParams()
     const [artistSearchResultList, setArtistSearchResultList] = useState([])
 
-
-
     useEffect(() => {
         getArtistSearchResult(artistSearchTerm)
             .then(setArtistSearchResultList)
