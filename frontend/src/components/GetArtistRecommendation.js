@@ -30,11 +30,11 @@ export default function GetArtistRecommendation(){
         }
     };
 
-    if(!recommendationTagCategories){
+    if (!recommendationTagCategories){
         return(
-            <section>
-                Loading
-            </section>
+            <Loading>
+                ...loading...
+            </Loading>
         )
     }
 
@@ -83,4 +83,12 @@ const ArtistRecommender = styled.section`
 const RecommendationTags = styled.section`
   display: flex;
   flex-direction: column;
+`
+
+const Loading =styled.section`
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
 `

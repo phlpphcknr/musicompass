@@ -31,9 +31,9 @@ export default function ArtistOverview(){
 
     if (!artist){
         return(
-            <section>
-                Loading
-            </section>
+            <Loading>
+                ...loading...
+            </Loading>
         )
     }
 
@@ -94,4 +94,12 @@ const Overview = styled.div`
     margin: 10px;
   }
 
+`
+
+const Loading =styled.section`
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
 `

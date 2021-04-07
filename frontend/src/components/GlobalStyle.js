@@ -36,8 +36,10 @@ export default createGlobalStyle`
     }
   }
   
-  select{
+  .searchBox#css_custom_input::placeholder{
     font-family: "Courier New";
+    font-weight: bold;
+    color: black;
   }
   
 `

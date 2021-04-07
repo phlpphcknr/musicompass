@@ -33,14 +33,20 @@ export default function RecommendationTagElement ({recommendationTagObject, getR
         chips: {
             background: "chocolate"
         },
+        searchBox:{
+            "border-color": "chocolate",
+            "border-width": "thin",
+            "border-radius": "0px",
+            margin: "2px"
+        },
+        multiselectContainer: {
+          color: "chocolate"
+        },
         option: {
             color: "black",
             background: "moccasin",
             "font-size": "14px"
         },
-        "#search_input.searchBox": {
-            "font-style": "Courier New"
-        }
     };
 
     return(
@@ -55,6 +61,7 @@ export default function RecommendationTagElement ({recommendationTagObject, getR
                 onRemove = {setRecommendation}
                 closeIcon = "cancel"
                 style = {style}
+                id="css_custom"
                 displayValue="name"
                 placeholder = {`select ${recommendationTagObject.categoryName}`}
                 hidePlaceholder = "true"
@@ -66,12 +73,6 @@ export default function RecommendationTagElement ({recommendationTagObject, getR
 const RecommendationTag = styled.section`
   display: flex;
   align-items: center;
-  font-family: "Courier New";
-
-  #search_input.searchBox{
-  "font-style": "Courier New"
-  }
-  
-  
+  border-width: 
   
 `

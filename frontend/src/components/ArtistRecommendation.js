@@ -40,16 +40,16 @@ export default function ArtistRecommendation ({currentRecommendationTags, artist
                     setGenreTagsInitial(recommendationTags.genres)
                     setRecommended(true)
                 },
-            setNoTagSelected(false),
+            setNoTagSelected(false)
         )
         }
     };
 
-    if(!recommendationTagCategories){
+    if (!recommendationTagCategories){
         return(
-            <section>
-                Loading
-            </section>
+            <Loading>
+                ...loading...
+            </Loading>
         )
     }
 
@@ -70,7 +70,7 @@ export default function ArtistRecommendation ({currentRecommendationTags, artist
                                           setRecommendation={setGenderTag}/>
             </RecommendationTags>
             {noTagSelected &&
-            <p>Set at least one tag to get an artist recommendation</p>}
+            <p>Select at least one tag to make an artist recommendation</p>}
             {!recommended &&
             <button onClick={setRecommendation}>RECOMMEND</button>}
             {recommended &&
@@ -104,4 +104,11 @@ const ArtistRecommender = styled.section`
 const RecommendationTags = styled.section`
   display: flex;
   flex-direction: column;
+`
+const Loading =styled.section`
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
 `
