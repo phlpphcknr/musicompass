@@ -14,6 +14,8 @@ const Header = styled.header`
   box-shadow: 0px 2px 8px #333;
   padding: 10px 0px 20px 0px;
   font-family: 'Orange Juice';
+  border-bottom: medium solid moccasin;
+  
   h1 {
     margin: 0px;
     padding: 8px;
