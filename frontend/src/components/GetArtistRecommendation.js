@@ -10,6 +10,7 @@ export default function GetArtistRecommendation(){
     const [genderTag, setGenderTag] = useState([]);
     const [rolesTags, setRolesTags] = useState([]);
     const [genreTags, setGenreTags] = useState([]);
+    const [noTagSelected, setNoTagSelected] = useState(false);
     const history = useHistory();
 
     useEffect(() => {
@@ -20,20 +21,15 @@ export default function GetArtistRecommendation(){
     );
 
     function onClick() {
-            getRecommendation({genreTags, rolesTags, genderTag})
-                .then((response) => history.push(`/artist/${response}`))
-                .catch((error) => console.error(error))
-    };
-
-/*    function onClick() {
         if (genreTags.length == rolesTags.length == genderTag.length == 0) {
-            alert("Please set at least one tag to get a recommendation!")
+            //alert("Please set at least one tag to get a recommendation!")
+            setNoTagSelected(true)
         } else {
             getRecommendation({genreTags, rolesTags, genderTag})
                 .then((response) => history.push(`/artist/${response}`))
                 .catch((error) => console.error(error))
         }
-    };*/
+    };
 
     if(!recommendationTagCategories){
         return(
@@ -59,6 +55,8 @@ export default function GetArtistRecommendation(){
                                           getRecommendation={[]}
                                           setRecommendation={setGenderTag}/>
             </RecommendationTags>
+            {noTagSelected &&
+            <p>Set at least one tag to get an artist recommendation</p>}
             <button onClick={onClick} > GET RECOMMENDATION </button>
         </ArtistRecommender>
     )
@@ -76,6 +74,10 @@ const ArtistRecommender = styled.section`
   
   button{
     margin: 20px 0px 0px 0px;
+  }
+  
+  p{
+    text-align: center;
   }
 `
 
