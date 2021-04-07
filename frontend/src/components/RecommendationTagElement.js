@@ -37,12 +37,14 @@ export default function RecommendationTagElement ({recommendationTagObject, getR
             color: "black",
             background: "moccasin",
             "font-size": "14px"
+        },
+        searchBox: {
+            "font-style": "Courier New"
         }
     };
 
     return(
         <RecommendationTag>
-            {/*<p>{recommendationTagObject.categoryName}:</p>*/}
             <Multiselect
                 options = {recommendationTagObject.categoryValues}
                 isObject = {false}
@@ -65,6 +67,7 @@ const RecommendationTag = styled.section`
   display: flex;
   align-items: center;
   font-family: "Courier New";
-
+  
+  
   
 `

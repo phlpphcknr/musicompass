@@ -22,7 +22,6 @@ export default function GetArtistRecommendation(){
 
     function onClick() {
         if (genreTags.length == rolesTags.length == genderTag.length == 0) {
-            //alert("Please set at least one tag to get a recommendation!")
             setNoTagSelected(true)
         } else {
             getRecommendation({genreTags, rolesTags, genderTag})
