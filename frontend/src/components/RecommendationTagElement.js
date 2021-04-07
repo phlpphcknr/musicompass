@@ -17,27 +17,45 @@ export default function RecommendationTagElement ({recommendationTagObject, getR
     },[setRecommendation])
 
     const style = {
+
+        multiSelectContainer: {
+
+        },
+
+        inputField: {
+            //"min-width": "300px",
+            "font-style": "Courier New"
+        },
+
+        placeholder: {
+            "font-style": "Courier New"
+        },
         chips: {
             background: "chocolate"
         },
         option: {
             color: "black",
-            background: "moccasin"
+            background: "moccasin",
+            "font-size": "14px"
         }
     };
 
     return(
         <RecommendationTag>
-            <p>{recommendationTagObject.categoryName}:</p>
+            {/*<p>{recommendationTagObject.categoryName}:</p>*/}
             <Multiselect
-                options={recommendationTagObject.categoryValues}
-                isObject={false}
-                ref={recommendationValueRef}
+                options = {recommendationTagObject.categoryValues}
+                isObject = {false}
+                ref = {recommendationValueRef}
                 selectionLimit = {selectionLimit}
-                selectedValues={getRecommendation}
+                selectedValues = {getRecommendation}
+                onSelect = {setRecommendation}
+                onRemove = {setRecommendation}
                 closeIcon = "cancel"
-                style={style}
+                style = {style}
                 displayValue="name"
+                placeholder = {`select ${recommendationTagObject.categoryName}`}
+                hidePlaceholder = "true"
             />
         </RecommendationTag>
     )
@@ -46,10 +64,7 @@ export default function RecommendationTagElement ({recommendationTagObject, getR
 const RecommendationTag = styled.section`
   display: flex;
   align-items: center;
-  
-  
-  p{
-    width: 90px;
-  }
+  font-family: "Courier New";
+
   
 `
