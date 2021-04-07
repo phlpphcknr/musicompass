@@ -1,11 +1,14 @@
 import styled from 'styled-components/macro'
+import {Link} from "react-router-dom";
 
 export default function AppHeader() {
   return (
-    <Header>
-      <h1>musiCompass</h1>
-      <h5>...discover new sounds!</h5>
-    </Header>
+      <Header>
+          <Link to={"/"}>
+              <h1>musiCompass</h1>
+              <h5>...discover new sounds!</h5>
+          </Link>
+      </Header>
   )
 }
 
