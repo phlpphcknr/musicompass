@@ -8,8 +8,10 @@ export default createGlobalStyle`
     height: 100%;
     font-family: "Courier New";
     background-color: var(--seondary-color);
-    --primary-color: #fdcb6e;
-    --secondary-color: moccasin;
+    --primary-color: #f1d145;
+    --secondary-color: #86baa1;
+    --tertiary-color: #553D36;
+    --quarternary-color: 
     --opacity-hover:0.7;
   }
   

@@ -1,12 +1,12 @@
 import styled from 'styled-components/macro'
 import {Link} from "react-router-dom";
+import logo from "../images/musicompass-logo.png"
 
 export default function AppHeader() {
   return (
       <Header>
           <Link to={"/"}>
-              <h1>musiCompass</h1>
-              <h5>...discover new sounds!</h5>
+              <img src={logo}/>
           </Link>
       </Header>
   )
@@ -15,9 +15,20 @@ export default function AppHeader() {
 const Header = styled.header`
   background: var(--primary-color);
   box-shadow: 0px 2px 8px #333;
-  padding: 10px 0px 20px 0px;
-  font-family: 'Orange Juice';
+  padding:0px;
   border-bottom: medium solid lightgray;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  
+  img {
+    display: block;
+    max-width: 70%;
+    width: auto;
+    height: auto;
+    margin: 4% 15% 2% 15%;
+    
+  }
   
   h1 {
     margin: 0px;
