@@ -13,6 +13,7 @@ export default function ArtistRecommendation ({currentRecommendationTags, artist
     const [genderTagInitial, setGenderTagInitial] = useState('');
     const [rolesTagsInitial, setRolesTagsInitial] = useState([]);
     const [genreTagsInitial, setGenreTagsInitial] = useState([]);
+    const [recommended, setRecommended] = useState(currentRecommendationTags.recommended);
 
     useEffect(() => {
         getRecommendationTagCategories()
@@ -26,12 +27,13 @@ export default function ArtistRecommendation ({currentRecommendationTags, artist
         },[currentRecommendationTags]
     );
 
-    function onClick() {
+    function setRecommendation() {
         postRecommendationTag({artistName, genreTags, rolesTags, genderTag})
             .then((recommendationTags) => {
                 setGenderTagInitial(recommendationTags.gender)
                 setRolesTagsInitial(recommendationTags.roles)
                 setGenreTagsInitial(recommendationTags.genres)
+                setRecommended(true)
             })
     };
 
@@ -59,10 +61,15 @@ export default function ArtistRecommendation ({currentRecommendationTags, artist
                                           getRecommendation={genderTagInitial}
                                           setRecommendation={setGenderTag}/>
             </RecommendationTags>
-            <button onClick={onClick} > RECOMMEND </button>
+            {!recommended &&
+            <button onClick={setRecommendation}>RECOMMEND</button>}
+            {recommended &&
+            <button onClick={setRecommendation}>UPDATE RECOMMENDATION</button>
+            }
         </ArtistRecommender>
     )
 }
+
 
 const ArtistRecommender = styled.section`
   display: flex;
