@@ -38,7 +38,7 @@ export default function RecommendationTagElement ({recommendationTagObject, getR
             background: "moccasin",
             "font-size": "14px"
         },
-        searchBox: {
+        "#search_input.searchBox": {
             "font-style": "Courier New"
         }
     };
@@ -67,6 +67,10 @@ const RecommendationTag = styled.section`
   display: flex;
   align-items: center;
   font-family: "Courier New";
+
+  #search_input.searchBox{
+  "font-style": "Courier New"
+  }
   
   
   
