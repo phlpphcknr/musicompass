@@ -20,10 +20,20 @@ export default function GetArtistRecommendation(){
     );
 
     function onClick() {
-        getRecommendation({genreTags, rolesTags, genderTag})
-            .then((response) => history.push(`/artist/${response}`))
-            .catch((error) => console.error(error))
+            getRecommendation({genreTags, rolesTags, genderTag})
+                .then((response) => history.push(`/artist/${response}`))
+                .catch((error) => console.error(error))
     };
+
+/*    function onClick() {
+        if (genreTags.length == rolesTags.length == genderTag.length == 0) {
+            alert("Please set at least one tag to get a recommendation!")
+        } else {
+            getRecommendation({genreTags, rolesTags, genderTag})
+                .then((response) => history.push(`/artist/${response}`))
+                .catch((error) => console.error(error))
+        }
+    };*/
 
     if(!recommendationTagCategories){
         return(
