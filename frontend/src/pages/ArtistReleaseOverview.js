@@ -29,14 +29,16 @@ export default function ArtistReleaseOverview(){
             return (
                 <>
                     {artist.artistAlbums.slice(0, 5).map((release) =>
-                        <ReleaseDescription release={release}/>)}
+                        <ReleaseDescription key = {release.discogsMasterReleaseId}
+                                            release = {release}/>)}
                 </>
             )
         } else if (releaseType === "singles-EPs") {
             return (
                 <>
                     {artist.artistSingles.slice(0, 5).map((release) =>
-                        <ReleaseDescription release={release}/>)}
+                        <ReleaseDescription key = {release.discogsMasterReleaseId}
+                                            release = {release}/>)}
                 </>
             )
         }
