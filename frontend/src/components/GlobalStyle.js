@@ -6,7 +6,7 @@ export default createGlobalStyle`
     margin: 0;
     padding: 0;
     height: 100%;
-    font-family: "Courier New";
+    font-family: "Courier New",serif;
     background-color: var(--seondary-color);
     --primary-color: #F1D145;
     --secondary-color: #86BAA1;
@@ -27,16 +27,18 @@ export default createGlobalStyle`
     color: var(--secondary-color);
     background-color: var(--tertiary-color);
   }
-
-/*  .warning{
-    text-align: center;
-    margin: 15px 30px 0px 30px;
-    color: var(--quarternary-color);
-  }*/
   
   section{
     padding: 0px;
     margin: 0px;
+  }
+  
+  img{
+    max-width: 120px;
+    max-height: 120px;
+    width: auto;
+    height: auto;
+    margin: 10px;
   }
   
   p{
@@ -72,9 +74,9 @@ export default createGlobalStyle`
   }
 
   .searchBox#css_custom_input{
-    font-family: "Courier New";
+    font-family: "Courier New", serif;
     font-weight: bold;
     color: var(--tertiary-color);
   }
-  
+
 `

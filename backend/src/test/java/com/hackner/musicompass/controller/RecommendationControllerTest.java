@@ -1,5 +1,6 @@
 package com.hackner.musicompass.controller;
 
+import com.hackner.musicompass.controller.model.RecommendationRequestDto;
 import com.hackner.musicompass.controller.model.RecommendationTagsDto;
 import com.hackner.musicompass.db.ArtistMongoDb;
 import com.hackner.musicompass.db.RecommendationCategoryMongoDb;
@@ -25,6 +26,7 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class RecommendationControllerTest {
@@ -111,7 +113,64 @@ class RecommendationControllerTest {
         //THEN
         assertThat(response.getBody(), equalTo(recommendationTagsAfter));
         assertTrue(response.getBody().getChangeDate().after(Date.from(before)));
+    }
 
+    @Test
+    @DisplayName("Get Artist Recommendation for existing tag combination")
+    public void getArtistRecommendationForExistingTagCombination(){
+        //GIVEN
+        List<String> gender = List.of("Non-binary");
+        List<String> genres = List.of("Hip Hop");
+        List<String> roles = List.of("Producer");
+        RecommendationRequestDto recommendationRequestDto = RecommendationRequestDto.builder()
+                .gender(gender)
+                .genres(genres)
+                .roles(roles).build();
+        artistMongoDb.saveAll(getArtistList());
+
+        //WHEN
+        HttpEntity<RecommendationRequestDto> entity = new HttpEntity<>(recommendationRequestDto);
+        ResponseEntity <String> response = testRestTemplate.exchange(getUrl() + "/get",
+                HttpMethod.POST,
+                entity,
+                String.class);
+
+        //THEN
+        assertThat(response.getBody(), equalTo("artist2"));
+    }
+
+    private static List<Artist> getArtistList(){
+        List<String> gender1 = List.of("Male");
+        List<String> genres1 = List.of("Jazz", "Rock");
+        List<String> roles1 = List.of("Singer");
+        RecommendationTags recommendationTags1 = RecommendationTags.builder()
+                .recommended(true)
+                .genres(genres1)
+                .roles(roles1)
+                .gender(gender1).build();
+        Artist artist1 = Artist.builder().artistName("artist1").recommendationTags(recommendationTags1).build();
+
+        List<String> gender2 = List.of("Non-binary");
+        List<String> genres2 = List.of("Hip Hop","African");
+        List<String> roles2 = List.of("Producer","Drummer/Percussionist");
+        RecommendationTags recommendationTags2 = RecommendationTags.builder()
+                .recommended(true)
+                .genres(genres2)
+                .roles(roles2)
+                .gender(gender2).build();
+        Artist artist2 = Artist.builder().artistName("artist2").recommendationTags(recommendationTags2).build();
+
+        List<String> gender3 = List.of("Female");
+        List<String> genres3 = List.of("Latin");
+        List<String> roles3 = List.of("Trumpeter");
+        RecommendationTags recommendationTags3 = RecommendationTags.builder()
+                .recommended(true)
+                .genres(genres3)
+                .roles(roles3)
+                .gender(gender3).build();
+        Artist artist3 = Artist.builder().artistName("artist3").recommendationTags(recommendationTags3).build();
+
+        return List.of(artist1, artist2, artist3);
     }
 
 

@@ -42,6 +42,7 @@ export default function RecommendationTagElement ({recommendationTagObject, getR
 
     return(
         <RecommendationTag>
+            <p>{recommendationTagObject.categoryName}:</p>
             <Multiselect
                 options = {recommendationTagObject.categoryValues}
                 isObject = {false}

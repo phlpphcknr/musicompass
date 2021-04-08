@@ -26,7 +26,7 @@ export default function GetArtistRecommendation(){
         } else {
             getRecommendation({genreTags, rolesTags, genderTag})
                 .then((response) => history.push(`/artist/${response}`))
-                .catch((error) => console.error(error))
+                .catch((error) => history.push(`/recommendation/not-available`))
         }
     };
 
@@ -70,19 +70,19 @@ const ArtistRecommender = styled.section`
   margin: 0px 20px;
   background: var(--primary-color);
   box-shadow: 0px 2px 4px #333;
-  
+
   .warning{
     font-size: 16px;
     text-align: center;
     margin: 15px 30px 0px 30px;
     color: var(--quarternary-color);
+  
+  button{
+    margin: 20px 0px 0px 0px;
   }
 `
 
-const Loading =styled.section`
-  
+const Loading = styled.section`
   display: flex;
-  justify-content: center;
-  align-items: center;
-  
+  flex-direction: column;
 `
