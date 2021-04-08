@@ -44,7 +44,7 @@ export default createGlobalStyle`
   
   a{
     text-decoration: none;
-    color: #27187E;
+    color: var(--quarternary-color);
     :hover {
       opacity: var(--opacity-hover);
     }
