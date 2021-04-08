@@ -3,12 +3,17 @@ import {Link} from "react-router-dom";
 
 export default function ArtistHeader({artist}) {
 
-
+    function artistImage () {
+        if(artist.artistInfo.artistImageUrl === ""){
+            return <img src={"https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"} alt="Shows placeholder" />;
+        }
+        return <img src={artist.artistInfo.artistImageUrl} alt="Shows artist" />;
+    }
 
     return (
         <Link to={`/artist/${artist.artistName}`} style={{textDecoration: 'none'}}>
             <Header>
-                <img src={artist.artistInfo.artistImageUrl} alt="" />
+                {artistImage()}
                 <h2>{artist.artistName}</h2>
             </Header>
         </Link>
@@ -19,17 +24,10 @@ const Header = styled.section`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 10px;
+  margin: 10px 0px;
   background: var(--primary-color);
   box-shadow: 0px 2px 4px #333;
-  
-  img {
-    max-width: 120px;
-    max-height: 120px;
-    width: auto;
-    height: auto;
-    margin: 10px;
-  }
   
   h2 {
     padding: 0px;
