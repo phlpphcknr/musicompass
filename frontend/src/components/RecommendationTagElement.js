@@ -20,23 +20,23 @@ export default function RecommendationTagElement ({recommendationTagObject, getR
 
         chips: {
             background: "var(--tertiary-color)",
-            "border-radius": "0px",
-            "font-size": "14px",
-            "font-weight": "bold",
+            "borderRadius": "0px",
+            "fontSize": "14px",
+            "fontWeight": "bold",
             "color": "var(--secondary-color)"
         },
 
         searchBox:{
-            "border-color": "var(--tertiary-color)",
-            "border-width": "thin",
-            "border-radius": "0px",
+            "borderColor": "var(--tertiary-color)",
+            "borderWidth": "thin",
+            "borderRadius": "0px",
             margin: "2px"
         },
 
         option: {
             color: "var(--tertiary-color)",
             background: "var(--secondary-color)",
-            "font-size": "14px"
+            "fontSize": "14px"
         }
     };
 
