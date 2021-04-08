@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom'
 import Landing from './pages/Landing'
 import ArtistSearchResult from './pages/ArtistSearchResult'
 import ArtistOverview from './pages/ArtistOverview'
+import RecommendationNotAvailable from './pages/RecommendationNotAvailable'
 import styled from 'styled-components/macro'
 
 export default function App() {
@@ -18,6 +19,9 @@ export default function App() {
         </Route>
           <Route exact path="/artist/:artistName">
               <ArtistOverview/>
+          </Route>
+          <Route exact path="/recommendation/not-available">
+              <RecommendationNotAvailable/>
           </Route>
       </Switch>
     </PageLayout>

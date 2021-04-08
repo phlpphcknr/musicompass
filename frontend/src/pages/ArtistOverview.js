@@ -17,7 +17,7 @@ export default function ArtistOverview(){
             .then(setArtist)
             .catch((error) => {
                 console.error(error)
-                history.push(`/artist/error-not-found`);
+                history.push(`/recommendation/not-available`);
             })
     },[artistName, history]);
 
