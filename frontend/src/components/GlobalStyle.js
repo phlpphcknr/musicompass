@@ -17,6 +17,23 @@ export default createGlobalStyle`
     --opacity-hover:0.7;
   }
   
+  button{
+    font-size: 16px;
+    font-family: inherit;
+    font-weight: bold;
+    margin: 15px 0px 0px 0px;
+    padding: 8px;
+    border: 0;
+    color: var(--secondary-color);
+    background-color: var(--tertiary-color);
+  }
+
+/*  .warning{
+    text-align: center;
+    margin: 15px 30px 0px 30px;
+    color: var(--quarternary-color);
+  }*/
+  
   section{
     padding: 0px;
     margin: 0px;

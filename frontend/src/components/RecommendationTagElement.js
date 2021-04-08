@@ -54,7 +54,7 @@ export default function RecommendationTagElement ({recommendationTagObject, getR
                 style = {style}
                 id="css_custom"
                 displayValue="name"
-                placeholder = {`select ${recommendationTagObject.categoryName}`}
+                placeholder = {`set ${recommendationTagObject.categoryName}`}
                 hidePlaceholder = "true"
             />
         </RecommendationTag>

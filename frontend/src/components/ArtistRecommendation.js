@@ -70,7 +70,7 @@ export default function ArtistRecommendation ({currentRecommendationTags, artist
                                           setRecommendation={setGenderTag}/>
             </RecommendationTags>
             {noTagSelected &&
-            <p>Select at least one tag to make an artist recommendation</p>}
+            <p class="warning" >Select at least one tag to make an artist recommendation</p>}
             {!recommended &&
             <button onClick={setRecommendation}>RECOMMEND</button>}
             {recommended &&
@@ -91,22 +91,12 @@ const ArtistRecommender = styled.section`
   background: var(--primary-color);
   box-shadow: 0px 2px 4px #333;
 
-  p{
+  .warning{
+    font-size: 16px;
     text-align: center;
-    padding: 15px 0px 0px 0px;
+    margin: 15px 30px 0px 30px;
     color: var(--quarternary-color);
   }
-  
-  button{
-    font-family: inherit;
-    font-weight: bold;
-    margin: 15px 0px 0px 0px;
-    padding: 7px;
-    border: 0;
-    color: var(--secondary-color);
-    background-color: var(--tertiary-color);
-  }
-  
 `
 
 const RecommendationTags = styled.section`
@@ -118,5 +108,4 @@ const Loading =styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
-  
 `

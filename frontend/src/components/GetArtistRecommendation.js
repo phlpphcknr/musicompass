@@ -40,7 +40,7 @@ export default function GetArtistRecommendation(){
 
     return(
         <ArtistRecommender>
-            <RecommendationTags>
+            <section>
                 <RecommendationTagElement key={recommendationTagCategories[0].categoryName}
                                           recommendationTagObject={recommendationTagCategories[0]}
                                           getRecommendation={[]}
@@ -53,10 +53,10 @@ export default function GetArtistRecommendation(){
                                           recommendationTagObject={recommendationTagCategories[2]}
                                           getRecommendation={[]}
                                           setRecommendation={setGenderTag}/>
-            </RecommendationTags>
+            </section>
             {noTagSelected &&
-            <p>Set at least one tag to get an artist recommendation</p>}
-            <button onClick={onClick} > GET RECOMMENDATION </button>
+            <p class="warning" >Set at least one tag to set/update an artist recommendation</p>}
+            <button onClick={onClick} >GET RECOMMENDATION</button>
         </ArtistRecommender>
     )
 }
@@ -70,25 +70,13 @@ const ArtistRecommender = styled.section`
   margin: 0px 20px;
   background: var(--primary-color);
   box-shadow: 0px 2px 4px #333;
-
-  button{
-    font-family: inherit;
-    font-weight: bold;
-    margin: 20px 0px 0px 0px;
-    padding: 7px;
-    border: 0;
-    color: var(--secondary-color);
-    background-color: var(--tertiary-color);
-  }
   
-  p{
+  .warning{
+    font-size: 16px;
     text-align: center;
+    margin: 15px 30px 0px 30px;
+    color: var(--quarternary-color);
   }
-`
-
-const RecommendationTags = styled.section`
-  display: flex;
-  flex-direction: column;
 `
 
 const Loading =styled.section`

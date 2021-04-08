@@ -3,8 +3,6 @@ import {Link} from "react-router-dom";
 
 export default function ArtistHeader({artist}) {
 
-
-
     return (
         <Link to={`/artist/${artist.artistName}`} style={{textDecoration: 'none'}}>
             <Header>
@@ -14,6 +12,7 @@ export default function ArtistHeader({artist}) {
         </Link>
     )
 }
+
 
 const Header = styled.section`
   display: flex;
@@ -38,4 +37,5 @@ const Header = styled.section`
     font-size: 20px;
     color: var(--tertiary-color);
   }
+  
 `
