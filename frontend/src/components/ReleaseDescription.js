@@ -16,7 +16,6 @@ export default function ReleaseDescription({release}){
 
 const Release = styled.section`
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: 10px;
   margin: 0px 20px;
@@ -32,10 +31,12 @@ const Release = styled.section`
   }
 
   section {
-    text-align: center;
+    display: block;
+    align-self: center;
     
     span{
       display: block;
+      align-self: center;
       padding: 10px;
       font-size: 18px;
       color: var(--tertiary-color);
