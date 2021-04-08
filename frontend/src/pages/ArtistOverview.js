@@ -41,7 +41,7 @@ export default function ArtistOverview(){
         <Overview>
             <ArtistHeader key={artist.artistName} artist={artist}/>
 
-            <span>Most popular/wanted album</span>
+            <h3>Most popular/wanted album</h3>
             {artist.artistAlbums.length === 0
                 ? <ReleasePlaceholder releasetype={"albums"}/>
                 : <>
@@ -51,7 +51,7 @@ export default function ArtistOverview(){
                     </Link>
                 </>
             }
-            <span>Most popular/wanted single/EP</span>
+            <h3>Most popular/wanted single/EP</h3>
             {artist.artistSingles.length === 0
                 ? <ReleasePlaceholder releasetype={"singles/EPs"}/>
                 : <>
@@ -62,7 +62,7 @@ export default function ArtistOverview(){
                 </>
             }
 
-            <span>Recommend '{artistName}' to other users</span>
+            <h3>Recommend '{artistName}' to other users</h3>
             <ArtistRecommendation artistName={artistName}
                                   currentRecommendationTags={artist.recommendationTags}/>
         </Overview>)
@@ -76,7 +76,7 @@ const Overview = styled.div`
   background-color: var(--secondary-color);
   padding: 20px;
   
-  span{
+  h3{
     margin: 10px;
     font-size: 16px;
     color: var(--tertiary-color);
