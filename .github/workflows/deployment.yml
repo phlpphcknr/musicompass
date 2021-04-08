@@ -4,6 +4,7 @@
     push:
       branches:
         - main
+        - add-BE-tests
 
   jobs:
     build-frontend:
