@@ -93,11 +93,18 @@ const ArtistRecommender = styled.section`
 
   p{
     text-align: center;
-    padding: 15px;
-    color: var(--tertiary-color);
+    padding: 15px 0px 0px 0px;
+    color: var(--quarternary-color);
   }
   
   button{
+    font-family: inherit;
+    font-weight: bold;
+    margin: 15px 0px 0px 0px;
+    padding: 7px;
+    border: 0;
+    color: var(--secondary-color);
+    background-color: var(--tertiary-color);
   }
   
 `

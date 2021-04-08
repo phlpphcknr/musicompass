@@ -16,7 +16,7 @@ const Header = styled.header`
   background: var(--primary-color);
   box-shadow: 0px 2px 8px #333;
   padding:0px;
-  border-bottom: medium solid var(--quarternary-color);
+  border-bottom: medium solid var(--tertiary-color);
   display:flex;
   align-items: center;
   justify-content: center;

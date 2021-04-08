@@ -70,9 +70,15 @@ const ArtistRecommender = styled.section`
   margin: 0px 20px;
   background: var(--primary-color);
   box-shadow: 0px 2px 4px #333;
-  
+
   button{
+    font-family: inherit;
+    font-weight: bold;
     margin: 20px 0px 0px 0px;
+    padding: 7px;
+    border: 0;
+    color: var(--secondary-color);
+    background-color: var(--tertiary-color);
   }
   
   p{

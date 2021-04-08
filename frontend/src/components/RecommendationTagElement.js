@@ -20,6 +20,7 @@ export default function RecommendationTagElement ({recommendationTagObject, getR
 
         chips: {
             background: "var(--tertiary-color)",
+            "border-radius": "0px",
             "font-size": "14px",
             "font-weight": "bold",
             "color": "var(--secondary-color)"
