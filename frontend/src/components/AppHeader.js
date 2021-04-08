@@ -6,7 +6,7 @@ export default function AppHeader() {
   return (
       <Header>
           <Link to={"/"}>
-              <img src={logo}/>
+              <img src={logo} alt="Logo"/>
           </Link>
       </Header>
   )
