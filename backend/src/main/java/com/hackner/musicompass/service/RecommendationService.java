@@ -63,8 +63,12 @@ public class RecommendationService {
 
         List<Artist> artists = artistMongoDb.findAll();
 
+        List<Artist> recommendedArtists = artists.stream()
+                .filter(artist -> artist.getRecommendationTags().getRecommended() == true)
+                .collect(Collectors.toList());
+
         FilterCategory genres = FilterCategory.GENRES;
-        List<Artist> genreFilteredArtists = filterByRecommendationTags(artists, recommendationRequestDto.getGenres(), genres);
+        List<Artist> genreFilteredArtists = filterByRecommendationTags(recommendedArtists, recommendationRequestDto.getGenres(), genres);
         FilterCategory roles = FilterCategory.ROLES;
         List<Artist> genreRoleFilteredArtists = filterByRecommendationTags(genreFilteredArtists, recommendationRequestDto.getRoles(), roles);
         FilterCategory gender = FilterCategory.GENDER;

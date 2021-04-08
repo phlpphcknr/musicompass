@@ -5,6 +5,7 @@ import ArtistSearchResult from './pages/ArtistSearchResult'
 import ArtistOverview from './pages/ArtistOverview'
 import RecommendationNotAvailable from './pages/RecommendationNotAvailable'
 import styled from 'styled-components/macro'
+import ArtistReleaseOverview from "./pages/ArtistReleaseOverview";
 
 export default function App() {
   return (
@@ -20,6 +21,9 @@ export default function App() {
           <Route exact path="/artist/:artistName">
               <ArtistOverview/>
           </Route>
+          <Route exact path="/artist/:artistName/:releaseType">
+              <ArtistReleaseOverview/>
+          </Route>
           <Route exact path="/recommendation/not-available">
               <RecommendationNotAvailable/>
           </Route>
@@ -34,4 +38,8 @@ const PageLayout = styled.div`
   overflow-y: scroll;
   grid-template-rows: auto 1fr;
   background: var(--secondary-color);
+  
+  main{
+    overflow-y: scroll;
+  }
 `

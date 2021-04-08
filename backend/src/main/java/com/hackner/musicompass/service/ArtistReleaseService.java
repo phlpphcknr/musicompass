@@ -6,14 +6,10 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.lang.Math.pow;
-import static java.lang.Math.round;
 
 @Service
 public class ArtistReleaseService {
@@ -48,21 +44,37 @@ public class ArtistReleaseService {
     }
 
     public List<DiscogsMasterRelease> filterDiscogsMasterReleaseListForFormat(String format, List<DiscogsMasterRelease> discogsMasterReleaseList) {
-        List<String> discogsFormat = convertToDiscogsFormat(format);
-        return discogsMasterReleaseList.stream()
-                .filter(discogsMasterRelease -> discogsMasterRelease.getFormat().stream()
-                        .anyMatch(discogsFormat::contains))
-                .collect(Collectors.toList());
+        List<DiscogsMasterRelease> filteredList = formatFilter(format, discogsMasterReleaseList);
+        return removeDuplicates(filteredList);
     }
 
-    public List<String> convertToDiscogsFormat (String format){
-        if(format.equals("Album")){
-            return Arrays.asList("Album", "LP", "Mini-Album");
+    public List<DiscogsMasterRelease> formatFilter(String format, List<DiscogsMasterRelease> discogsMasterReleaseList){
+
+        if(format == "Album"){
+            List<String> discogsFormat = List.of("Album" , "LP");
+            return  discogsMasterReleaseList.stream()
+                    .filter(discogsMasterRelease -> discogsMasterRelease.getFormat().stream().anyMatch(discogsFormat::contains))
+                    .collect(Collectors.toList());
         }
-        if(format.equals("Single/EP")){
-            return Arrays.asList("7\"","10\"","12\"", "EP", "Single", "Maxi-Single");
+
+        if(format == "Single/EP") {
+            List<String> discogsFormat = List.of("Album" , "LP", "Compilation");
+            return discogsMasterReleaseList.stream()
+                    .filter(discogsMasterRelease -> !discogsMasterRelease.getFormat().stream().anyMatch(discogsFormat::contains))
+                    .collect(Collectors.toList());
         }
-        return null;
+
+        return discogsMasterReleaseList;
+    }
+
+    public List<DiscogsMasterRelease> removeDuplicates (List<DiscogsMasterRelease> duplicateList) {
+
+        Map<String, DiscogsMasterRelease> map = new HashMap<String, DiscogsMasterRelease>();
+        for (DiscogsMasterRelease r : duplicateList) map.put(r.getMasterId(), r);
+
+        List<DiscogsMasterRelease> result = new ArrayList<DiscogsMasterRelease>(map.values());
+
+        return result;
     }
 
     public double calculateGlobalRating ( int have, int want){

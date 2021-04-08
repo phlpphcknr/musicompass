@@ -12,8 +12,21 @@ export default createGlobalStyle`
     --secondary-color: moccasin;
     --opacity-hover: 0.7;
   }
-
-  p {
+  
+  section{
+    padding: 0px;
+    margin: 0px;
+  }
+  
+  img{
+    max-width: 120px;
+    max-height: 120px;
+    width: auto;
+    height: auto;
+    margin: 10px;
+  }
+  
+  p{
     font-weight: bold;
   }
 
