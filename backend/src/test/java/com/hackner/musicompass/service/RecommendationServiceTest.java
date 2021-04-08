@@ -145,8 +145,8 @@ class RecommendationServiceTest {
     }
 
     @Test
-    @DisplayName("Request Artist Recommendation with tag combination which is not available")
-    public void getArtistRecommendationForNotExistingTagCombination(){
+    @DisplayName("Request Artist Recommendation with tag combination which is not available and throw error")
+    public void getErrorForNotExistingTagCombination(){
         //GIVEN
         List<String> gender = List.of("Female");
         List<String> genres = List.of("Jazz", "Rock");
