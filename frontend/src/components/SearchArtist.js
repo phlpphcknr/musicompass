@@ -30,18 +30,24 @@ const SearchArtistContainer = styled.section`
   
   form {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-evenly;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    margin: 0px 20px 20px 20px;
+    background: var(--primary-color);
+    box-shadow: 0px 2px 4px #333;
   }
 
   input {
-    flex-grow: 1;
-    text-align: left;
+    width: 90%;
+    text-align: center;
     margin: 8px;
   }
 
   button {
     padding: 8px;
-    margin: 8px;
+    margin: 20px 0px 0px 0px;
   }
 `

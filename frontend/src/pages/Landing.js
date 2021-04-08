@@ -5,6 +5,7 @@ import GetArtistRecommendation from "../components/GetArtistRecommendation";
 export default function Landing() {
   return (
       <Wrapper>
+          <p>Search for an artist and their releases</p>
           <SearchArtist/>
           <p>Set some tags and get an artist recommendation</p>
           <GetArtistRecommendation/>
