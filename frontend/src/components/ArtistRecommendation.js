@@ -30,7 +30,7 @@ export default function ArtistRecommendation ({currentRecommendationTags, artist
     );
 
     function setRecommendation() {
-        if (genreTags.length == rolesTags.length == genderTag.length == 0) {
+        if (genreTags.length === 0 && rolesTags.length === 0 && genderTag.length === 0) {
             setNoTagSelected(true)
         } else {
             postRecommendationTag({artistName, genreTags, rolesTags, genderTag})

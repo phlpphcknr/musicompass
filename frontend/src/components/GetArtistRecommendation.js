@@ -21,7 +21,7 @@ export default function GetArtistRecommendation(){
     );
 
     function onClick() {
-        if (genreTags.length == rolesTags.length == genderTag.length == 0) {
+        if (genreTags.length === 0 && rolesTags.length === 0 && genderTag.length === 0) {
             setNoTagSelected(true)
         } else {
             getRecommendation({genreTags, rolesTags, genderTag})
@@ -55,7 +55,7 @@ export default function GetArtistRecommendation(){
                                           setRecommendation={setGenderTag}/>
             </section>
             {noTagSelected &&
-            <p class="warning" >Set at least one tag to set/update an artist recommendation</p>}
+            <p className="warning" >Set at least one tag to set/update an artist recommendation</p>}
             <button onClick={onClick} >GET RECOMMENDATION</button>
         </ArtistRecommender>
     )
