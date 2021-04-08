@@ -41,28 +41,28 @@ export default function ArtistOverview(){
         <Overview>
             <ArtistHeader key={artist.artistName} artist={artist}/>
 
-            <h3>Most popular/wanted album</h3>
+            <span>Most popular/wanted album</span>
             {artist.artistAlbums.length === 0
                 ? <ReleasePlaceholder releasetype={"albums"}/>
                 : <>
                     <ReleaseDescription release={artist.artistAlbums[0]}/>
                     <Link to={`artist/${artistName}/albums`}>
-                        <h5>see more albums ...</h5>
+                        <p>see more albums ...</p>
                     </Link>
                 </>
             }
-            <h3>Most popular/wanted single/EP</h3>
+            <span>Most popular/wanted single/EP</span>
             {artist.artistSingles.length === 0
                 ? <ReleasePlaceholder releasetype={"singles/EPs"}/>
                 : <>
                     <ReleaseDescription release={artist.artistSingles[0]}/>
                     <Link to={`artist/${artistName}/singles-eps`}>
-                        <h5>see more singles/EPs ...</h5>
+                        <p>see more singles/EPs ...</p>
                     </Link>
                 </>
             }
 
-            <h3>Recommend '{artistName}' to other users</h3>
+            <span>Recommend '{artistName}' to other users</span>
             <ArtistRecommendation artistName={artistName}
                                   currentRecommendationTags={artist.recommendationTags}/>
         </Overview>)
@@ -76,17 +76,20 @@ const Overview = styled.div`
   background-color: var(--secondary-color);
   padding: 20px;
   
-  h3{
+  span{
     margin: 10px;
-    font-size: 0.9em;
+    font-size: 16px;
+    color: var(--tertiary-color);
   }
   
   h4{
     margin: 20px;
+    color: var(--tertiary-color);
   }
   
-  h5{
+  p{
     margin: 0px 20px;
+    font-size: 14px;
   }
   
   a{

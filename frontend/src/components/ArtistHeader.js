@@ -9,7 +9,7 @@ export default function ArtistHeader({artist}) {
         <Link to={`/artist/${artist.artistName}`} style={{textDecoration: 'none'}}>
             <Header>
                 <img src={artist.artistInfo.artistImageUrl} alt="" />
-                <h2>{artist.artistName}</h2>
+                <h1>{artist.artistName}</h1>
             </Header>
         </Link>
     )
@@ -23,7 +23,7 @@ const Header = styled.section`
   background: var(--primary-color);
   box-shadow: 0px 2px 4px #333;
   
-  img {
+  img{
     max-width: 120px;
     max-height: 120px;
     width: auto;
@@ -31,12 +31,11 @@ const Header = styled.section`
     margin: 10px;
   }
   
-  h2 {
-    padding: 0px;
-    margin: 0px;
+  h1{
+    display: block;
     width: 100%;
     text-align: center;
-    font-size: 1.2em;
-    color: #636e72;
+    font-size: 20px;
+    color: var(--tertiary-color);
   }
 `

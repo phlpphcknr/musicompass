@@ -11,7 +11,9 @@ export default createGlobalStyle`
     --primary-color: #F1D145;
     --secondary-color: #86BAA1;
     --tertiary-color: #553D36;
-    --quarternary-color: 
+    --quarternary-color: #27187E;
+    --quinary-color: #3AB795;
+    
     --opacity-hover:0.7;
   }
   
@@ -24,6 +26,17 @@ export default createGlobalStyle`
     font-weight: bold;
   }
   
+  span{
+    padding: 0px;
+    margin: 0px;
+    font-weight: bold;
+  }
+
+  h1{
+    margin: 0;
+    padding: 0;
+  }
+  
   h5{
     margin: 0;
     padding: 0;
@@ -31,7 +44,7 @@ export default createGlobalStyle`
   
   a{
     text-decoration: none;
-    color: chocolate;
+    color: #27187E;
     :hover {
       opacity: var(--opacity-hover);
     }

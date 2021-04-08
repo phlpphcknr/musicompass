@@ -6,8 +6,8 @@ export default function ReleaseDescription({release}){
         <Release>
             <img src={release.coverImageUrl} alt=""/>
             <section>
-                <h3>{release.fullTitle}</h3>
-                {release.releaseYear !== 0 && <h3>{release.releaseYear}</h3>}
+                <span>{release.fullTitle}</span>
+                {release.releaseYear !== 0 && <span>{release.releaseYear}</span>}
             </section>
         </Release>
     )
@@ -38,6 +38,14 @@ const Release = styled.section`
     width: 100%;
     text-align: center;
     color: #636e72;
+
+    span{
+      display: block;
+      font-size: 18px;
+    }
+    
   }
+  
+  
   
 `
