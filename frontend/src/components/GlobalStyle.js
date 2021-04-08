@@ -6,17 +6,11 @@ export default createGlobalStyle`
     margin: 0;
     padding: 0;
     height: 100%;
-    //font-size: 112.5%;
     font-family: "Courier New";
     background-color: var(--seondary-color);
     --primary-color: #fdcb6e;
     --secondary-color: moccasin;
     --opacity-hover: 0.7;
-  }
-
-  section {
-    padding: 0px;
-    margin: 0px;
   }
 
   p {

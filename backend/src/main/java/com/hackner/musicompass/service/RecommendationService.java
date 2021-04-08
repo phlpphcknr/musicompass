@@ -71,7 +71,7 @@ public class RecommendationService {
         List<Artist> fullyFilteredArtists = filterByRecommendationTags(genreRoleFilteredArtists, recommendationRequestDto.getGender(), gender);
 
         if (fullyFilteredArtists.size() == 0) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Artist for the specified tags not in the recommended database");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Artist for the specified tags not in the recommended database");
         }
 
         Random rand = new Random();

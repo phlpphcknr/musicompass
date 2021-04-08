@@ -139,7 +139,7 @@ class RecommendationControllerTest {
         assertThat(response.getBody(), equalTo("artist2"));
     }
 
-    public List<Artist> getArtistList(){
+    private static List<Artist> getArtistList(){
         List<String> gender1 = List.of("Male");
         List<String> genres1 = List.of("Jazz", "Rock");
         List<String> roles1 = List.of("Singer");

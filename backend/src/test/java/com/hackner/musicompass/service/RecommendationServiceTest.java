@@ -159,11 +159,7 @@ class RecommendationServiceTest {
 
         //WHEN
         assertThrows(ResponseStatusException.class, () -> recommendationService.getArtistRecommendation(recommendationRequestDto));
-        //String actual = recommendationService.getArtistRecommendation(recommendationRequestDto);
 
-        //THEN
-        //assertThrows(ResponseStatusException.class, )
-        //assertThat(actual, is("error-not-found"));
     }
 
     @Test
