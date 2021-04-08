@@ -91,14 +91,15 @@ const ArtistRecommender = styled.section`
   background: var(--primary-color);
   box-shadow: 0px 2px 4px #333;
 
-  button{
-    margin: 10px 0px 0px 0px;
-  }
-  
   p{
     text-align: center;
-    margin: 10px;
+    padding: 15px;
+    color: var(--tertiary-color);
   }
+  
+  button{
+  }
+  
 `
 
 const RecommendationTags = styled.section`

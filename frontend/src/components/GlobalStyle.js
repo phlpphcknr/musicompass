@@ -51,13 +51,13 @@ export default createGlobalStyle`
   }
   
   .searchBox#css_custom_input::placeholder{
-    color: black;
+    color: var(--tertiary-color);
   }
 
   .searchBox#css_custom_input{
     font-family: "Courier New";
     font-weight: bold;
-    color: black;
+    color: var(--tertiary-color);
   }
   
 `

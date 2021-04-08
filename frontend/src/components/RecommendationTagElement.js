@@ -19,21 +19,22 @@ export default function RecommendationTagElement ({recommendationTagObject, getR
     const style = {
 
         chips: {
-            background: "chocolate",
+            background: "var(--tertiary-color)",
             "font-size": "14px",
-            "font-weight": "bold"
+            "font-weight": "bold",
+            "color": "var(--secondary-color)"
         },
 
         searchBox:{
-            "border-color": "chocolate",
+            "border-color": "var(--tertiary-color)",
             "border-width": "thin",
             "border-radius": "0px",
             margin: "2px"
         },
 
         option: {
-            color: "black",
-            background: "moccasin",
+            color: "var(--tertiary-color)",
+            background: "var(--secondary-color)",
             "font-size": "14px"
         }
     };
