@@ -5,9 +5,9 @@ export default function ArtistHeader({artist}) {
 
     function artistImage () {
         if(artist.artistInfo.artistImageUrl === ""){
-            return <img src={"https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"} alt="" />;
+            return <img src={"https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"} alt="Shows placeholder" />;
         }
-        return <img src={artist.artistInfo.artistImageUrl} alt="" />;
+        return <img src={artist.artistInfo.artistImageUrl} alt="Shows artist" />;
     }
 
     return (

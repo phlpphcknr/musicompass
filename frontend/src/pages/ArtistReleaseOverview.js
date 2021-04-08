@@ -6,8 +6,8 @@ import ArtistHeader from "../components/ArtistHeader";
 import ReleaseDescription from "../components/ReleaseDescription";
 
 export default function ArtistReleaseOverview(){
-    const {artistName} = useParams();
-    const {releaseType} = useParams();
+
+    const {artistName, releaseType} = useParams();
     const [artist, setArtist] = useState();
 
     useEffect(() => {
@@ -24,15 +24,15 @@ export default function ArtistReleaseOverview(){
         )
     }
 
-    function releaseList () {
-        if(releaseType === "albums"){
+    function releaseList() {
+        if (releaseType === "albums") {
             return (
                 <>
                     {artist.artistAlbums.slice(0, 5).map((release) =>
                         <ReleaseDescription release={release}/>)}
                 </>
             )
-        }else if (releaseType === "singles-EPs"){
+        } else if (releaseType === "singles-EPs") {
             return (
                 <>
                     {artist.artistSingles.slice(0, 5).map((release) =>
@@ -52,17 +52,10 @@ export default function ArtistReleaseOverview(){
             </Link>
         </ReleaseOverview>
     )
-
 }
 
 
-
-
-/*{artist.artistAlbums.slice(0, 5).map((release) =>
-    <ReleaseDescription release={release}/>)}*/
-
 const ReleaseOverview = styled.div`
-
   display: flex;
   flex-direction: column;
   background-color: var(--secondary-color);
@@ -77,13 +70,8 @@ const ReleaseOverview = styled.div`
     margin: 20px;
   }
   
-  h5{
-    margin: 0px 20px;
-  }
-  
   a{
     text-align: right;
     margin: 10px;
   }
-
 `

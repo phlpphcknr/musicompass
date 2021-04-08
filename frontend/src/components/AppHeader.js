@@ -12,7 +12,7 @@ export default function AppHeader() {
 const Header = styled.header`
   background: var(--primary-color);
   box-shadow: 0px 2px 8px #333;
-  padding: 10px 0px 20px 0px;
+  padding: 10px 0px 20px;
   font-family: 'Orange Juice';
   
   h1 {
@@ -22,6 +22,7 @@ const Header = styled.header`
     font-size: 1.6em;
     color: #636e72;
   }
+  
   p {
     font-weight: bold;
     margin: 0px;

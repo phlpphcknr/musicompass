@@ -33,8 +33,8 @@ const SearchResults = styled.div`
   padding: 20px;
 
   p {
-    margin-bottom: 15px;
-    margin-top: 15px;
+    margin: 15px 0px;
+    //margin-top: 15px;
     font-size: 1.0em;
     width: 100%;
     text-align: left;

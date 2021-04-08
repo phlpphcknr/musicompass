@@ -37,10 +37,6 @@ const PageLayout = styled.div`
   grid-template-rows: auto 1fr;
   background: var(--secondary-color);
   
-  AppHeader{
-    
-  }
-  
   main{
     overflow-y: scroll;
   }
