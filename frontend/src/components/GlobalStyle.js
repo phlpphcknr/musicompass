@@ -6,12 +6,11 @@ export default createGlobalStyle`
     margin: 0;
     padding: 0;
     height: 100%;
-    //font-size: 112.5%;
     font-family: "Courier New";
     background-color: var(--seondary-color);
     --primary-color: #fdcb6e;
     --secondary-color: moccasin;
-    --opacity-hover:0.7;
+    --opacity-hover: 0.7;
   }
   
   section{
@@ -30,22 +29,23 @@ export default createGlobalStyle`
   p{
     font-weight: bold;
   }
-  
-  h5{
+
+  h5 {
     margin: 0;
     padding: 0;
   }
-  
-  a{
+
+  a {
     text-decoration: none;
     color: chocolate;
+
     :hover {
       opacity: var(--opacity-hover);
     }
   }
-  
-  select{
+
+  select {
     font-family: "Courier New";
   }
-  
+
 `

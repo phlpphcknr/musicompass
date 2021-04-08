@@ -15,19 +15,8 @@ export default function ArtistOverview(){
     useEffect(() => {
         getArtistByName(artistName)
             .then(setArtist)
-            .catch((error) => {
-                console.error(error)
-                history.push(`/artist/error-not-found`);
-            })
+            .catch((error) => {console.error(error)})
     },[artistName, history]);
-
-    if (artistName === "error-not-found"){
-        return (
-            <Overview>
-                <h4>sorry, no artist was found for your criteria</h4>
-            </Overview>
-        )
-    }
 
     if (!artist){
         return(
