@@ -19,7 +19,7 @@ const Header = styled.section`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 10px;
   background: var(--primary-color);
   box-shadow: 0px 2px 4px #333;
   
@@ -32,7 +32,7 @@ const Header = styled.section`
   }
   
   h1{
-    display: block;
+    padding: 10px;
     width: 100%;
     text-align: center;
     font-size: 20px;

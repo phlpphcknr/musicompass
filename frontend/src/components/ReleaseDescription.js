@@ -14,12 +14,11 @@ export default function ReleaseDescription({release}){
 }
 
 
-
 const Release = styled.section`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 10px;
   margin: 0px 20px;
   background-color: var(--primary-color);
   box-shadow: 0px 0px 6px #333;
@@ -33,20 +32,15 @@ const Release = styled.section`
   }
 
   section {
-    padding: 0px;
-    margin: 0px;
-    width: 100%;
     text-align: center;
-    color: #636e72;
-
+    
     span{
       display: block;
+      padding: 10px;
       font-size: 18px;
       color: var(--tertiary-color);
     }
     
   }
-  
-  
   
 `
