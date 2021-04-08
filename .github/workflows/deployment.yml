@@ -4,6 +4,7 @@
     push:
       branches:
         - main
+        - frontend-release-pages
 
   jobs:
     build-frontend:
