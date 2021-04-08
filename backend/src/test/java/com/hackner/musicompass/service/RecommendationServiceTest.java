@@ -9,6 +9,7 @@ import com.hackner.musicompass.model.RecommendationTags;
 import com.hackner.musicompass.controller.model.RecommendationTagsDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -157,10 +158,12 @@ class RecommendationServiceTest {
         when(artistMongoDb.findAll()).thenReturn(getArtistList());
 
         //WHEN
-        String actual = recommendationService.getArtistRecommendation(recommendationRequestDto);
+        assertThrows(ResponseStatusException.class, () -> recommendationService.getArtistRecommendation(recommendationRequestDto));
+        //String actual = recommendationService.getArtistRecommendation(recommendationRequestDto);
 
         //THEN
-        assertThat(actual, is("error-not-found"));
+        //assertThrows(ResponseStatusException.class, )
+        //assertThat(actual, is("error-not-found"));
     }
 
     @Test

@@ -22,7 +22,10 @@ export default function GetArtistRecommendation(){
     function onClick() {
         getRecommendation({genreTags, rolesTags, genderTag})
             .then((response) => history.push(`/artist/${response}`))
-            .catch((error) => console.error(error))
+            .catch((error) => {
+                console.error(error)
+                history.push(`/recommendation/not-available`);
+            })
     };
 
     if(!recommendationTagCategories){
