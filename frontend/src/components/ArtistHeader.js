@@ -42,7 +42,7 @@ const Header = styled.section`
     padding: 10px;
     width: 100%;
     text-align: center;
-    font-size: 20px;
+    font-size: 18px;
     color: var(--tertiary-color);
   }
 `

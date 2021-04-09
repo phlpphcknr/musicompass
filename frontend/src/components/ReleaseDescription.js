@@ -37,7 +37,7 @@ const Release = styled.section`
     span{
       display: block;
       padding: 10px;
-      font-size: 18px;
+      font-size: 14px;
       color: var(--tertiary-color);
     }
     

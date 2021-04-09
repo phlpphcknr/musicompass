@@ -15,7 +15,7 @@ export default function SearchArtist() {
     <SearchArtistContainer>
       <form onSubmit={handleSubmit}>
         <input
-          placeholder="the artist I want to find out about is..."
+          placeholder="type artist name"
           type="text"
           value={artistSearchTerm}
           onChange={({ target }) => setArtistSearchTerm(target.value)}
@@ -42,8 +42,17 @@ const SearchArtistContainer = styled.section`
 
   input {
     width: 90%;
-    text-align: center;
-    margin: 8px;
+    text-align: left;
+    margin: 2px;
+    padding: 5px;
+    background-color: var(--primary-color);
+    border-color: var(--tertiary-color);
+    border-width: thin;
+    border-radius: 0px;
+    font-family: "Courier New", serif;
+    font-weight: bold;
+    color: var(--tertiary-color);
+    
   }
 
   button {

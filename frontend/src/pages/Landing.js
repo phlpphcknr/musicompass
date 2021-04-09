@@ -7,7 +7,7 @@ export default function Landing() {
       <Wrapper>
           <p>Search for an artist and their releases</p>
           <SearchArtist/>
-          <p>Set some tags and get an artist recommendation</p>
+          <p>Set tags and get an artist recommendation</p>
           <GetArtistRecommendation/>
       </Wrapper>
   )
