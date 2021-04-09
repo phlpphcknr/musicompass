@@ -84,5 +84,7 @@ const ArtistRecommender = styled.section`
 
 const Loading = styled.section`
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 60px;
 `

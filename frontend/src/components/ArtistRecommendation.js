@@ -108,4 +108,5 @@ const Loading =styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 60px;
 `
