@@ -55,7 +55,7 @@ export default function GetArtistRecommendation(){
                                           setRecommendation={setGenderTag}/>
             </section>
             {noTagSelected &&
-            <p className="warning" >Set at least one tag to set/update an artist recommendation</p>}
+            <p className="warning" >Set at least one tag to get an artist recommendation</p>}
             <button onClick={onClick} >GET RECOMMENDATION</button>
         </ArtistRecommender>
     )
