@@ -48,7 +48,7 @@ export default function ArtistOverview(){
                 ? <ReleasePlaceholder releasetype={"singles/EPs"}/>
                 : <>
                     <ReleaseDescription release={artist.artistSingles[0]}/>
-                    <Link to={`${artistName}/singles-eps`}>
+                    <Link to={`${artistName}/singles-EPs`}>
                         <p>see more singles/EPs ...</p>
                     </Link>
                 </>
