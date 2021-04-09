@@ -4,25 +4,32 @@ import { useHistory } from 'react-router-dom'
 
 export default function SearchArtist() {
   const [artistSearchTerm, setArtistSearchTerm] = useState('');
+  const [emptySearchTerm, setEmptySearchTerm] = useState(false);
   const history = useHistory();
 
   const handleSubmit = (event) => {
       event.preventDefault();
-      history.push(`/artistsearch/${artistSearchTerm}`);
+      if(artistSearchTerm === ""){
+          setEmptySearchTerm(true)
+      } else {
+          history.push(`/artistsearch/${artistSearchTerm}`);
+      }
     }
 
   return (
-    <SearchArtistContainer>
-      <form onSubmit={handleSubmit}>
-        <input
-          placeholder="type artist name"
-          type="text"
-          value={artistSearchTerm}
-          onChange={({ target }) => setArtistSearchTerm(target.value)}
-        />
-          <button>SEARCH</button>
-      </form>
-    </SearchArtistContainer>
+      <SearchArtistContainer>
+          <form onSubmit={handleSubmit}>
+              <input
+                  placeholder="type artist name"
+                  type="text"
+                  value={artistSearchTerm}
+                  onChange={({target}) => setArtistSearchTerm(target.value)}
+              />
+              {emptySearchTerm &&
+              <p class="warning">Enter a search term to look for artists</p>}
+              <button>SEARCH</button>
+          </form>
+      </SearchArtistContainer>
   )
 }
 
@@ -52,11 +59,17 @@ const SearchArtistContainer = styled.section`
     font-family: "Courier New", serif;
     font-weight: bold;
     color: var(--tertiary-color);
-    
+  }
+
+  .warning{
+    font-size: 16px;
+    text-align: center;
+    margin: 15px 30px 0px 30px;
+    color: var(--quarternary-color);
   }
 
   button {
     padding: 8px;
-    margin: 20px 0px 0px 0px;
+    margin: 15px 0px 0px 0px;
   }
 `
