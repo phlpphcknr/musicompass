@@ -6,20 +6,18 @@ export default function ReleaseDescription({release}){
         <Release>
             <img src={release.coverImageUrl} alt=""/>
             <section>
-                <h3>{release.fullTitle}</h3>
-                {release.releaseYear !== 0 && <h3>{release.releaseYear}</h3>}
+                <span>{release.fullTitle}</span>
+                {release.releaseYear !== 0 && <span>{release.releaseYear}</span>}
             </section>
         </Release>
     )
 }
 
 
-
 const Release = styled.section`
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 10px;
   margin: 0px 20px;
   background-color: var(--primary-color);
   box-shadow: 0px 0px 6px #333;
@@ -33,11 +31,15 @@ const Release = styled.section`
   }
 
   section {
-    padding: 0px;
-    margin: 0px;
-    width: 100%;
+    display: block;
     text-align: center;
-    color: #636e72;
+    
+    span{
+      display: block;
+      padding: 10px;
+      font-size: 18px;
+      color: var(--tertiary-color);
+    }
+    
   }
-  
 `

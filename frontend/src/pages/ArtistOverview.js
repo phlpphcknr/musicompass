@@ -15,14 +15,17 @@ export default function ArtistOverview(){
     useEffect(() => {
         getArtistByName(artistName)
             .then(setArtist)
-            .catch((error) => {console.error(error)})
+            .catch((error) => {
+                console.error(error)
+                history.push(`/artist/error-not-found`);
+            })
     },[artistName, history]);
 
     if (!artist){
         return(
-            <section>
-                Loading
-            </section>
+            <Loading>
+                ...loading...
+            </Loading>
         )
     }
 
@@ -36,7 +39,7 @@ export default function ArtistOverview(){
                 : <>
                     <ReleaseDescription release={artist.artistAlbums[0]}/>
                     <Link to={`${artistName}/albums`}>
-                        <h5>see more albums ...</h5>
+                        <p>see more albums ...</p>
                     </Link>
                 </>
             }
@@ -45,8 +48,8 @@ export default function ArtistOverview(){
                 ? <ReleasePlaceholder releasetype={"singles/EPs"}/>
                 : <>
                     <ReleaseDescription release={artist.artistSingles[0]}/>
-                    <Link to={`${artistName}/singles-EPs`}>
-                        <h5>see more singles/EPs ...</h5>
+                    <Link to={`${artistName}/singles-eps`}>
+                        <p>see more singles/EPs ...</p>
                     </Link>
                 </>
             }
@@ -67,15 +70,18 @@ const Overview = styled.div`
   
   h3{
     margin: 10px;
-    font-size: 0.9em;
+    font-size: 16px;
+    color: var(--tertiary-color);
   }
   
   h4{
     margin: 20px;
+    color: var(--tertiary-color);
   }
   
-  h5{
+  p{
     margin: 0px 20px;
+    font-size: 14px;
   }
   
   a{
@@ -83,4 +89,12 @@ const Overview = styled.div`
     margin: 10px;
   }
 
+`
+
+const Loading =styled.section`
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
 `

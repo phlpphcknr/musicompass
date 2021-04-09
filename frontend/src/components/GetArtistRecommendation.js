@@ -10,6 +10,7 @@ export default function GetArtistRecommendation(){
     const [genderTag, setGenderTag] = useState([]);
     const [rolesTags, setRolesTags] = useState([]);
     const [genreTags, setGenreTags] = useState([]);
+    const [noTagSelected, setNoTagSelected] = useState(false);
     const history = useHistory();
 
     useEffect(() => {
@@ -20,23 +21,26 @@ export default function GetArtistRecommendation(){
     );
 
     function onClick() {
-        getRecommendation({genreTags, rolesTags, genderTag})
-            .then((response) => history.push(`/artist/${response}`))
-            .catch((error) => {
-                history.push(`/recommendation/not-available`);})
+        if (genreTags.length === 0 && rolesTags.length === 0 && genderTag.length === 0) {
+            setNoTagSelected(true)
+        } else {
+            getRecommendation({genreTags, rolesTags, genderTag})
+                .then((response) => history.push(`/artist/${response}`))
+                .catch((error) => history.push(`/recommendation/not-available`))
+        }
     };
 
-    if(!recommendationTagCategories){
+    if (!recommendationTagCategories){
         return(
-            <section>
-                Loading
-            </section>
+            <Loading>
+                ...loading...
+            </Loading>
         )
     }
 
     return(
         <ArtistRecommender>
-            <RecommendationTags>
+            <section>
                 <RecommendationTagElement key={recommendationTagCategories[0].categoryName}
                                           recommendationTagObject={recommendationTagCategories[0]}
                                           getRecommendation={[]}
@@ -49,8 +53,10 @@ export default function GetArtistRecommendation(){
                                           recommendationTagObject={recommendationTagCategories[2]}
                                           getRecommendation={[]}
                                           setRecommendation={setGenderTag}/>
-            </RecommendationTags>
-            <button onClick={onClick} > GET RECOMMENDATION </button>
+            </section>
+            {noTagSelected &&
+            <p className="warning" >Set at least one tag to set/update an artist recommendation</p>}
+            <button onClick={onClick} >GET RECOMMENDATION</button>
         </ArtistRecommender>
     )
 }
@@ -64,13 +70,19 @@ const ArtistRecommender = styled.section`
   margin: 0px 20px;
   background: var(--primary-color);
   box-shadow: 0px 2px 4px #333;
+
+  .warning{
+    font-size: 16px;
+    text-align: center;
+    margin: 15px 30px 0px 30px;
+    color: var(--quarternary-color);
   
   button{
     margin: 20px 0px 0px 0px;
   }
 `
 
-const RecommendationTags = styled.section`
+const Loading = styled.section`
   display: flex;
   flex-direction: column;
 `
