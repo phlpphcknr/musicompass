@@ -21,6 +21,7 @@ export default function SearchArtist() {
           <form onSubmit={handleSubmit}>
               <input
                   placeholder="type artist name"
+                  spellCheck={false}
                   type="text"
                   value={artistSearchTerm}
                   onChange={({target}) => setArtistSearchTerm(target.value)}
