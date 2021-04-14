@@ -34,8 +34,7 @@ const SearchResults = styled.div`
 
   p {
     margin: 15px 0px;
-    //margin-top: 15px;
-    font-size: 1.0em;
+    font-size: 14px;
     width: 100%;
     text-align: left;
   }
