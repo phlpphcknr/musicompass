@@ -9,26 +9,28 @@ import ArtistReleaseOverview from "./pages/ArtistReleaseOverview";
 
 export default function App() {
   return (
-    <PageLayout>
-      <AppHeader/>
-      <Switch>
-        <Route exact path="/">
-          <Landing />
-        </Route>
-        <Route exact path="/artistsearch/:artistSearchTerm">
-          <ArtistSearchResult />
-        </Route>
-          <Route exact path="/artist/:artistName">
-              <ArtistOverview/>
-          </Route>
-          <Route exact path="/artist/:artistName/:releaseType">
-              <ArtistReleaseOverview/>
-          </Route>
-          <Route exact path="/recommendation/not-available">
-              <RecommendationNotAvailable/>
-          </Route>
-      </Switch>
-    </PageLayout>
+      <PageLayout>
+          <AppHeader/>
+          <main>
+              <Switch>
+                  <Route exact path="/">
+                      <Landing/>
+                  </Route>
+                  <Route exact path="/artistsearch/:artistSearchTerm">
+                      <ArtistSearchResult/>
+                  </Route>
+                  <Route exact path="/artist/:artistName">
+                      <ArtistOverview/>
+                  </Route>
+                  <Route exact path="/artist/:artistName/:releaseType">
+                      <ArtistReleaseOverview/>
+                  </Route>
+                  <Route exact path="/recommendation/not-available">
+                      <RecommendationNotAvailable/>
+                  </Route>
+              </Switch>
+          </main>
+      </PageLayout>
   )
 }
 

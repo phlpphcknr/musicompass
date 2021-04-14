@@ -20,5 +20,6 @@ const Wrapper = styled.div`
 
   p{
     margin: 10px 30px;
+    color: var(--tertiary-color);
   }
 `
