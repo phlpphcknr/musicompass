@@ -1,5 +1,4 @@
 <h2><p align=center>musiCompass</p></h3>
-<br/>
 <h3><p align=center>... discover new sounds !</p></h3>
 <br/>
 The world of music often seems infinite like the universe itself. We often catch a name here or there or just a genre we are interested in and then it it is often difficult to find a proper release to start listening. 
