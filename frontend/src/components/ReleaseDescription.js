@@ -31,6 +31,7 @@ const Release = styled.section`
   }
 
   section {
+    width: 100%;
     display: block;
     text-align: center;
     
