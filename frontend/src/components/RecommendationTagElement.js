@@ -17,45 +17,27 @@ export default function RecommendationTagElement ({recommendationTagObject, getR
     },[setRecommendation])
 
     const style = {
-
         chips: {
-            background: "var(--tertiary-color)",
-            "borderRadius": "0px",
-            "fontSize": "14px",
-            "fontWeight": "bold",
-            "color": "var(--secondary-color)"
+            background: "chocolate"
         },
-
-        searchBox:{
-            "borderColor": "var(--tertiary-color)",
-            "borderWidth": "thin",
-            "borderRadius": "0px",
-            margin: "2px"
-        },
-
         option: {
-            color: "var(--tertiary-color)",
-            background: "var(--secondary-color)",
-            "fontSize": "14px"
+            color: "black",
+            background: "moccasin"
         }
     };
 
     return(
         <RecommendationTag>
+            <p>{recommendationTagObject.categoryName}:</p>
             <Multiselect
-                options = {recommendationTagObject.categoryValues}
-                isObject = {false}
-                ref = {recommendationValueRef}
+                options={recommendationTagObject.categoryValues}
+                isObject={false}
+                ref={recommendationValueRef}
                 selectionLimit = {selectionLimit}
-                selectedValues = {getRecommendation}
-                onSelect = {setRecommendation}
-                onRemove = {setRecommendation}
+                selectedValues={getRecommendation}
                 closeIcon = "cancel"
-                style = {style}
-                id="css_custom"
+                style={style}
                 displayValue="name"
-                placeholder = {`set ${recommendationTagObject.categoryName}`}
-                hidePlaceholder = "true"
             />
         </RecommendationTag>
     )
@@ -63,6 +45,14 @@ export default function RecommendationTagElement ({recommendationTagObject, getR
 
 const RecommendationTag = styled.section`
   display: flex;
+  flex-direction: column;
   align-items: center;
+  
+  
+  p{
+    font-size: 16px;
+    font-weight: bold;
+    width: 90px;
+  }
   
 `

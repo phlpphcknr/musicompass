@@ -15,17 +15,14 @@ export default function ArtistOverview(){
     useEffect(() => {
         getArtistByName(artistName)
             .then(setArtist)
-            .catch((error) => {
-                console.error(error)
-                history.push(`/artist/error-not-found`);
-            })
+            .catch((error) => {console.error(error)})
     },[artistName, history]);
 
     if (!artist){
         return(
-            <Loading>
-                ...loading...
-            </Loading>
+            <section>
+                Loading
+            </section>
         )
     }
 
@@ -38,8 +35,8 @@ export default function ArtistOverview(){
                 ? <ReleasePlaceholder releasetype={"albums"}/>
                 : <>
                     <ReleaseDescription release={artist.artistAlbums[0]}/>
-                    <Link to={`artist/${artistName}/albums`}>
-                        <p>see more albums ...</p>
+                    <Link to={`${artistName}/albums`}>
+                        <h5>see more albums ...</h5>
                     </Link>
                 </>
             }
@@ -48,8 +45,8 @@ export default function ArtistOverview(){
                 ? <ReleasePlaceholder releasetype={"singles/EPs"}/>
                 : <>
                     <ReleaseDescription release={artist.artistSingles[0]}/>
-                    <Link to={`artist/${artistName}/singles-eps`}>
-                        <p>see more singles/EPs ...</p>
+                    <Link to={`${artistName}/singles-EPs`}>
+                        <h5>see more singles/EPs ...</h5>
                     </Link>
                 </>
             }
@@ -70,18 +67,15 @@ const Overview = styled.div`
   
   h3{
     margin: 10px;
-    font-size: 16px;
-    color: var(--tertiary-color);
+    font-size: 0.9em;
   }
   
   h4{
     margin: 20px;
-    color: var(--tertiary-color);
   }
   
-  p{
+  h5{
     margin: 0px 20px;
-    font-size: 14px;
   }
   
   a{
@@ -89,12 +83,4 @@ const Overview = styled.div`
     margin: 10px;
   }
 
-`
-
-const Loading =styled.section`
-  
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  
 `

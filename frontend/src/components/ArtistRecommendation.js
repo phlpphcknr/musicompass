@@ -10,12 +10,9 @@ export default function ArtistRecommendation ({currentRecommendationTags, artist
     const [rolesTags, setRolesTags] = useState([]);
     const [genreTags, setGenreTags] = useState([]);
 
-    const [genderTagInitial, setGenderTagInitial] = useState([]);
+    const [genderTagInitial, setGenderTagInitial] = useState('');
     const [rolesTagsInitial, setRolesTagsInitial] = useState([]);
     const [genreTagsInitial, setGenreTagsInitial] = useState([]);
-    const [recommended, setRecommended] = useState(currentRecommendationTags.recommended);
-
-    const [noTagSelected, setNoTagSelected] = useState(false);
 
     useEffect(() => {
         getRecommendationTagCategories()
@@ -29,27 +26,20 @@ export default function ArtistRecommendation ({currentRecommendationTags, artist
         },[currentRecommendationTags]
     );
 
-    function setRecommendation() {
-        if (genreTags.length === 0 && rolesTags.length === 0 && genderTag.length === 0) {
-            setNoTagSelected(true)
-        } else {
-            postRecommendationTag({artistName, genreTags, rolesTags, genderTag})
-                .then((recommendationTags) => {
-                    setGenderTagInitial(recommendationTags.gender)
-                    setRolesTagsInitial(recommendationTags.roles)
-                    setGenreTagsInitial(recommendationTags.genres)
-                    setRecommended(true)
-                },
-            setNoTagSelected(false)
-        )
-        }
+    function onClick() {
+        postRecommendationTag({artistName, genreTags, rolesTags, genderTag})
+            .then((recommendationTags) => {
+                setGenderTagInitial(recommendationTags.gender)
+                setRolesTagsInitial(recommendationTags.roles)
+                setGenreTagsInitial(recommendationTags.genres)
+            })
     };
 
-    if (!recommendationTagCategories){
+    if(!recommendationTagCategories){
         return(
-            <Loading>
-                ...loading...
-            </Loading>
+            <section>
+                Loading
+            </section>
         )
     }
 
@@ -69,17 +59,10 @@ export default function ArtistRecommendation ({currentRecommendationTags, artist
                                           getRecommendation={genderTagInitial}
                                           setRecommendation={setGenderTag}/>
             </RecommendationTags>
-            {noTagSelected &&
-            <p class="warning" >Select at least one tag to make an artist recommendation</p>}
-            {!recommended &&
-            <button onClick={setRecommendation}>RECOMMEND</button>}
-            {recommended &&
-            <button onClick={setRecommendation}>UPDATE RECOMMENDATION</button>
-            }
+            <button onClick={onClick} > RECOMMEND </button>
         </ArtistRecommender>
     )
 }
-
 
 const ArtistRecommender = styled.section`
   display: flex;
@@ -91,21 +74,12 @@ const ArtistRecommender = styled.section`
   background: var(--primary-color);
   box-shadow: 0px 2px 4px #333;
 
-  .warning{
-    font-size: 16px;
-    text-align: center;
-    margin: 15px 30px 0px 30px;
-    color: var(--quarternary-color);
+  button{
+    margin: 20px 0px 0px 0px;
   }
 `
 
 const RecommendationTags = styled.section`
   display: flex;
   flex-direction: column;
-`
-const Loading =styled.section`
-  
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `

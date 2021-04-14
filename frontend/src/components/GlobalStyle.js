@@ -6,26 +6,11 @@ export default createGlobalStyle`
     margin: 0;
     padding: 0;
     height: 100%;
-    font-family: "Courier New",serif;
+    font-family: "Courier New";
     background-color: var(--seondary-color);
-    --primary-color: #F1D145;
-    --secondary-color: #86BAA1;
-    --tertiary-color: #553D36;
-    --quarternary-color: #27187E;
-    --quinary-color: #3AB795;
-    
-    --opacity-hover:0.7;
-  }
-  
-  button{
-    font-size: 16px;
-    font-family: inherit;
-    font-weight: bold;
-    margin: 15px 0px 0px 0px;
-    padding: 8px;
-    border: 0;
-    color: var(--secondary-color);
-    background-color: var(--tertiary-color);
+    --primary-color: #fdcb6e;
+    --secondary-color: moccasin;
+    --opacity-hover: 0.7;
   }
   
   section{
@@ -44,39 +29,23 @@ export default createGlobalStyle`
   p{
     font-weight: bold;
   }
-  
-  span{
-    padding: 0px;
-    margin: 0px;
-    font-weight: bold;
+
+  h5 {
+    margin: 0;
+    padding: 0;
   }
 
-  h1{
-    margin: 0;
-    padding: 0;
-  }
-  
-  h5{
-    margin: 0;
-    padding: 0;
-  }
-  
-  a{
+  a {
     text-decoration: none;
-    color: var(--quarternary-color);
+    color: chocolate;
+
     :hover {
       opacity: var(--opacity-hover);
     }
   }
-  
-  .searchBox#css_custom_input::placeholder{
-    color: var(--tertiary-color);
-  }
 
-  .searchBox#css_custom_input{
-    font-family: "Courier New", serif;
-    font-weight: bold;
-    color: var(--tertiary-color);
+  select {
+    font-family: "Courier New";
   }
 
 `
