@@ -70,7 +70,7 @@ export default function ArtistRecommendation ({currentRecommendationTags, artist
                                           setRecommendation={setGenderTag}/>
             </RecommendationTags>
             {noTagSelected &&
-            <p class="warning" >Select at least one tag to make an artist recommendation</p>}
+            <p class="warning" >Set at least one tag to set/update an artist recommendation</p>}
             {!recommended &&
             <button onClick={setRecommendation}>RECOMMEND</button>}
             {recommended &&
@@ -108,4 +108,5 @@ const Loading =styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 60px;
 `

@@ -31,13 +31,14 @@ const Release = styled.section`
   }
 
   section {
+    width: 100%;
     display: block;
     text-align: center;
     
     span{
       display: block;
       padding: 10px;
-      font-size: 18px;
+      font-size: 14px;
       color: var(--tertiary-color);
     }
     

@@ -17,7 +17,7 @@ export default function ArtistOverview(){
             .then(setArtist)
             .catch((error) => {
                 console.error(error)
-                history.push(`/artist/error-not-found`);
+                history.push(`/recommendation/not-available`);
             })
     },[artistName, history]);
 
@@ -48,7 +48,7 @@ export default function ArtistOverview(){
                 ? <ReleasePlaceholder releasetype={"singles/EPs"}/>
                 : <>
                     <ReleaseDescription release={artist.artistSingles[0]}/>
-                    <Link to={`${artistName}/singles-eps`}>
+                    <Link to={`${artistName}/singles-EPs`}>
                         <p>see more singles/EPs ...</p>
                     </Link>
                 </>
@@ -96,5 +96,6 @@ const Loading =styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 60px;
   
 `

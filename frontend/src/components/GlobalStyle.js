@@ -23,9 +23,12 @@ export default createGlobalStyle`
     font-weight: bold;
     margin: 15px 0px 0px 0px;
     padding: 8px;
-    border: 0;
     color: var(--secondary-color);
     background-color: var(--tertiary-color);
+  }
+  
+  button:focus{
+    outline: 0;
   }
   
   section{
@@ -46,8 +49,8 @@ export default createGlobalStyle`
   }
   
   span{
-    padding: 0px;
-    margin: 0px;
+    padding: 0;
+    margin: 0;
     font-weight: bold;
   }
 
@@ -69,6 +72,15 @@ export default createGlobalStyle`
     }
   }
   
+  input:focus{
+    outline: 0;
+  }
+  
+  input::placeholder{
+    color: var(--tertiary-color);
+  }
+  
+  
   .searchBox#css_custom_input::placeholder{
     color: var(--tertiary-color);
   }
@@ -77,6 +89,8 @@ export default createGlobalStyle`
     font-family: "Courier New", serif;
     font-weight: bold;
     color: var(--tertiary-color);
+    padding: 0;
+    margin: 0;
   }
 
 `
