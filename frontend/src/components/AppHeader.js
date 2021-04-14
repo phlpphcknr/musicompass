@@ -20,6 +20,6 @@ const Header = styled.header`
   img {
     display: block;
     max-width: 70%;
-    margin: 25px auto 15px auto;
+    margin: 25px auto 15px;
   }
 `
