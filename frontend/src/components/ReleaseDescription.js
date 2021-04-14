@@ -32,16 +32,14 @@ const Release = styled.section`
 
   section {
     display: block;
-    align-self: center;
+    text-align: center;
     
     span{
       display: block;
-      align-self: center;
       padding: 10px;
       font-size: 18px;
       color: var(--tertiary-color);
     }
     
   }
-  
 `

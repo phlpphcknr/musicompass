@@ -94,7 +94,7 @@ const ArtistRecommender = styled.section`
   .warning{
     font-size: 16px;
     text-align: center;
-    margin: 15px 30px 0px 30px;
+    margin: 15px 30px 0px;
     color: var(--quarternary-color);
   }
 `

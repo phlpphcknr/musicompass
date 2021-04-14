@@ -38,7 +38,7 @@ export default function ArtistOverview(){
                 ? <ReleasePlaceholder releasetype={"albums"}/>
                 : <>
                     <ReleaseDescription release={artist.artistAlbums[0]}/>
-                    <Link to={`artist/${artistName}/albums`}>
+                    <Link to={`${artistName}/albums`}>
                         <p>see more albums ...</p>
                     </Link>
                 </>
@@ -48,7 +48,7 @@ export default function ArtistOverview(){
                 ? <ReleasePlaceholder releasetype={"singles/EPs"}/>
                 : <>
                     <ReleaseDescription release={artist.artistSingles[0]}/>
-                    <Link to={`artist/${artistName}/singles-eps`}>
+                    <Link to={`${artistName}/singles-eps`}>
                         <p>see more singles/EPs ...</p>
                     </Link>
                 </>
