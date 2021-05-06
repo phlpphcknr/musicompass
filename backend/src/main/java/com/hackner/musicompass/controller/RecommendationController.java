@@ -1,6 +1,7 @@
 package com.hackner.musicompass.controller;
 
 import com.hackner.musicompass.controller.model.RecommendationRequestDto;
+import com.hackner.musicompass.model.Artist;
 import com.hackner.musicompass.model.RecommendationCategory;
 import com.hackner.musicompass.controller.model.RecommendationTagsDto;
 import com.hackner.musicompass.model.RecommendationTags;
@@ -34,5 +35,10 @@ public class RecommendationController {
     @PostMapping("/get")
     public String getArtistRecommendation(@RequestBody RecommendationRequestDto recommendationRequestDto){
         return recommendationService.getArtistRecommendation(recommendationRequestDto);
+    }
+
+    @GetMapping("/latest")
+    public List<Artist> getLatestArtistRecommendations(){
+        return recommendationService.getLatestArtistRecommendations();
     }
 }
