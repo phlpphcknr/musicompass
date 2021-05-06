@@ -2,3 +2,4 @@ spring:
   data:
     mongodb:
       database: musicompass-cluster
+      uri: ${MONGODB_URI}
