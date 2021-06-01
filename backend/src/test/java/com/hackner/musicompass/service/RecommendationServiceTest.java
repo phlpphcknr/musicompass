@@ -258,6 +258,18 @@ class RecommendationServiceTest {
                 .changeDate(date3).build();
         Artist artist3 = Artist.builder().artistName("artist3").recommendationTags(recommendationTags3).build();
 
-        return List.of(artist1, artist2, artist3);
+        List<String> gender4 = List.of("Female");
+        List<String> genres4 = List.of("Rock");
+        List<String> roles4 = List.of("Producer");
+        LocalDateTime date4 = LocalDateTime.of(2021, 5, 16, 14, 37);
+        RecommendationTags recommendationTags4 = RecommendationTags.builder()
+                .recommended(true)
+                .genres(genres4)
+                .roles(roles4)
+                .gender(gender4)
+                .changeDate(date4).build();
+        Artist artist4 = Artist.builder().artistName("artist4").recommendationTags(recommendationTags4).build();
+
+        return List.of(artist1, artist2, artist3, artist4);
     }
 }

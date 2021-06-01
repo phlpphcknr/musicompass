@@ -14,9 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -60,7 +58,15 @@ public class RecommendationService {
 
         List<Artist> recommendedArtists = getRecommendedArtists();
 
-        return recommendedArtists;
+        List<Artist> orderedRecommendedArtists = recommendedArtists.stream()
+                .sorted(Comparator.comparing(artist -> artist.getRecommendationTags().getChangeDate(), LocalDateTime::compareTo))
+                .collect(Collectors.toList());
+
+        Collections.reverse(orderedRecommendedArtists);
+
+        List<Artist> recentRecommendedArtists = orderedRecommendedArtists.subList(0,3);
+
+        return recentRecommendedArtists;
     }
 
     enum FilterCategory{
