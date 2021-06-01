@@ -67,7 +67,7 @@ const ArtistRecommender = styled.section`
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  margin: 0px 20px;
+  margin: 0px 20px 20px 20px;
   background: var(--primary-color);
   box-shadow: 0px 2px 4px #333;
 

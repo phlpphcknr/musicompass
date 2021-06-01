@@ -26,3 +26,8 @@ export const getRecommendation = ({genreTags, rolesTags, genderTag}) =>
     axios
         .post(baseUrl + `/recommendation/get`,{genreTags, rolesTags, genderTag})
         .then((response) => response.data)
+
+export const getLatestRecommendations = () =>
+    axios
+        .get(baseUrl + `/recommendation/latest`)
+        .then((response) => response.data)
