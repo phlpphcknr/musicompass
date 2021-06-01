@@ -1,6 +1,7 @@
 import styled from 'styled-components/macro'
 import SearchArtist from '../components/SearchArtist'
 import GetArtistRecommendation from "../components/GetArtistRecommendation";
+import LatestArtistRecommendations from "../components/LatestArtistRecommendations";
 
 export default function Landing() {
   return (
@@ -9,6 +10,8 @@ export default function Landing() {
           <SearchArtist/>
           <p>Set tags and get an artist recommendation</p>
           <GetArtistRecommendation/>
+          <p>Check out the latest artist recommendations</p>
+          <LatestArtistRecommendations/>
       </Wrapper>
   )
 }
