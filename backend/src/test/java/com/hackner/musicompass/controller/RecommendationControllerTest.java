@@ -20,6 +20,8 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Date;
 import java.util.List;
 
@@ -90,7 +92,7 @@ class RecommendationControllerTest {
                 .recommended(true)
                 .genres(genresBefore)
                 .roles(rolesBefore)
-                .changeDate(Date.from(before))
+                .changeDate(LocalDateTime.ofInstant(before, ZoneOffset.UTC))
                 .gender(genderBefore).build();
 
         RecommendationTags recommendationTagsAfter = RecommendationTags.builder()
@@ -112,7 +114,7 @@ class RecommendationControllerTest {
 
         //THEN
         assertThat(response.getBody(), equalTo(recommendationTagsAfter));
-        assertTrue(response.getBody().getChangeDate().after(Date.from(before)));
+        assertTrue(response.getBody().getChangeDate().isAfter(LocalDateTime.ofInstant(before, ZoneOffset.UTC)));
     }
 
     @Test

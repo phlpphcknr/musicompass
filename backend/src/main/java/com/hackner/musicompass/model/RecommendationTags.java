@@ -2,7 +2,7 @@ package com.hackner.musicompass.model;
 
 import lombok.*;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -16,5 +16,5 @@ public class RecommendationTags {
     private List<String> roles;
     private List<String> gender;
     @EqualsAndHashCode.Exclude
-    private Date changeDate;
+    private LocalDateTime changeDate;
 }

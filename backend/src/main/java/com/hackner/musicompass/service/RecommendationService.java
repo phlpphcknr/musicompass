@@ -12,9 +12,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -32,7 +32,6 @@ public class RecommendationService {
     }
 
 
-
     public RecommendationTags changeRecommendationTags (RecommendationTagsDto recommendationTagsDto){
 
         Artist artist = artistMongoDb.findById(recommendationTagsDto.getArtistName()).get();
@@ -42,7 +41,7 @@ public class RecommendationService {
                 .genres(recommendationTagsDto.getGenres())
                 .roles(recommendationTagsDto.getRoles())
                 .gender(recommendationTagsDto.getGender())
-                .changeDate(Date.from(timeUtils.now())).build();
+                .changeDate(LocalDateTime.ofInstant(timeUtils.now(), ZoneOffset.UTC)).build();
 
         artist.setRecommendationTags(recommendationTags);
 
@@ -55,17 +54,28 @@ public class RecommendationService {
         return recommendationCategoryMongoDb.findAll();
     }
 
+    public List<Artist> getLatestArtistRecommendations() {
+
+        List<Artist> recommendedArtists = getRecommendedArtists();
+
+        List<Artist> orderedRecommendedArtists = recommendedArtists.stream()
+                .sorted(Comparator.comparing(artist -> artist.getRecommendationTags().getChangeDate(), LocalDateTime::compareTo))
+                .collect(Collectors.toList());
+
+        Collections.reverse(orderedRecommendedArtists);
+
+        List<Artist> recentRecommendedArtists = orderedRecommendedArtists.subList(0,3);
+
+        return recentRecommendedArtists;
+    }
+
     enum FilterCategory{
         GENRES, ROLES, GENDER
     }
 
     public String getArtistRecommendation(RecommendationRequestDto recommendationRequestDto) {
 
-        List<Artist> artists = artistMongoDb.findAll();
-
-        List<Artist> recommendedArtists = artists.stream()
-                .filter(artist -> artist.getRecommendationTags().getRecommended() == true)
-                .collect(Collectors.toList());
+        List<Artist> recommendedArtists = getRecommendedArtists();
 
         FilterCategory genres = FilterCategory.GENRES;
         List<Artist> genreFilteredArtists = filterByRecommendationTags(recommendedArtists, recommendationRequestDto.getGenres(), genres);
@@ -80,6 +90,17 @@ public class RecommendationService {
 
         Random rand = new Random();
         return fullyFilteredArtists.get(rand.nextInt(fullyFilteredArtists.size())).getArtistName();
+    }
+
+    public List<Artist> getRecommendedArtists(){
+
+        List<Artist> artists = artistMongoDb.findAll();
+
+        List<Artist> recommendedArtists = artists.stream()
+                .filter(artist -> artist.getRecommendationTags().getRecommended() == true)
+                .collect(Collectors.toList());
+
+        return recommendedArtists;
     }
 
     public List<Artist> filterByRecommendationTags(List<Artist> artists, List<String> filterCriteria, FilterCategory filterCategory) {

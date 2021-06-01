@@ -11,8 +11,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.time.Instant;
 import java.util.Optional;
@@ -35,9 +36,9 @@ class RecommendationServiceTest {
     public void getRecommendationCategoryValues(){
         //GIVEN
         List<RecommendationCategory> categoryValues = Arrays.asList(
-                RecommendationCategory.builder().categoryName("Genre").categoryValues(Arrays.asList("Genre1", "Genre2")).build(),
-                RecommendationCategory.builder().categoryName("Role").categoryValues(Arrays.asList("Role1","Role2")).build(),
-                RecommendationCategory.builder().categoryName("Gender").categoryValues(Arrays.asList("Gender")).build());
+                RecommendationCategory.builder().categoryName("Genre").categoryValues(List.of("Genre1", "Genre2")).build(),
+                RecommendationCategory.builder().categoryName("Role").categoryValues(List.of("Role1","Role2")).build(),
+                RecommendationCategory.builder().categoryName("Gender").categoryValues(List.of("Gender")).build());
 
         when(recommendationCategoryMongoDb.findAll()).thenReturn(categoryValues);
 
@@ -73,14 +74,14 @@ class RecommendationServiceTest {
                 .recommended(true)
                 .genres(genresBefore)
                 .roles(rolesBefore)
-                .changeDate(Date.from(before))
+                .changeDate(LocalDateTime.ofInstant(before, ZoneOffset.UTC))
                 .gender(genderBefore).build();
 
         RecommendationTags recommendationTagsAfter = RecommendationTags.builder()
                 .recommended(true)
                 .genres(genresAfter)
                 .roles(rolesAfter)
-                .changeDate(Date.from(after))
+                .changeDate(LocalDateTime.ofInstant(after, ZoneOffset.UTC))
                 .gender(genderAfter).build();
 
         Artist artistBefore = Artist.builder()
@@ -99,7 +100,7 @@ class RecommendationServiceTest {
 
         //THEN
         verify(artistMongoDb).save(artistAfter);
-        assertTrue(actual.getChangeDate().after(Date.from(before)));
+        assertTrue(actual.getChangeDate().isAfter(LocalDateTime.ofInstant(before, ZoneOffset.UTC)));
         assertThat(actual, equalTo(recommendationTagsAfter));
     }
 
@@ -123,7 +124,7 @@ class RecommendationServiceTest {
                 .recommended(true)
                 .genres(genresAfter)
                 .roles(rolesAfter)
-                .changeDate(Date.from(after))
+                .changeDate(LocalDateTime.ofInstant(after, ZoneOffset.UTC))
                 .gender(genderAfter).build();
 
         Artist artistBefore = Artist.builder()
@@ -202,37 +203,73 @@ class RecommendationServiceTest {
         assertThat(actual, is("artist3"));
     }
 
+    @Test
+    @DisplayName("Get 3 latest artist recommendation with date in descending order")
+    public void getLatestArtistRecommendationsList(){
+        //GIVEN
+        when(artistMongoDb.findAll()).thenReturn(getArtistList());
+
+        //WHEN
+        List<Artist> actual = recommendationService.getLatestArtistRecommendations();
+
+        //THEN
+        assertTrue(actual.get(0).getRecommendationTags().getChangeDate()
+                .isAfter(actual.get(1).getRecommendationTags().getChangeDate()));
+        assertTrue(actual.get(1).getRecommendationTags().getChangeDate()
+                .isAfter(actual.get(2).getRecommendationTags().getChangeDate()));
+        assertTrue(actual.size() <= 3);
+
+    }
+
     public List<Artist> getArtistList(){
         List<String> gender1 = List.of("Male");
         List<String> genres1 = List.of("Jazz", "Rock");
         List<String> roles1 = List.of("Singer");
+        LocalDateTime date1 = LocalDateTime.of(2021, 4, 16, 14, 37);
         RecommendationTags recommendationTags1 = RecommendationTags.builder()
                 .recommended(true)
                 .genres(genres1)
                 .roles(roles1)
-                .gender(gender1).build();
+                .gender(gender1)
+                .changeDate(date1).build();
         Artist artist1 = Artist.builder().artistName("artist1").recommendationTags(recommendationTags1).build();
 
         List<String> gender2 = List.of("Non-binary");
         List<String> genres2 = List.of("Hip Hop","African");
         List<String> roles2 = List.of("Producer","Drummer/Percussionist");
+        LocalDateTime date2 = LocalDateTime.of(2021, 2, 16, 14, 37);
         RecommendationTags recommendationTags2 = RecommendationTags.builder()
                 .recommended(true)
                 .genres(genres2)
                 .roles(roles2)
-                .gender(gender2).build();
+                .gender(gender2)
+                .changeDate(date2).build();
         Artist artist2 = Artist.builder().artistName("artist2").recommendationTags(recommendationTags2).build();
 
         List<String> gender3 = List.of("Female");
         List<String> genres3 = List.of("Latin");
         List<String> roles3 = List.of("Trumpeter");
+        LocalDateTime date3 = LocalDateTime.of(2021, 3, 16, 14, 37);
         RecommendationTags recommendationTags3 = RecommendationTags.builder()
                 .recommended(true)
                 .genres(genres3)
                 .roles(roles3)
-                .gender(gender3).build();
+                .gender(gender3)
+                .changeDate(date3).build();
         Artist artist3 = Artist.builder().artistName("artist3").recommendationTags(recommendationTags3).build();
 
-        return List.of(artist1, artist2, artist3);
+        List<String> gender4 = List.of("Female");
+        List<String> genres4 = List.of("Rock");
+        List<String> roles4 = List.of("Producer");
+        LocalDateTime date4 = LocalDateTime.of(2021, 5, 16, 14, 37);
+        RecommendationTags recommendationTags4 = RecommendationTags.builder()
+                .recommended(true)
+                .genres(genres4)
+                .roles(roles4)
+                .gender(gender4)
+                .changeDate(date4).build();
+        Artist artist4 = Artist.builder().artistName("artist4").recommendationTags(recommendationTags4).build();
+
+        return List.of(artist1, artist2, artist3, artist4);
     }
 }
