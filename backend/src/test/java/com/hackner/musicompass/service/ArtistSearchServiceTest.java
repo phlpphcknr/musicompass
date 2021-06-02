@@ -49,7 +49,7 @@ class ArtistSearchServiceTest {
         List<Artist> actual = artistSearchService.getArtistListBySearchTerm(searchTerm);
 
         //THEN
-        assertThat(actual, is(TestData.createArtistList(3)));
+        assertThat(actual, is(TestData.createBasicArtistList(3)));
     }
 
     @Test
@@ -63,7 +63,7 @@ class ArtistSearchServiceTest {
         List<Artist> actual = artistSearchService.getArtistListBySearchTerm(searchTerm);
 
         //THEN
-        assertThat(actual, is(TestData.createArtistList(5)));
+        assertThat(actual, is(TestData.createBasicArtistList(5)));
         assertThat(actual.size(), is(5));
     }
 }

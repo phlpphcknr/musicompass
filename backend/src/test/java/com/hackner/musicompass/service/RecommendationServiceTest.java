@@ -121,11 +121,11 @@ class RecommendationServiceTest {
         String actual = recommendationService.getArtistRecommendation(recommendationRequestDto);
 
         //THEN
-        assertThat(actual, is("artist2"));
+        assertThat(actual, is("Hans Sichel"));
     }
 
     @Test
-    @DisplayName("Request Artist Recommendation with tag combination which is not available")
+    @DisplayName("Request Artist Recommendation with tag combination which is available")
     public void getArtistRecommendationForExistingSingleTag(){
         //GIVEN
         List<String> gender = List.of();
@@ -141,7 +141,7 @@ class RecommendationServiceTest {
         String actual = recommendationService.getArtistRecommendation(recommendationRequestDto);
 
         //THEN
-        assertThat(actual, is("artist3"));
+        assertThat(actual, is("Hans Bohrer"));
     }
 
     @Test

@@ -52,7 +52,7 @@ class ArtistServiceTest {
     @DisplayName("Get Artist who is not saved in DB from Api and save in DB")
     public void getArtistByNameFromApi (){
         //GIVEN
-        String artistName = "Hans Hammer";
+        String artistName = "Hans Schraube";
         Instant now = Instant.ofEpochSecond(Instant.now().getEpochSecond());
 
         /*Artist artist = Artist.builder()

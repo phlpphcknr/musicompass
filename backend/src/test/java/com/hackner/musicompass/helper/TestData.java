@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 public class TestData {
@@ -120,6 +119,20 @@ public class TestData {
     public static DiscogsArtistSearchResults createDiscogsArtistSearchResults (String artistName){
 
         DiscogsArtist discogsArtist = DiscogsArtist.builder()
+                .discogsArtistId("666")
+                .artistName(artistName)
+                .artistImageUrl("SchraubeImageUrl")
+                .discogsArtistUrl("SchraubeUrl").build();
+
+        DiscogsArtistSearchResults discogsArtistSearchResults = DiscogsArtistSearchResults.builder()
+                .results(List.of(discogsArtist)).build();
+
+        return discogsArtistSearchResults;
+    }
+
+    public static DiscogsArtistSearchResults createDiscogsArtistSearchResults2 (String artistName){
+
+        DiscogsArtist discogsArtist = DiscogsArtist.builder()
                 .discogsArtistId("111")
                 .artistName(artistName)
                 .artistImageUrl("HammerImageUrl")
@@ -131,27 +144,7 @@ public class TestData {
         return discogsArtistSearchResults;
     }
 
-    public static Artist createArtist(String artistName, Instant saveDate){
-        Artist artist = createArtist(artistName);
-        artist.setSaveDate(LocalDateTime.ofInstant(saveDate, ZoneOffset.UTC));
-
-        return artist;
-    }
-
-    public static Artist createArtist(String artistName){
-
-        Artist artist = createArtistList(1).get(0);
-        artist.setArtistName(artistName);
-
-        return artist;
-    }
-
-    public static List<Artist> createArtistList(int listlength){
-
-        List<String> gender1 = List.of("Male");
-        List<String> genres1 = List.of("Jazz", "Rock");
-        List<String> roles1 = List.of("Singer");
-        LocalDateTime date1 = LocalDateTime.of(2021, 4, 16, 14, 37);
+    public static Artist createArtistIntegrationTest(String artistName, Instant saveDate){
 
         ArtistInfo artistInfo1 = new ArtistInfo().builder()
                 .artistImageUrl("HammerImageUrl")
@@ -180,12 +173,6 @@ public class TestData {
                 .build();
         List<ArtistRelease> artistAlbums = List.of(artistRelease1);
         List<ArtistRelease> artistSingles = List.of(artistRelease2);
-        /*RecommendationTags recommendationTags1 = RecommendationTags.builder()
-                .recommended(true)
-                .genres(genres1)
-                .roles(roles1)
-                .gender(gender1)
-                .changeDate(date1).build();*/
         RecommendationTags recommendationTags1 = RecommendationTags.builder()
                 .recommended(false)
                 .genres(Collections.emptyList())
@@ -194,10 +181,61 @@ public class TestData {
                 .changeDate(null)
                 .build();
         Artist artist1 = Artist.builder()
-                .artistName("Hans Hammer")
+                .artistName(artistName)
+                .saveDate(LocalDateTime.ofInstant(saveDate, ZoneOffset.UTC))
                 .artistInfo(artistInfo1)
                 .artistAlbums(artistAlbums)
                 .artistSingles(artistSingles)
+                .recommendationTags(recommendationTags1)
+                .build();
+
+        return artist1;
+
+    }
+
+    public static Artist createArtist(String artistName, Instant saveDate){
+
+        if (artistName=="Hans Schraube"){
+            Artist artist = createArtistList(6).get(5);
+            artist.setSaveDate(LocalDateTime.ofInstant(saveDate, ZoneOffset.UTC));
+            return artist;
+        }
+
+        Artist artist = createArtist(artistName);
+        artist.setSaveDate(LocalDateTime.ofInstant(saveDate, ZoneOffset.UTC));
+
+        return artist;
+    }
+
+    public static Artist createArtist(String artistName){
+
+        Artist artist = createArtistList(1).get(0);
+        artist.setArtistName(artistName);
+
+        return artist;
+    }
+
+    public static List<Artist> createArtistList(int listlength){
+
+        List<String> gender1 = List.of("Male");
+        List<String> genres1 = List.of("Jazz", "Rock");
+        List<String> roles1 = List.of("Singer");
+        LocalDateTime date1 = LocalDateTime.of(2021, 4, 16, 14, 37);
+
+        ArtistInfo artistInfo1 = new ArtistInfo().builder()
+                .artistImageUrl("HammerImageUrl")
+                .discogsArtistId("111")
+                .discogsArtistUrl("HammerUrl")
+                .build();
+        RecommendationTags recommendationTags1 = RecommendationTags.builder()
+                .recommended(true)
+                .genres(genres1)
+                .roles(roles1)
+                .gender(gender1)
+                .changeDate(date1).build();
+        Artist artist1 = Artist.builder()
+                .artistName("Hans Hammer")
+                .artistInfo(artistInfo1)
                 .recommendationTags(recommendationTags1)
                 .build();
 
@@ -285,7 +323,96 @@ public class TestData {
                 .recommendationTags(recommendationTags5)
                 .build();
 
-        List<Artist> results = Arrays.asList(artist1,artist2,artist3,artist4,artist5);
+        RecommendationTags recommendationTags6 = RecommendationTags.builder()
+                .recommended(false)
+                .genres(Collections.emptyList())
+                .roles(Collections.emptyList())
+                .gender(Collections.emptyList())
+                .changeDate(null)
+                .build();
+        ArtistInfo artistInfo6 = new ArtistInfo().builder()
+                .artistImageUrl("SchraubeImageUrl")
+                .discogsArtistId("666")
+                .discogsArtistUrl("SchraubeUrl")
+                .build();
+        Artist artist6 = Artist.builder()
+                .artistName("Hans Schraube")
+                .artistInfo(artistInfo6)
+                .artistAlbums(Collections.emptyList())
+                .artistSingles(Collections.emptyList())
+                .recommendationTags(recommendationTags6)
+                .build();
+
+        List<Artist> results = Arrays.asList(artist1,artist2,artist3,artist4,artist5, artist6);
+
+        return results.subList(0,listlength);
+    }
+
+    public static List<Artist> createBasicArtistList(int listlength){
+
+        ArtistInfo artistInfo1 = new ArtistInfo().builder()
+                .artistImageUrl("HammerImageUrl")
+                .discogsArtistId("111")
+                .discogsArtistUrl("HammerUrl")
+                .build();
+        Artist artist1 = Artist.builder()
+                .artistName("Hans Hammer")
+                .artistInfo(artistInfo1)
+                .build();
+
+        ArtistInfo artistInfo2 = new ArtistInfo().builder()
+                .artistImageUrl("SichelImageUrl")
+                .discogsArtistId("222")
+                .discogsArtistUrl("SichelUrl")
+                .build();
+        Artist artist2 = Artist.builder()
+                .artistName("Hans Sichel")
+                .artistInfo(artistInfo2)
+                .build();
+
+        ArtistInfo artistInfo3 = new ArtistInfo().builder()
+                .artistImageUrl("BohrerImageUrl")
+                .discogsArtistId("333")
+                .discogsArtistUrl("BohrerUrl")
+                .build();
+        Artist artist3 = Artist.builder()
+                .artistName("Hans Bohrer")
+                .artistInfo(artistInfo3)
+                .build();
+
+        ArtistInfo artistInfo4 = new ArtistInfo().builder()
+                .artistImageUrl("MeiselImageUrl")
+                .discogsArtistId("444")
+                .discogsArtistUrl("MeiselUrl")
+                .build();
+        Artist artist4 = Artist.builder()
+                .artistName("Hans Meisel")
+                .artistInfo(artistInfo4)
+                .build();
+
+        ArtistInfo artistInfo5 = new ArtistInfo().builder()
+                .artistImageUrl("NagelImageUrl")
+                .discogsArtistId("555")
+                .discogsArtistUrl("NagelUrl")
+                .build();
+        Artist artist5 = Artist.builder()
+                .artistName("Hans Nagel")
+                .artistInfo(artistInfo5)
+                .build();
+
+        ArtistInfo artistInfo6 = new ArtistInfo().builder()
+                .artistImageUrl("SchraubeImageUrl")
+                .discogsArtistId("666")
+                .discogsArtistUrl("SchraubeUrl")
+                .build();
+        Artist artist6 = Artist.builder()
+                .artistName("Hans Schraube")
+                .artistInfo(artistInfo6)
+                .artistAlbums(Collections.emptyList())
+                .artistSingles(Collections.emptyList())
+                .build();
+
+        List<Artist> results = Arrays.asList(artist1,artist2,artist3,artist4,artist5, artist6);
 
         return results.subList(0,listlength);
     }

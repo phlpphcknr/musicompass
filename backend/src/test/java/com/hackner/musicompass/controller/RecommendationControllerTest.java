@@ -80,7 +80,7 @@ class RecommendationControllerTest {
         List<String> genresAfter = List.of("Genre1", "Genre5");
         List<String> rolesAfter = List.of("Role0","Role2");
         List<String> genderAfter = List.of("differentGender");
-        Instant before = Instant.ofEpochSecond(Instant.now().getEpochSecond());
+        Instant before = Instant.ofEpochSecond(Instant.now().getEpochSecond()-5);
 
         RecommendationTagsDto recommendationTagsDto = RecommendationTagsDto.builder()
                 .artistName(artistName)

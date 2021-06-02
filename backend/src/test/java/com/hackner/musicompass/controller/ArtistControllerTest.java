@@ -64,7 +64,7 @@ class ArtistControllerTest {
         //GIVEN
         String artistName = "Prince";
         Instant saveDate = timeUtils.now();
-        Artist artist = TestData.createArtist(artistName, saveDate);
+        Artist artist = TestData.createArtistIntegrationTest(artistName, saveDate);
         artistMongoDb.save(artist);
 
         //WHEN
@@ -83,9 +83,9 @@ class ArtistControllerTest {
         String artistUrl = "https://api.discogs.com/database/search?type=artist&q=" + artistName;
         String releasesUrl = "https://api.discogs.com/database/search?type=master&artist=" + artistName + "&page=1&per-page_100";
         Instant saveDate = timeUtils.now();
-        Artist artist = TestData.createArtist(artistName, saveDate);
+        Artist artist = TestData.createArtistIntegrationTest(artistName, saveDate);
 
-        DiscogsArtistSearchResults discogsArtistSearchResults = TestData.createDiscogsArtistSearchResults(artistName);
+        DiscogsArtistSearchResults discogsArtistSearchResults = TestData.createDiscogsArtistSearchResults2(artistName);
         ResponseEntity<DiscogsArtistSearchResults> artistResponseEntity = ResponseEntity.ok(discogsArtistSearchResults);
 
         DiscogsMasterReleaseSearchResults discogsMasterReleaseSearchResults = TestData.createDiscogsMasterReleaseSearchResults();
