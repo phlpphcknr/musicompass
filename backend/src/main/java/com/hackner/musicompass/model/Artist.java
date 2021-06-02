@@ -3,6 +3,7 @@ package com.hackner.musicompass.model;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class Artist {
     @Id
     private String artistName;
     @EqualsAndHashCode.Exclude
-    private Date saveDate;
+    private LocalDateTime saveDate;
     private ArtistInfo artistInfo;
     private List<ArtistRelease> artistAlbums;
     private List<ArtistRelease> artistSingles;

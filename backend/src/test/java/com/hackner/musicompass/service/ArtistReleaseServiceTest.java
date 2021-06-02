@@ -1,12 +1,10 @@
 package com.hackner.musicompass.service;
 
 import com.hackner.musicompass.discogsapi.model.DiscogsMasterRelease;
-import com.hackner.musicompass.discogsapi.model.Stats;
 import com.hackner.musicompass.model.ArtistRelease;
+import com.hackner.musicompass.helper.TestData;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -20,7 +18,7 @@ class ArtistReleaseServiceTest {
     @DisplayName("Get albums list from discogsMasterReleaseList")
     public void getAlbumList (){
         //GIVEN
-        List<DiscogsMasterRelease> discogsMasterReleaseList = getDiscogsMasterReleaseList();
+        List<DiscogsMasterRelease> discogsMasterReleaseList = TestData.createDiscogsMasterReleaseList();
 
         //WHEN
         List<ArtistRelease> actual = artistReleaseService.getSortedReleaseList("Album", discogsMasterReleaseList);
@@ -28,14 +26,14 @@ class ArtistReleaseServiceTest {
         //THEN
         assertThat(actual.size(), is(2));
         assertThat(actual.get(0).getGlobalRating() > actual.get(1).getGlobalRating(), is(true));
-        assertThat(actual.get(1), equalTo(getArtistReleaseList().get(0)));
+        assertThat(actual.get(1), equalTo(TestData.createArtistReleaseList().get(0)));
     }
 
     @Test
     @DisplayName("Get singles list from discogsMasterReleaseList")
     public void getSingleList (){
         //GIVEN
-        List<DiscogsMasterRelease> discogsMasterReleaseList = getDiscogsMasterReleaseList();
+        List<DiscogsMasterRelease> discogsMasterReleaseList = TestData.createDiscogsMasterReleaseList();
 
         //WHEN
         List<ArtistRelease> actual = artistReleaseService.getSortedReleaseList("Album", discogsMasterReleaseList);
@@ -57,67 +55,5 @@ class ArtistReleaseServiceTest {
 
         //THEN
         assertThat(actual, is(16.0));
-    }
-
-    public List<ArtistRelease> getArtistReleaseList(){
-
-        ArtistRelease artistRelease1 = ArtistRelease.builder()
-                .fullTitle("someTitle")
-                .discogsMasterReleaseId("111")
-                .format("Album")
-                .coverImageUrl("someOtherCoverImageUrl")
-                .releaseYear(1999)
-                .discogsWant(50000)
-                .discogsHave(100000)
-                .globalRating(5.0)
-                .build();
-
-        List<ArtistRelease> results = Arrays.asList(artistRelease1);
-
-        return results;
-    }
-
-    public List<DiscogsMasterRelease> getDiscogsMasterReleaseList(){
-
-        Stats stats1 = Stats.builder().numberOfWants(50000).numberOfHaves(100000).build();
-        DiscogsMasterRelease discogsMasterRelease1 = DiscogsMasterRelease.builder()
-                .year(1999)
-                .format(Arrays.asList("Album","Compilation","CD"))
-                .masterId("111")
-                .fullAlbumTitle("someTitle")
-                .coverImageUrl("someOtherCoverImageUrl")
-                .releaseStats(stats1)
-                .build();
-        Stats stats2 = Stats.builder().numberOfWants(1082).numberOfHaves(108).build();
-        DiscogsMasterRelease discogsMasterRelease2 = DiscogsMasterRelease.builder()
-                .year(1999)
-                .format(Arrays.asList("Album","LP"))
-                .masterId("112")
-                .fullAlbumTitle("anotherTitle")
-                .coverImageUrl("someOtherCoverImageUrl")
-                .releaseStats(stats2)
-                .build();
-        Stats stats3 = Stats.builder().numberOfWants(110).numberOfHaves(176).build();
-        DiscogsMasterRelease discogsMasterRelease3 = DiscogsMasterRelease.builder()
-                .year(1999)
-                .format(Arrays.asList("Single","CD"))
-                .masterId("113")
-                .fullAlbumTitle("differentTitle")
-                .coverImageUrl("someOtherCoverImageUrl")
-                .releaseStats(stats3)
-                .build();
-        Stats stats4 = Stats.builder().numberOfWants(110).numberOfHaves(44).build();
-        DiscogsMasterRelease discogsMasterRelease4 = DiscogsMasterRelease.builder()
-                .year(1999)
-                .format(Arrays.asList("EP","12\""))
-                .masterId("114")
-                .fullAlbumTitle("oneMoreTitle")
-                .coverImageUrl("someOtherCoverImageUrl")
-                .releaseStats(stats4)
-                .build();
-
-        List<DiscogsMasterRelease> results = Arrays.asList(discogsMasterRelease1,discogsMasterRelease2,discogsMasterRelease3,discogsMasterRelease4);
-
-        return results;
     }
 }
