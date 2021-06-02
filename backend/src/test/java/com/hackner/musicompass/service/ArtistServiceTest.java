@@ -4,6 +4,7 @@ import com.hackner.musicompass.db.ArtistMongoDb;
 import com.hackner.musicompass.discogsapi.model.DiscogsArtist;
 import com.hackner.musicompass.discogsapi.model.DiscogsArtistSearchResults;
 import com.hackner.musicompass.discogsapi.service.DiscogsArtistApiService;
+import com.hackner.musicompass.helper.TestData;
 import com.hackner.musicompass.model.Artist;
 import com.hackner.musicompass.model.ArtistInfo;
 import com.hackner.musicompass.model.RecommendationTags;
@@ -35,23 +36,14 @@ class ArtistServiceTest {
         //GIVEN
         String artistName = "Hans Hammer";
 
-        Artist artist = Artist.builder()
-                .artistName(artistName)
-                .artistInfo(new ArtistInfo().builder()
-                        .artistImageUrl("HammerImageUrl")
-                        .discogsArtistId("111")
-                        .discogsArtistUrl("HammerUrl")
-                        .build())
-                .build();
-
         when(artistMongoDb.existsById(artistName)).thenReturn(true);
-        when(artistMongoDb.findById(artistName)).thenReturn(Optional.of(artist));
+        when(artistMongoDb.findById(artistName)).thenReturn(Optional.of(TestData.createArtist(artistName)));
 
         //WHEN
         Artist actual = artistService.getArtistByName(artistName);
 
         //THEN
-        assertThat(actual, equalTo(artist));
+        assertThat(actual, equalTo(TestData.createArtist(artistName)));
         verify(artistMongoDb).existsById(artistName);
         verify(artistMongoDb).findById(artistName);
     }
@@ -60,10 +52,10 @@ class ArtistServiceTest {
     @DisplayName("Get Artist who is not saved in DB from Api and save in DB")
     public void getArtistByNameFromApi (){
         //GIVEN
-        String artistName = "Hans Hammer";
+        String artistName = "Hans Schraube";
         Instant now = Instant.ofEpochSecond(Instant.now().getEpochSecond());
 
-        Artist artist = Artist.builder()
+        /*Artist artist = Artist.builder()
                 .artistName(artistName)
                 .saveDate(Date.from(now))
                 .artistInfo(new ArtistInfo().builder()
@@ -78,27 +70,27 @@ class ArtistServiceTest {
                         .gender(List.of())
                         .roles(List.of())
                         .genres(List.of()).build())
-                .build();
+                .build();*/
 
-        DiscogsArtist discogsArtist = DiscogsArtist.builder()
+        /*DiscogsArtist discogsArtist = DiscogsArtist.builder()
                 .discogsArtistId("111")
                 .artistName("Hans Hammer")
                 .artistImageUrl("HammerImageUrl")
-                .discogsArtistUrl("HammerUrl").build();
+                .discogsArtistUrl("HammerUrl").build();*/
 
-        DiscogsArtistSearchResults discogsArtistSearchResults = DiscogsArtistSearchResults.builder()
-                .results(Arrays.asList(discogsArtist)).build();
+     /*   DiscogsArtistSearchResults discogsArtistSearchResults = DiscogsArtistSearchResults.builder()
+                .results(List.of(discogsArtist)).build();*/
 
         when(artistMongoDb.existsById(artistName)).thenReturn(false);
         when(discogsArtistApiService.getDiscogsArtistListBySearchTerm(artistName))
-                .thenReturn(discogsArtistSearchResults);
+                .thenReturn(TestData.createDiscogsArtistSearchResults(artistName));
         when(timeUtils.now()).thenReturn(now);
 
         //WHEN
         Artist actual = artistService.getArtistByName(artistName);
 
         //THEN
-        assertThat(actual, equalTo(artist));
-        verify(artistMongoDb).save(artist);
+        assertThat(actual, equalTo(TestData.createArtist(artistName, now)));
+        verify(artistMongoDb).save(TestData.createArtist(artistName, now));
     }
 }

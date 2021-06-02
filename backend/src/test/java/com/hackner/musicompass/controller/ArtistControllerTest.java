@@ -2,6 +2,7 @@ package com.hackner.musicompass.controller;
 
 import com.hackner.musicompass.db.ArtistMongoDb;
 import com.hackner.musicompass.discogsapi.model.*;
+import com.hackner.musicompass.helper.TestData;
 import com.hackner.musicompass.model.Artist;
 import com.hackner.musicompass.model.ArtistInfo;
 import com.hackner.musicompass.model.ArtistRelease;
@@ -19,6 +20,9 @@ import org.springframework.http.*;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -59,8 +63,8 @@ class ArtistControllerTest {
     public void getArtistWhoIsSavedInDb (){
         //GIVEN
         String artistName = "Prince";
-        Date saveDate = Date.from(timeUtils.now());
-        Artist artist = getArtist(artistName, saveDate);
+        Instant saveDate = timeUtils.now();
+        Artist artist = TestData.createArtistIntegrationTest(artistName, saveDate);
         artistMongoDb.save(artist);
 
         //WHEN
@@ -78,13 +82,13 @@ class ArtistControllerTest {
         String artistName = "Prince";
         String artistUrl = "https://api.discogs.com/database/search?type=artist&q=" + artistName;
         String releasesUrl = "https://api.discogs.com/database/search?type=master&artist=" + artistName + "&page=1&per-page_100";
-        Date saveDate = Date.from(timeUtils.now());
-        Artist artist = getArtist(artistName, saveDate);
+        Instant saveDate = timeUtils.now();
+        Artist artist = TestData.createArtistIntegrationTest(artistName, saveDate);
 
-        DiscogsArtistSearchResults discogsArtistSearchResults = getDiscogsArtistSearchResults(artistName);
+        DiscogsArtistSearchResults discogsArtistSearchResults = TestData.createDiscogsArtistSearchResults2(artistName);
         ResponseEntity<DiscogsArtistSearchResults> artistResponseEntity = ResponseEntity.ok(discogsArtistSearchResults);
 
-        DiscogsMasterReleaseSearchResults discogsMasterReleaseSearchResults = getDiscogsMasterReleaseSearchResults();
+        DiscogsMasterReleaseSearchResults discogsMasterReleaseSearchResults = TestData.createDiscogsMasterReleaseSearchResults();
         ResponseEntity<DiscogsMasterReleaseSearchResults> releaseResponseEntity = ResponseEntity.ok(discogsMasterReleaseSearchResults);
 
         HttpHeaders headers = new HttpHeaders();
@@ -104,92 +108,5 @@ class ArtistControllerTest {
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
         assertThat(response.getBody(), equalTo(artist));
         assertTrue(artistMongoDb.existsById(artistName));
-    }
-
-    public Artist getArtist(String artistName, Date saveDate){
-        ArtistInfo artistInfo = ArtistInfo.builder()
-                .discogsArtistId("111")
-                .artistImageUrl("imageUrl")
-                .discogsArtistUrl("artistUrl").build();
-        ArtistRelease artistRelease1 = ArtistRelease.builder()
-                .fullTitle("someTitle")
-                .discogsMasterReleaseId("111")
-                .format("Album")
-                .coverImageUrl("coverImageUrl")
-                .releaseYear(1999)
-                .discogsWant(32768)
-                .discogsHave(65536)
-                .globalRating(4.595)
-                .build();
-        ArtistRelease artistRelease2 = ArtistRelease.builder()
-                .fullTitle("someOtherTitle")
-                .discogsMasterReleaseId("222")
-                .format("Single/EP")
-                .coverImageUrl("someOtherCoverImageUrl")
-                .releaseYear(1999)
-                .discogsWant(32768)
-                .discogsHave(65536)
-                .globalRating(4.595)
-                .build();
-        List<ArtistRelease> artistAlbums = List.of(artistRelease1);
-        List<ArtistRelease> artistSingles = List.of(artistRelease2);
-        RecommendationTags recommendationTags = RecommendationTags.builder()
-                .recommended(false)
-                .gender(List.of())
-                .roles(List.of())
-                .genres(List.of()).build();
-        Artist artist = Artist.builder()
-                .artistName(artistName)
-                .saveDate(saveDate)
-                .artistInfo(artistInfo)
-                .artistAlbums(artistAlbums)
-                .artistSingles(artistSingles)
-                .recommendationTags(recommendationTags).build();
-        return artist;
-    }
-
-    public DiscogsMasterReleaseSearchResults getDiscogsMasterReleaseSearchResults(){
-
-        DiscogsMasterRelease discogsMasterRelease1 = DiscogsMasterRelease.builder()
-                .fullAlbumTitle("someTitle")
-                .masterId("111")
-                .format(List.of("Album","CD"))
-                .coverImageUrl("coverImageUrl")
-                .year(1999)
-                .releaseStats(Stats.builder().numberOfWants(32768).numberOfHaves(65536).build())
-                .build();
-        DiscogsMasterRelease discogsMasterRelease2 = DiscogsMasterRelease.builder()
-                .fullAlbumTitle("someOtherTitle")
-                .masterId("222")
-                .format(List.of("Single","7\""))
-                .coverImageUrl("someOtherCoverImageUrl")
-                .year(1999)
-                .releaseStats(Stats.builder().numberOfWants(32768).numberOfHaves(65536).build())
-                .build();
-
-        DiscogsPagination discogsPagination = new DiscogsPagination(2,1,1);
-
-        DiscogsMasterReleaseSearchResults discogsMasterReleaseSearchResults = DiscogsMasterReleaseSearchResults.builder()
-                .pagination(discogsPagination)
-                .results(List.of(discogsMasterRelease1,discogsMasterRelease2)).build();
-
-        return discogsMasterReleaseSearchResults;
-    }
-
-    public DiscogsArtistSearchResults getDiscogsArtistSearchResults (String artistName){
-
-        String discogsArtistId = "111";
-        String artistImageUrl = "imageUrl";
-        String discogsArtistUrl = "artistUrl";
-
-        DiscogsArtist discogsArtist = DiscogsArtist.builder()
-                .discogsArtistId(discogsArtistId)
-                .artistName(artistName)
-                .artistImageUrl(artistImageUrl)
-                .discogsArtistUrl(discogsArtistUrl).build();
-        DiscogsArtistSearchResults discogsArtistSearchResults = DiscogsArtistSearchResults.builder()
-                .results(List.of(discogsArtist)).build();
-
-        return discogsArtistSearchResults;
     }
 }

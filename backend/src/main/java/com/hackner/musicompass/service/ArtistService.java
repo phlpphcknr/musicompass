@@ -12,6 +12,8 @@ import com.hackner.musicompass.model.RecommendationTags;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Date;
 import java.util.List;
 
@@ -59,7 +61,7 @@ public class ArtistService {
 
         Artist artist = new Artist().builder()
                 .artistName(discogsArtist.getArtistName())
-                .saveDate(Date.from(timeUtils.now()))
+                .saveDate(LocalDateTime.ofInstant(timeUtils.now(), ZoneOffset.UTC))
                 .artistInfo(artistInfo)
                 .artistAlbums(albumList)
                 .artistSingles(singleList)
